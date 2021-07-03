@@ -17,7 +17,7 @@ class MailTransactionLogs extends Migration
             $table->id();
             $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->nullOnDelete();
             $table->string('log');
-            $table->string('user_leel_department');
+            $table->string('user_level_department');
             $table->string('user_name');
             $table->softDeletes();
             $table->timestamps();
