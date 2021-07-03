@@ -13,7 +13,7 @@ class MailTransactionLogs extends Migration
      */
     public function up()
     {
-        Schema::create('mail_transaction_logs', function (Blueprint $table) {
+        Schema::create('mail_transactions_log', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->nullOnDelete();
             $table->string('log');
