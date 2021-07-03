@@ -15,7 +15,7 @@ class MailTransactionMemo extends Migration
     {
         Schema::create('mail_transaction_memo', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->nullOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

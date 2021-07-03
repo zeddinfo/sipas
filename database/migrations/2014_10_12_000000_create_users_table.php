@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();            
+            $table->id();
             $table->string('nip');
             $table->string('name');
             $table->string('phone_number');
@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('level_id')->references('id')->on('levels')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('department_id')->references('id')->on('departments')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('level_id')->references('id')->on('levels')->nullOnDelete();
+            $table->foreignId('department_id')->references('id')->on('departments')->nullOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

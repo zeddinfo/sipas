@@ -15,9 +15,9 @@ class MailTransactionCorrections extends Migration
     {
         Schema::create('mail_transaction_corrections', function (Blueprint $table) {
             $table->id();
-            $table->$table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->onUpdate('cascade')->onDelete('cascade');
+            $table->$table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->nullOnDelete();
             $table->longText('note');
-            $table->foreignId('file_id')->references('id')->on('files')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('file_id')->references('id')->on('files')->nullOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

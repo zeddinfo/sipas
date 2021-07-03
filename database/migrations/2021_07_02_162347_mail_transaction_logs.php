@@ -15,7 +15,7 @@ class MailTransactionLogs extends Migration
     {
         Schema::create('mail_transaction_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->nullOnDelete();
             $table->string('log');
             $table->string('user_leel_department');
             $table->string('user_name');
