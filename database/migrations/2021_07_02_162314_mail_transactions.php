@@ -14,7 +14,7 @@ class MailTransactions extends Migration
     public function up()
     {
         Schema::create('mail_transactions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->foreignId('mail_version_id')->references('id')->on('mail_versions')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('target_user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

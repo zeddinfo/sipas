@@ -14,7 +14,7 @@ class MailTransactionCorrections extends Migration
     public function up()
     {
         Schema::create('mail_transaction_corrections', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->$table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->onUpdate('cascade')->onDelete('cascade');
             $table->longText('note');
             $table->foreignId('file_id')->references('id')->on('files')->onUpdate('cascade')->onDelete('cascade');

@@ -14,7 +14,7 @@ class Levels extends Migration
     public function up()
     {
         Schema::create('levels', function (Blueprint $table) {
-            $table->bigIncrements('id')->index();
+            $table->id();
             $table->string('name');
             $table->foreignId('same_as_id')->references('id')->on('levels');
             $table->softDeletes();

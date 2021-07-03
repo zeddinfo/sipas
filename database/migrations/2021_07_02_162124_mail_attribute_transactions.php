@@ -14,7 +14,7 @@ class MailAttributeTransactions extends Migration
     public function up()
     {
         Schema::create('mail_attribute_transaction', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->foreignId('mail_id')->references('id')->on('mails')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('mail_attributes_id')->references('id')->on('mail_attributes')->onUpdate('cascade')->onDelete('cascade');
             $table->string('type');

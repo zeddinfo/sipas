@@ -14,7 +14,7 @@ class Files extends Migration
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('original_name');
             $table->string('directory_name');
             $table->string('type');

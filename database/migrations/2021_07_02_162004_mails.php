@@ -14,7 +14,7 @@ class Mails extends Migration
     public function up()
     {
         Schema::create('mails', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->enum('kind', ['in', 'out']);
             $table->string('directory_code');
             $table->string('code');
