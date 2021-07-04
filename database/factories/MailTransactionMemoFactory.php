@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\MailTransactionCorrectionMemo;
+use App\Models\MailTransactionMemo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MailTransactionCorrectionMemoFactory extends Factory
+class MailTransactionMemoFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = MailTransactionCorrectionMemo::class;
+    protected $model = MailTransactionMemo::class;
 
     /**
      * Define the model's default state.

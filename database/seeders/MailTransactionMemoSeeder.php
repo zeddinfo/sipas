@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class MailTransactionCorrectionMemoSeeder extends Seeder
+class MailTransactionMemoSeeder extends Seeder
 {
     /**
      * Run the database seeds.

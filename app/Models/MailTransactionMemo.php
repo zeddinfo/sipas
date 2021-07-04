@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MailTransactionCorrection extends Model
+class MailTransactionMemo extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -15,10 +15,5 @@ class MailTransactionCorrection extends Model
     public function mailTransaction()
     {
         return $this->belongsTo(MailTransaction::class);
-    }
-
-    public function file()
-    {
-        return $this->belongsTo(File::class);
     }
 }

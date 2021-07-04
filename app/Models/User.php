@@ -44,4 +44,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function mailTransactions()
+    {
+        return $this->hasMany(MailTransaction::class);
+    }
+
+    public function targetMailTransactions()
+    {
+        return $this->hasMany(MailTransaction::class, 'target_user_id');
+    }
 }
