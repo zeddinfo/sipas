@@ -93,7 +93,7 @@ Route::group(['prefix' => 'pengguna'], function () {
         Route::patch('/keluar/{id}', 'User\MailOutController@update');
 
         // AKSES SELURUH SURAT
-        // SEDANG BERLANGSUNG
+
         Route::get('/dalam-proses', 'User\OngoingMailController@index');
         Route::patch('/dalam-proses/{id}/{action}', 'User\OngoingMailController@update')->action;
         Route::delete('/dalam-proses/{id}', 'User\OngoingMailController@destroy');
