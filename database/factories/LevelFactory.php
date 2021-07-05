@@ -22,7 +22,8 @@ class LevelFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'same_as_id' => $this->faker->unique()->randomNumber(),
         ];
     }
 }

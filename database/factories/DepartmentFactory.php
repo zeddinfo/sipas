@@ -22,7 +22,8 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'depend_on_id' => $this->faker->unique()->randomNumber(),
         ];
     }
 }
