@@ -14,10 +14,10 @@ class MailTransactions extends Migration
     public function up()
     {
         Schema::create('mail_transactions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('mail_version_id')->references('id')->on('mail_versions')->nullOnDelete();
-            $table->foreignId('user_id')->references('id')->on('users')->nullOnDelete();
-            $table->foreignId('target_user_id')->references('id')->on('users')->nullOnDelete();
+            $table->bigIncrements('id');
+            $table->foreignId('mail_version_id')->references('id')->on('mail_versions');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('target_user_id')->references('id')->on('users');
             $table->string('type');
             $table->softDeletes();
             $table->timestamps();

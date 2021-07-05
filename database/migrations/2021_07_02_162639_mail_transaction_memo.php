@@ -14,8 +14,8 @@ class MailTransactionMemo extends Migration
     public function up()
     {
         Schema::create('mail_transactions_memo', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions')->nullOnDelete();
+            $table->bigIncrements('id');
+            $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions');
             $table->softDeletes();
             $table->timestamps();
         });
