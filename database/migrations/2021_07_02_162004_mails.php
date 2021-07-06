@@ -16,8 +16,8 @@ class Mails extends Migration
         Schema::create('mails', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->enum('kind', ['in', 'out']);
-            $table->string('directory_code');
-            $table->string('code');
+            $table->string('code')->nullable();
+            $table->string('directory_code')->nullable();
             $table->string('title');
             $table->string('origin');
             $table->dateTime('mail_created_at');

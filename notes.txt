@@ -1,0 +1,6 @@
+TU Mail Download
+-Bypass if Controller is MailMasterController 
+
+User Mail Download
+-Set config for user that grant access for All Mail.
+-Bypass Download Mail in User section if User can access All Mail.

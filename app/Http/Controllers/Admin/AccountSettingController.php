@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class OnGoingMainController extends Controller
+class AccountSettingController extends Controller
 {
     /**
      * Display a listing of the resource.

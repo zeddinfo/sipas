@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Administration;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MailInDownController extends Controller
+class MailAtrributeSettingController extends Controller
 {
     /**
      * Display a listing of the resource.

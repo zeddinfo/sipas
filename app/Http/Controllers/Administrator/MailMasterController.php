@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Administration;
+namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MailInArchiveController extends Controller
+class MailMasterController extends Controller
 {
     /**
      * Display a listing of the resource.
