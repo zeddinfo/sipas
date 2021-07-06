@@ -15,9 +15,9 @@ class MailTransactions extends Migration
     {
         Schema::create('mail_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('mail_version_id')->references('id')->on('mail_versions');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('target_user_id')->references('id')->on('users');
+            $table->foreignId('mail_version_id')->constrained('mail_versions');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('target_user_id')->constrained('users');
             $table->string('type');
             $table->softDeletes();
             $table->timestamps();

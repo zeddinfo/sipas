@@ -16,6 +16,9 @@ class MailAttributes extends Migration
         Schema::create('mail_attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type');
+            $table->string('name');
+            $table->string('code')->nullable();
+            $table->string('color')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

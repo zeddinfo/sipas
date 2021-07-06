@@ -15,12 +15,12 @@ class Mails extends Migration
     {
         Schema::create('mails', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('kind', ['in', 'out']);
+            $table->enum('type', ['IN', 'OUT']);
             $table->string('code')->nullable();
             $table->string('directory_code')->nullable();
             $table->string('title');
             $table->string('origin');
-            $table->dateTime('mail_created_at');
+            $table->dateTime('mail_created_at')->nullable();
             $table->dateTime('archived_at')->nullable();
             $table->softDeletes();
             $table->timestamps();

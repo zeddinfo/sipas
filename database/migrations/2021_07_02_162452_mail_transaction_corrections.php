@@ -13,11 +13,11 @@ class MailTransactionCorrections extends Migration
      */
     public function up()
     {
-        Schema::create('mail_transactions_correction', function (Blueprint $table) {
+        Schema::create('mail_transactions_corrections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions');
-            $table->longText('note');
-            $table->foreignId('file_id')->references('id')->on('files');
+            $table->foreignId('mail_transaction_id')->constrained('mail_transactions');
+            $table->foreignId('file_id')->nullable()->constrained('files');
+            $table->string('note');
             $table->softDeletes();
             $table->timestamps();
         });

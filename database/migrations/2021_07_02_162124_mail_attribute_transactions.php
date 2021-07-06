@@ -15,9 +15,8 @@ class MailAttributeTransactions extends Migration
     {
         Schema::create('mail_attribute_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('mail_id')->references('id')->on('mails');
-            $table->foreignId('mail_attribute_id')->references('id')->on('mail_attributes');
-            $table->string('type');
+            $table->foreignId('mail_id')->constrained('mails');
+            $table->foreignId('mail_attribute_id')->constrained('mail_attributes');
             $table->softDeletes();
             $table->timestamps();
         });

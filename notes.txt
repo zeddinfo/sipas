@@ -1,3 +1,58 @@
+Seeder
+    Level
+        Admin
+        TU
+        Ketum <=> Asisten Ketum
+        Sekre
+        Kabid
+        Kadep
+        Anggota Dep
+
+    Departement
+        Department 1 => [Sub-Department1A, Sub-Department1B]
+        Department 2 => [Sub-Department2A, Sub-Department2B]
+        
+    User
+        with Level -> Admin
+        with Level -> TU
+        with Level -> Ketum 
+        with Level -> Asisten Ketum
+        with Level -> Sekre
+        with Level -> Kabid (2 for each Department)
+        with Level -> Kadep (4 for each Sub-Department)
+        with Level -> Anggota Dep (4 for each Sub-Department)
+
+    Mail Attribute
+        reference: https://github.com/fathil11/sistem-pengarsipan-surat-dinas/blob/master/database/seeds/production/InitialSeeder.php
+        note: 
+            - tinggal disesuaikan dengan tipe database yang baru (dijadikan satu, tapi beda type)
+            - migrasi mail attributenya udah tak tambah code & color
+    Mail
+        1 Mail with type IN
+        1 Mail with type OUT
+
+    Mail Attribute Transaction
+        Assign one from each MailAttribute type for Mail In
+        Assign one from each MailAttribute type for Mail Out
+    
+    Mail Version
+        1 from Mail In
+        1 from Mail Out
+
+    Mail File
+        1 from Mail Version In
+        1 from Mail Version Out
+    
+    Mail Transaction
+        Assign Mail In Version for (TU targeting Sekretaris) with type of FORWARD
+        Assign Mail Out Version for (one of Anggota Departemen targeting his Kepala Departemen) of FORWARD
+    
+    Mail Transaction Log
+        Add log for Mail In "dibuat" with User TU  
+        Add log for Mail In "diteruskan" with User Sekre  
+        Add log for Mail Out "dibuat" with User that created Mail Out  
+        Add log for Mail Out "diteruskan" with upper level User of User that created Mail Out   
+
 TU Mail Download
 -Bypass if Controller is MailMasterController 
 

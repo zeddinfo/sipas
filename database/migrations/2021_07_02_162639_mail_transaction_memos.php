@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MailTransactionMemo extends Migration
+class MailTransactionMemos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class MailTransactionMemo extends Migration
      */
     public function up()
     {
-        Schema::create('mail_transactions_memo', function (Blueprint $table) {
+        Schema::create('mail_transaction_memos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('mail_transaction_id')->references('id')->on('mail_transactions');
+            $table->foreignId('mail_transaction_id')->constrained('mail_transactions');
+            $table->string('memo');
             $table->softDeletes();
             $table->timestamps();
         });
