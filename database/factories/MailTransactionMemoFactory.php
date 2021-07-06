@@ -22,7 +22,7 @@ class MailTransactionMemoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'mail_transaction_id' => $this->faker->mail_transaction_id(),
         ];
     }
 }

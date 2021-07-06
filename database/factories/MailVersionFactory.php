@@ -22,7 +22,8 @@ class MailVersionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'mail_id' => $this->faker->mail_id(),
+            'file_id' => $this->faker->file_id(),
         ];
     }
 }

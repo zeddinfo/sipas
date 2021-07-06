@@ -22,7 +22,9 @@ class MailTransactionCorrectionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'mail_transaction_id' => $this->faker->mail_transaction_id(),
+            'note' => $this->faker->note(),
+            'file_id' => $this->faker->file_id(),
         ];
     }
 }

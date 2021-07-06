@@ -22,7 +22,11 @@ class MailFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'kind' => $this->faker->kind(),
+            'directory_code' => $this->faker->directory_code(),
+            'code' => $this->faker->code(),
+            'title' => $this->faker->title(),
+            'origin' => $this->faker->origin(),
         ];
     }
 }

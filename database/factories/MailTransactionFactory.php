@@ -22,7 +22,9 @@ class MailTransactionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'mail_version_id' => $this->faker->mail_version_id(),
+            'user_id' => $this->faker->user_id(),
+            'target_user_id' => $this->faker->target_user_id(),
         ];
     }
 }

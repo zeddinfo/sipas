@@ -22,7 +22,10 @@ class MailTransactionLogFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'mail_transaction_id' => $this->faker->mail_transaction_id(),
+            'log' => $this->faker->log(),
+            'user_level_department' => $this->faker->user_level_department(),
+            'user_name' => $this->faker->user_name(),
         ];
     }
 }

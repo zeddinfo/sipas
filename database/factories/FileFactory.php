@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+
 use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,9 @@ class FileFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'original_name' => $this->faker->original_name(),
+            'directory_name' => $this->faker->directory_name(),
+            'type' => $this->faker->type(),
         ];
     }
 }
