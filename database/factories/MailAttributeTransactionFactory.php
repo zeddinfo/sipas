@@ -21,10 +21,6 @@ class MailAttributeTransactionFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'mail_id' => $this->faker->mail_id(),
-            'mail_attribute_id' => $this->faker->mail_attribute_id(),
-            'type' => $this->faker->type(),
-        ];
+        return [];
     }
 }

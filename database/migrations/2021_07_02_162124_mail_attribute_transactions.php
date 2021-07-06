@@ -13,7 +13,7 @@ class MailAttributeTransactions extends Migration
      */
     public function up()
     {
-        Schema::create('mail_attributes_transaction', function (Blueprint $table) {
+        Schema::create('mail_attribute_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('mail_id')->references('id')->on('mails');
             $table->foreignId('mail_attribute_id')->references('id')->on('mail_attributes');

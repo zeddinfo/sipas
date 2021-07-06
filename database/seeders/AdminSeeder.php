@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
             'nip' => '000001',
             'name' => 'Admin',
             'phone_number' => '0818181221',
-            'email' => 'admin@tsel.com',
+            'email' => 'admin@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 1,
             'department_id' => 1,
@@ -27,9 +27,9 @@ class AdminSeeder extends Seeder
 
         User::create([
             'nip' => '000002',
-            'name' => 'Kepala Dinas',
+            'name' => 'Ketua Umum',
             'phone_number' => '0818181222',
-            'email' => 'kepaladinas@tsel.com',
+            'email' => 'ketuaumum@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 2,
             'department_id' => 1,

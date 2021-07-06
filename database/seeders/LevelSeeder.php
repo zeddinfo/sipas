@@ -25,13 +25,18 @@ class LevelSeeder extends Seeder
         ]);
 
         Level::create([
-            'name' => 'kepala_dinas',
+            'name' => 'kepala_bidang_iptek',
             'same_as_id' => 3
         ]);
 
         Level::create([
-            'name' => 'kepala_tu',
+            'name' => 'kepala_bidang_litbang',
             'same_as_id' => 4
+        ]);
+
+        Level::create([
+            'name' => 'kepala_bidang_infokom',
+            'same_as_id' => 5
         ]);
     }
 }
