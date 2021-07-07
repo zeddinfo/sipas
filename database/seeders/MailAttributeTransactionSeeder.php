@@ -16,16 +16,16 @@ class MailAttributeTransactionSeeder extends Seeder
      */
     public function run()
     {
-        $data = Mail::all();
-        $mail_attr_id = MailAttribute::all(['id'])->toArray();
-        // dd($mail_attr_id[0]['id']);
-        $i = 0;
-        for ($i = 0; $i < count($data) - 1; $i++) {
-            MailAttributeTransaction::create([
-                'mail_id' => $data[$i]->id,
-                'mail_attribute_id' => $mail_attr_id[$i]['id'],
-                // 'type' => $data[$i]->kind
-            ]);
+        $mails = Mail::all();
+        $mail_attribute_types = MailAttribute::select('type')->distinct()->get();
+        foreach ($mails as $mail) {
+            foreach ($mail_attribute_types as $mail_attribute_type) {
+                $mail_attribute_transaction = new MailAttributeTransaction();
+                $mail_attribute_transaction->mail_id = $mail->id;
+                $mail_attribute = MailAttribute::where('type', $mail_attribute_type->type)->get()[rand(0, 2)];
+                $mail_attribute_transaction->mail_attribute_id = $mail_attribute->id;
+                $mail_attribute_transaction->save();
+            }
         }
     }
 }
