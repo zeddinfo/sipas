@@ -20,6 +20,11 @@ class LevelSeeder extends Seeder
         ]);
 
         Level::create([
+            'name' => 'TU',
+
+        ]);
+
+        Level::create([
             'name' => 'Ketua Umum',
 
         ]);
@@ -40,12 +45,12 @@ class LevelSeeder extends Seeder
         ]);
 
         Level::create([
-            'name' => 'Kepala Department',
+            'name' => 'Kepala Departemen',
 
         ]);
 
         Level::create([
-            'name' => 'Anggota Department',
+            'name' => 'Anggota Departemen',
 
         ]);
     }

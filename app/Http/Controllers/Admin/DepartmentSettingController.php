@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\Facades\MailService;
 use Illuminate\Http\Request;
 
 class DepartmentSettingController extends Controller
@@ -14,7 +15,6 @@ class DepartmentSettingController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
