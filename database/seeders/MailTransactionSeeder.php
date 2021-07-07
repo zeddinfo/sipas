@@ -18,7 +18,7 @@ class MailTransactionSeeder extends Seeder
     public function run()
     {
         MailTransaction::create([
-            'mail_version_id' => 4,
+            'mail_version_id' => 2,
             'user_id' =>  8,
             'target_user_id' => 6,
             'type' => 'FORWARD',

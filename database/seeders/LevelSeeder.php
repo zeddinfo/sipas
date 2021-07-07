@@ -35,28 +35,18 @@ class LevelSeeder extends Seeder
         ]);
 
         Level::create([
-            'name' => 'Kepala Bidang Iptek',
+            'name' => 'Kepala Bidang',
             'same_as_id' => 4
         ]);
 
         Level::create([
-            'name' => 'Kepala Department A',
+            'name' => 'Kepala Department',
             'same_as_id' => 5
         ]);
 
         Level::create([
-            'name' => 'Kepala Department B',
+            'name' => 'Anggota Department',
             'same_as_id' => 6
-        ]);
-
-        Level::create([
-            'name' => 'Anggota',
-            'same_as_id' => 7
-        ]);
-
-        Level::create([
-            'name' => 'Kepala TU',
-            'same_as_id' => 9
         ]);
     }
 }

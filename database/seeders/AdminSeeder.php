@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
             'email' => 'admin@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 1,
-            'department_id' => 1,
+            // 'department_id' => 1,
         ]);
 
         User::create([
@@ -52,7 +52,7 @@ class AdminSeeder extends Seeder
             'email' => 'sekretaris@tsel.com',
             'password' => Hash::make('123123'),
             'level_id' => 3,
-            'department_id' => 1,
+            // 'department_id' => 1,
         ]);
 
         User::create([
@@ -62,7 +62,7 @@ class AdminSeeder extends Seeder
             'email' => 'kepalatu@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 5,
-            'department_id' => 1,
+            // 'department_id' => 1,
         ]);
 
         User::create([
@@ -72,7 +72,7 @@ class AdminSeeder extends Seeder
             'email' => 'kebidiptek@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 4,
-            'department_id' => 1,
+            // 'department_id' => 1,
         ]);
 
         User::create([
@@ -82,7 +82,7 @@ class AdminSeeder extends Seeder
             'email' => 'kebidinfokom@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 4,
-            'department_id' => 3,
+            // 'department_id' => 3,
         ]);
 
         User::create([
@@ -102,7 +102,7 @@ class AdminSeeder extends Seeder
             'email' => 'kedeplitbanga@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 5,
-            'department_id' => 2,
+            'department_id' => 3,
         ]);
 
         User::create([
@@ -112,7 +112,7 @@ class AdminSeeder extends Seeder
             'email' => 'kedepiptekb@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 6,
-            'department_id' => 1,
+            'department_id' => 2,
         ]);
 
         User::create([
@@ -122,7 +122,7 @@ class AdminSeeder extends Seeder
             'email' => 'kedeplitbangb@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => 6,
-            'department_id' => 2,
+            'department_id' => 3,
         ]);
 
         User::create([
@@ -131,7 +131,7 @@ class AdminSeeder extends Seeder
             'phone_number' => '0818181224',
             'email' => 'anggotaipteka@hmti.com',
             'password' => Hash::make('123123'),
-            'level_id' => 7,
+            'level_id' => 6,
             'department_id' => 1,
         ]);
 
@@ -141,7 +141,7 @@ class AdminSeeder extends Seeder
             'phone_number' => '0818181224',
             'email' => 'anggotalitbanga@hmti.com',
             'password' => Hash::make('123123'),
-            'level_id' => 7,
+            'level_id' => 6,
             'department_id' => 2,
         ]);
 
@@ -151,7 +151,7 @@ class AdminSeeder extends Seeder
             'phone_number' => '0818181224',
             'email' => 'anggotaiptekb@hmti.com',
             'password' => Hash::make('123123'),
-            'level_id' => 8,
+            'level_id' => 6,
             'department_id' => 1,
         ]);
 
@@ -161,7 +161,7 @@ class AdminSeeder extends Seeder
             'phone_number' => '0818181224',
             'email' => 'anggotalitbangb@hmti.com',
             'password' => Hash::make('123123'),
-            'level_id' => 8,
+            'level_id' => 6,
             'department_id' => 2,
         ]);
 
@@ -171,7 +171,7 @@ class AdminSeeder extends Seeder
             'phone_number' => '0818181224',
             'email' => 'amin@tu.com',
             'password' => Hash::make('123123'),
-            'level_id' => 9,
+            'level_id' => 1,
         ]);
     }
 }

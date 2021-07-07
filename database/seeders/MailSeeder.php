@@ -21,24 +21,6 @@ class MailSeeder extends Seeder
             'type' => 'out',
             'directory_code' => $faker->bothify('???/???/####/##/##'),
             'code' => $faker->bothify('???/???/####/##/##'),
-            'title' => 'Surat Undangan Kaprogdi',
-            'origin' => $faker->imageUrl($width = 640, $height = 480),
-            'mail_created_at' => Carbon::now()->format('Y-m-d'),
-        ]);
-
-        Mail::create([
-            'type' => 'out',
-            'directory_code' => $faker->bothify('???/???/####/##/##'),
-            'code' => $faker->bothify('???/???/####/##/##'),
-            'title' => 'Surat Undangan Kemahasiswaaan',
-            'origin' => $faker->imageUrl($width = 640, $height = 480),
-            'mail_created_at' => Carbon::now()->format('Y-m-d'),
-        ]);
-
-        Mail::create([
-            'type' => 'out',
-            'directory_code' => $faker->bothify('???/???/####/##/##'),
-            'code' => $faker->bothify('???/???/####/##/##'),
             'title' => 'Surat Undangan Alumni',
             'origin' => $faker->imageUrl($width = 640, $height = 480),
             'mail_created_at' => Carbon::now()->format('Y-m-d'),

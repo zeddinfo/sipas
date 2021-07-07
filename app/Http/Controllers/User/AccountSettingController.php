@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Level;
 use Illuminate\Http\Request;
 
 class AccountSettingController extends Controller
@@ -24,7 +26,13 @@ class AccountSettingController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::all();
+        $levels = Level::all();
+
+        if ($departments->count() == 0 || $levels->count() == 0) {
+            return redirect('/')->withErrors('Silahkan tambahkan, department atau level untuk menambahkan user.');
+        }
+        return view('app.user.user_add')->with(compact('departments', 'levels'));
     }
 
     /**
@@ -35,7 +43,14 @@ class AccountSettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ///Validate Form
+        $request->validate();
+
+        ///Validate departments
+        if (empty($request->user_department_id)) {
+            return redirect()->back()->withErrors('Department tidak boleh kosong.');
+        } elseif (empty($request->user_level_id)) {
+        }
     }
 
     /**
