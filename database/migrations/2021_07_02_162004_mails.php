@@ -19,7 +19,7 @@ class Mails extends Migration
             $table->string('code')->nullable();
             $table->string('directory_code')->nullable();
             $table->string('title');
-            $table->string('origin');
+            $table->string('instance');
             $table->dateTime('mail_created_at')->nullable();
             $table->dateTime('archived_at')->nullable();
             $table->softDeletes();

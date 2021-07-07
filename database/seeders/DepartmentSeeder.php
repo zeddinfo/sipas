@@ -15,6 +15,18 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         Department::create([
+            'name' => 'Ilmu Pengetahuan dan Teknologi',
+        ]);
+
+        Department::create([
+            'name' => 'Penelitian dan Pengembangan SDM',
+        ]);
+
+        Department::create([
+            'name' => 'Informasi dan Komunikasi',
+        ]);
+
+        Department::create([
             'name' => 'Department Software',
             'depend_on_id' => 1,
         ]);
@@ -23,23 +35,22 @@ class DepartmentSeeder extends Seeder
             'name' => 'Department Hardware',
             'depend_on_id' => 1,
         ]);
-
         Department::create([
-            'name' => 'Department Pengkaderan',
+            'name' => 'Dpartment Kastra',
             'depend_on_id' => 2,
         ]);
 
         Department::create([
-            'name' => 'Department Kastra',
+            'name' => 'Deparment Pengkaderan',
             'depend_on_id' => 2,
         ]);
 
         Department::create([
-            'name' => 'Media Informasi',
+            'name' => 'Deparment Humas',
             'depend_on_id' => 3,
         ]);
         Department::create([
-            'name' => 'Humas',
+            'name' => 'Deparment BC',
             'depend_on_id' => 3,
         ]);
     }

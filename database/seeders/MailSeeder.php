@@ -19,10 +19,10 @@ class MailSeeder extends Seeder
         $faker = Factory::create('id_ID');
         Mail::create([
             'type' => 'out',
-            'directory_code' => $faker->bothify('???/???/####/##/##'),
-            'code' => $faker->bothify('???/???/####/##/##'),
+            'directory_code' => "",
+            'code' => "",
             'title' => 'Surat Undangan Alumni',
-            'origin' => $faker->imageUrl($width = 640, $height = 480),
+            'instance' => "Pemerintah Out",
             'mail_created_at' => Carbon::now()->format('Y-m-d'),
         ]);
 
@@ -31,7 +31,7 @@ class MailSeeder extends Seeder
             'directory_code' => $faker->bothify('???/???/####/##/##'),
             'code' => $faker->bothify('???/???/####/##/##'),
             'title' => 'Surat Undangan Rapat PCP',
-            'origin' => $faker->imageUrl($width = 640, $height = 480),
+            'instance' => "Pemerintah In",
             'mail_created_at' => Carbon::now()->format('Y-m-d'),
         ]);
     }

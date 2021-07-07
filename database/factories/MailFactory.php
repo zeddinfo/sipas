@@ -26,7 +26,7 @@ class MailFactory extends Factory
             'directory_code' => $this->faker->bothify('???/???/####/##/##'),
             'code' => $this->faker->bothify('???/???/####/##/##'),
             'title' => $this->faker->name(),
-            'origin' => $this->faker->file($sourceDir = '/tmp', $targetDir = '/tmp'),
+            'instance' => $this->faker->name(),
         ];
     }
 }
