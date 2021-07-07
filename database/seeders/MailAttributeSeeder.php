@@ -14,11 +14,32 @@ class MailAttributeSeeder extends Seeder
      */
     public function run()
     {
-        $data = ['priority', 'reference', 'type'];
-        foreach ($data as $key => $value) {
-            MailAttribute::create([
-                'type' => $value,
-            ]);
-        }
+        MailAttribute::create([
+            "type" => 'Permohonan',
+            'name' => 'PERMOHONAN',
+            "code" => 'PRMHN',
+            "color" => '#1bcfb4',
+        ]);
+
+        MailAttribute::create([
+            "type" => 'Pemberitahuan',
+            'name' => 'PEBERITAHUAN',
+            "code" => 'PBRTHN',
+            "color" => '#ffd500',
+        ]);
+
+        MailAttribute::create([
+            "type" => 'Keterangan',
+            'name' => 'KETERANGAN',
+            "code" => 'KTRGN',
+            "color" => '#1bcfb4',
+        ]);
+
+        MailAttribute::create([
+            "type" => 'Undanga',
+            'name' => 'UNDANGAN',
+            "code" => 'UNDGN',
+            "color" => '#c3bdbd',
+        ]);
     }
 }

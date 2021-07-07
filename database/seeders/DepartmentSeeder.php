@@ -28,5 +28,33 @@ class DepartmentSeeder extends Seeder
             'name' => 'Informasi dan Komunikasi',
             'depend_on_id' => 3,
         ]);
+
+        Department::create([
+            'name' => 'Sub-Department IPTEK-A',
+            'depend_on_id' => 1,
+        ]);
+
+        Department::create([
+            'name' => 'Sub-Department LITBANG-A',
+            'depend_on_id' => 2,
+        ]);
+        Department::create([
+            'name' => 'Sub-Department INFOKOM-A',
+            'depend_on_id' => 3,
+        ]);
+
+        Department::create([
+            'name' => 'Sub-Department IPTEK-B',
+            'depend_on_id' => 1,
+        ]);
+
+        Department::create([
+            'name' => 'Sub-Department LITBANG-B',
+            'depend_on_id' => 2,
+        ]);
+        Department::create([
+            'name' => 'Sub-Department INFOKOM-B',
+            'depend_on_id' => 3,
+        ]);
     }
 }

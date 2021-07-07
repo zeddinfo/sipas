@@ -13,7 +13,7 @@ class MailTransactionLogs extends Migration
      */
     public function up()
     {
-        Schema::create('mail_transactions_logs', function (Blueprint $table) {
+        Schema::create('mail_transaction_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('mail_transaction_id')->constrained('mail_transactions');
             $table->string('log');

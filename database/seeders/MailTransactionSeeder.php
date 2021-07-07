@@ -17,17 +17,18 @@ class MailTransactionSeeder extends Seeder
      */
     public function run()
     {
-        $data = MailVersion::all();
-        $user = User::all(['id'])->toArray();
+        MailTransaction::create([
+            'mail_version_id' => 4,
+            'user_id' =>  8,
+            'target_user_id' => 6,
+            'type' => 'FORWARD',
+        ]);
 
-        $i = 0;
-        foreach ($data as $r) {
-            MailTransaction::create([
-                'mail_version_id' => $r->id,
-                'user_id' => $user[$i]['id'],
-                'target_user_id' => $user[$i]['id'],
-                'type' => '',
-            ]);
-        }
+        MailTransaction::create([
+            'mail_version_id' => 1,
+            'user_id' =>  16,
+            'target_user_id' => 4,
+            'type' => 'FORWARD',
+        ]);
     }
 }

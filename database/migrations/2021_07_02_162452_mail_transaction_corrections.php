@@ -13,7 +13,7 @@ class MailTransactionCorrections extends Migration
      */
     public function up()
     {
-        Schema::create('mail_transactions_corrections', function (Blueprint $table) {
+        Schema::create('mail_transaction_corrections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('mail_transaction_id')->constrained('mail_transactions');
             $table->foreignId('file_id')->nullable()->constrained('files');

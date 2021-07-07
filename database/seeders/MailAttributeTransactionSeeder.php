@@ -24,7 +24,7 @@ class MailAttributeTransactionSeeder extends Seeder
             MailAttributeTransaction::create([
                 'mail_id' => $data[$i]->id,
                 'mail_attribute_id' => $mail_attr_id[$i]['id'],
-                'type' => $data[$i]->kind
+                // 'type' => $data[$i]->kind
             ]);
         }
     }
