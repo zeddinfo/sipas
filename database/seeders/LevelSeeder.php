@@ -50,13 +50,8 @@ class LevelSeeder extends Seeder
         ]);
 
         Level::create([
-            'name' => 'Anggota A',
+            'name' => 'Anggota',
             'same_as_id' => 7
-        ]);
-
-        Level::create([
-            'name' => 'Anggota B',
-            'same_as_id' => 8
         ]);
 
         Level::create([

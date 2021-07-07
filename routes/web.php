@@ -133,7 +133,7 @@ Route::group(['prefix' => 'pengguna', 'namespace' => 'App\Http\Controllers\User'
 });
 
 // Admin
-Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'namespace' => 'App\Http\Controllers\Admin'], function () {
     // Dashboard
     Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
 
@@ -199,3 +199,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'],
         Route::patch('/atribut-surat/{id}', 'MailAtrributeSettingController@destroy')->name('admin.setting.mail.attribute.destroy');
     });
 });
+
+require __DIR__ . '/auth.php';

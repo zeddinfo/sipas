@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(MailTransaction::class, 'target_user_id');
     }
+
+    public function hasRole($role)
+    {
+        return $this->level->name == $role;
+    }
 }
