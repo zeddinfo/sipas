@@ -17,7 +17,6 @@ class Files extends Migration
             $table->bigIncrements('id');
             $table->string('original_name');
             $table->string('directory_name');
-            $table->string('type');
             $table->softDeletes();
             $table->timestamps();
         });

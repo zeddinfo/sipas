@@ -19,9 +19,8 @@ class FileSeeder extends Seeder
 
         foreach ($mails as $r) {
             File::create([
-                'original_name' => $r->title,
-                'directory_name' => $r->instance,
-                'type' => $r->id,
+                'original_name' => "dokumen.png",
+                'directory_name' => "https://designshack.net/wp-content/uploads/placeholder-image.png",
             ]);
         }
     }

@@ -28,11 +28,20 @@ class AdminSeeder extends Seeder
 
         User::create([
             'nip' => '000012',
-            'name' => 'Amin',
+            'name' => 'TU',
             'phone_number' => '0818181224',
-            'email' => 'amin@tu.com',
+            'email' => 'tu@tu.com',
             'password' => Hash::make('123123'),
             'level_id' => Level::where('name', 'TU')->first()->id,
+        ]);
+
+        User::create([
+            'nip' => '000012',
+            'name' => 'Asisten TU',
+            'phone_number' => '0818181224',
+            'email' => 'tu2@tu.com',
+            'password' => Hash::make('123123'),
+            'level_id' => Level::where('name', 'Asisten TU')->first()->id,
         ]);
 
         User::create([
@@ -83,12 +92,12 @@ class AdminSeeder extends Seeder
 
         User::create([
             'nip' => '000007',
-            'name' => 'Bagas Dany Aradhana',
+            'name' => 'Chelvin',
             'phone_number' => '0818181224',
-            'email' => 'kebidinfokom@hmti.com',
+            'email' => 'kebidlitbang@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => Level::where('name', 'Kepala Bidang')->first()->id,
-            'department_id' => Department::where('name', 'Informasi dan Komunikasi')->first()->id,
+            'department_id' => Department::where('name', 'Penelitian dan Pengembangan SDM')->first()->id,
         ]);
 
         User::create([
@@ -108,6 +117,16 @@ class AdminSeeder extends Seeder
             'email' => 'kedeplitbanga@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => Level::where('name', 'Kepala Departemen')->first()->id,
+            'department_id' => Department::where('name', 'Kastra')->first()->id,
+        ]);
+
+        User::create([
+            'nip' => '000009',
+            'name' => 'Fajar Heru',
+            'phone_number' => '0818181224',
+            'email' => 'fajar@hmti.com',
+            'password' => Hash::make('123123'),
+            'level_id' => Level::where('name', 'Asisten Kepala Departemen')->first()->id,
             'department_id' => Department::where('name', 'Kastra')->first()->id,
         ]);
 
@@ -132,12 +151,12 @@ class AdminSeeder extends Seeder
         ]);
 
         User::create([
-            'nip' => '000012',
+            'nip' => '0000123',
             'name' => 'apria Nurhuda',
             'phone_number' => '0818181224',
             'email' => 'anggotaipteka@hmti.com',
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Anggota Departemen')->first()->id,
+            'level_id' => Level::where('name', 'Anggota')->first()->id,
             'department_id' => Department::where('name', 'Software')->first()->id,
         ]);
 
@@ -147,7 +166,7 @@ class AdminSeeder extends Seeder
             'phone_number' => '0818181224',
             'email' => 'anggotalitbanga@hmti.com',
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Anggota Departemen')->first()->id,
+            'level_id' => Level::where('name', 'Anggota')->first()->id,
             'department_id' => Department::where('name', 'Kastra')->first()->id,
         ]);
 
@@ -157,17 +176,17 @@ class AdminSeeder extends Seeder
             'phone_number' => '0818181224',
             'email' => 'anggotaiptekb@hmti.com',
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Anggota Departemen')->first()->id,
+            'level_id' => Level::where('name', 'Anggota')->first()->id,
             'department_id' => Department::where('name', 'Hardware')->first()->id,
         ]);
 
         User::create([
             'nip' => '000011',
-            'name' => 'Hanif Faiz',
+            'name' => 'Azzahra',
             'phone_number' => '0818181224',
             'email' => 'anggotalitbangb@hmti.com',
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Anggota Departemen')->first()->id,
+            'level_id' => Level::where('name', 'Anggota')->first()->id,
             'department_id' => Department::where('name', 'Pengkaderan')->first()->id,
         ]);
     }

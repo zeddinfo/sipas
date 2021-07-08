@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Level;
+use App\Models\Mail;
 use Illuminate\Database\Seeder;
 
 class LevelSeeder extends Seeder
@@ -15,43 +16,46 @@ class LevelSeeder extends Seeder
     public function run()
     {
         Level::create([
-            'name' => 'Admin',
-
+            'name' => Level::LEVEL_ADMIN,
         ]);
 
         Level::create([
-            'name' => 'TU',
-
+            'name' => Level::LEVEL_TU,
         ]);
 
         Level::create([
-            'name' => 'Ketua Umum',
-
+            'name' => Level::LEVEL_KETUM,
         ]);
 
         Level::create([
-            'name' => 'Asisten Ketua Umum',
+            'name' => 'Asisten ' . Level::LEVEL_TU,
             'same_as_id' => 2
         ]);
 
         Level::create([
-            'name' => 'Sekretaris',
-
+            'name' => 'Asisten ' . Level::LEVEL_KETUM,
+            'same_as_id' => 3
         ]);
 
         Level::create([
-            'name' => 'Kepala Bidang',
-
+            'name' => Level::LEVEL_SEKRETARIS,
         ]);
 
         Level::create([
-            'name' => 'Kepala Departemen',
-
+            'name' => Level::LEVEL_KABID,
         ]);
 
         Level::create([
-            'name' => 'Anggota Departemen',
+            'name' => Level::LEVEL_KADEP,
+        ]);
 
+        Level::create([
+            'name' => 'Asisten ' . Level::LEVEL_KADEP,
+            'same_as_id' => 8
+        ]);
+
+        Level::create([
+            'name' => Level::LEVEL_ANGGOTA,
         ]);
     }
 }

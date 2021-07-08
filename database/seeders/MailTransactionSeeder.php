@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Level;
 use App\Models\Mail;
 use App\Models\MailTransaction;
 use App\Models\MailVersion;
@@ -18,16 +19,42 @@ class MailTransactionSeeder extends Seeder
     public function run()
     {
         MailTransaction::create([
-            'mail_version_id' => 2,
-            'user_id' =>  8,
-            'target_user_id' => 6,
+            'mail_version_id' => 1,
+
+            'user_id' =>  User::query()
+                ->whereHas('level', function ($query) {
+                    $query->where('name', Level::LEVEL_ANGGOTA);
+                })
+                ->whereHas('department', function ($query) {
+                    $query->where('name', "Software");
+                })
+                ->first()->id,
+
+            'target_user_id' => User::query()
+                ->whereHas('level', function ($query) {
+                    $query->where('name', Level::LEVEL_KADEP);
+                })
+                ->whereHas('department', function ($query) {
+                    $query->where('name', "Software");
+                })
+                ->first()->id,
+
             'type' => 'FORWARD',
         ]);
 
         MailTransaction::create([
-            'mail_version_id' => 1,
-            'user_id' =>  16,
-            'target_user_id' => 4,
+            'mail_version_id' => 2,
+
+            'user_id' => User::query()
+                ->whereHas('level', function ($query) {
+                    $query->where('name', Level::LEVEL_TU);
+                })->first()->id,
+
+            'target_user_id' => User::query()
+                ->whereHas('level', function ($query) {
+                    $query->where('name', Level::LEVEL_KETUM);
+                })->first()->id,
+
             'type' => 'FORWARD',
         ]);
     }

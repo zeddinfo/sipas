@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\CreatedMailOutProcess;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MailOutRequest;
+use App\Models\Mail;
 use Illuminate\Http\Request;
 
 class MailOutController extends Controller
@@ -33,9 +36,17 @@ class MailOutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MailOutRequest $request)
     {
-        //
+        // $mail = Mail::create($request->validated());
+        $mail = new Mail();
+        $mail->type = Mail::TYPE_OUT;
+        $mail->title = $request->title;
+        $mail->instance = $request->instance;
+        $mail->mail_created_at = $request->mail_created_at;
+        $mail->save();
+
+        event(new CreatedMailOutProcess($mail, $request));
     }
 
     /**

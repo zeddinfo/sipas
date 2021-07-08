@@ -28,30 +28,30 @@ class DepartmentSeeder extends Seeder
 
         Department::create([
             'name' => 'Software',
-            'depend_on_id' => 1,
+            'depends_on_id' => 1,
         ]);
 
         Department::create([
             'name' => 'Hardware',
-            'depend_on_id' => 1,
+            'depends_on_id' => 1,
         ]);
         Department::create([
             'name' => 'Kastra',
-            'depend_on_id' => 2,
+            'depends_on_id' => 2,
         ]);
 
         Department::create([
             'name' => 'Pengkaderan',
-            'depend_on_id' => 2,
+            'depends_on_id' => 2,
         ]);
 
         Department::create([
             'name' => 'Humas',
-            'depend_on_id' => 3,
+            'depends_on_id' => 3,
         ]);
         Department::create([
             'name' => 'BC',
-            'depend_on_id' => 3,
+            'depends_on_id' => 3,
         ]);
     }
 }

@@ -12,12 +12,13 @@ class Department extends Model
 
     protected $guarded = [];
 
-    public function belongsToDepartment()
+    // Relation Function
+    public function upperDepartment()
     {
         return $this->belongsTo(Department::class, 'depends_on_id');
     }
 
-    public function hasManyDepartments()
+    public function hasDepartments()
     {
         return $this->hasMany(Department::class, 'depends_on_id');
     }
@@ -25,5 +26,11 @@ class Department extends Model
     public function user()
     {
         return $this->hasOne(User::class);
+    }
+
+    // Custom Function
+    public function getUpperDepartment()
+    {
+        return $this->belongsToDepartment();
     }
 }

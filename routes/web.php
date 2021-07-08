@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +79,7 @@ Route::group(['prefix' => 'tu', 'namespace' => 'App\Http\Controllers\Administrat
 });
 
 // User
-Route::group(['prefix' => 'pengguna', 'namespace' => 'App\Http\Controllers\User'], function () {
+Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'namespace' => 'App\Http\Controllers\User'], function () {
     // Dashboard
     Route::get('/', 'DashboardController@index')->name('user.dashboard.index');
 

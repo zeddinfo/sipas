@@ -53,9 +53,21 @@ Seeder
         Add log for Mail Out "dibuat" with User that created Mail Out  
         Add log for Mail Out "diteruskan" with upper level User of User that created Mail Out   
 
+User
+    CreateMailOut
+    - ProcessMail
+    - ProcessMailAttributeTransaction
+    - ProcessMailVersion
+    - ProcessFile
+    - ProcessMailTransaction
+    - ProcessMailTransactionLog
+    - Send Notification Mail    
+    
+
 TU Mail Download
 -Bypass if Controller is MailMasterController 
 
 User Mail Download
 -Set config for user that grant access for All Mail.
 -Bypass Download Mail in User section if User can access All Mail.
+

@@ -45,6 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
+    // Relation Method
     public function level()
     {
         return $this->belongsTo(Level::class);
@@ -65,8 +68,24 @@ class User extends Authenticatable
         return $this->hasMany(MailTransaction::class, 'target_user_id');
     }
 
+
+    // Custom Method
     public function hasRole($role)
     {
-        return $this->level->name == $role;
+        return $this->level->getRole() == $role;
+    }
+
+    public function getUpperUser()
+    {
+        $level_id = $this->level->getSameLevel()->getUpperLevel()->id;
+
+        // If Anggota, the upper Department still same
+        if ($this->level->name == Level::LEVEL_ANGGOTA) {
+            $department_id = $this->department->id;
+        } else {
+            $department_id = $this->department?->upperDepartment?->id;
+        }
+
+        return User::where([['level_id', $level_id], ['department_id', $department_id]])->first();
     }
 }

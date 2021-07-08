@@ -27,7 +27,7 @@ class UserSettingTest extends TestCase
     public function other_than_admin_cant_access_features()
     {
         $user = User::whereHas('level', function ($query) {
-            return $query->where('name', '!=', 'Admin');
+            return $query->where('name', '!=', Level::LEVEL_ADMIN);
         })->first();
 
         $response = $this->actingAs($user)->get(route('admin.setting.user.index'));
@@ -294,7 +294,7 @@ class UserSettingTest extends TestCase
     public function adminUser()
     {
         return User::whereHas('level', function ($query) {
-            return $query->where('name', 'Admin');
+            return $query->where('name', Level::LEVEL_ADMIN);
         })->first();
     }
 
