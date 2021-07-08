@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\CreatedMailInProcess;
 use App\Events\CreatedMailOutProcess;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -41,7 +42,25 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailTransaction::class,
             ProcessMailTransactionLog::class,
             // SendNotification::class,
-        ]
+        ],
+
+        CreatedMailInProcess::class => [
+            ProcessMailAttributeTransaction::class,
+            ProcessFile::class,
+            ProcessMailVersion::class,
+            ProcessMailTransaction::class,
+            ProcessMailTransactionLog::class,
+        ],
+
+        UpdatedMailOutProcess::class => [
+            ProcessMailAttributeTransaction::class,
+            ProcessFile::class,
+            ProcessMailVersion::class,
+            ProcessMailTransaction::class,
+            ProcessMailTransactionLog::class,
+            // SendNotification::class,
+        ],
+
     ];
 
     /**

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\CreatedMailinProcess;
+use App\Events\UpdatedMailInProcess;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MailInRequest;
+use App\Models\Mail;
 use Illuminate\Http\Request;
 
 class MailInController extends Controller
@@ -33,9 +37,16 @@ class MailInController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MailInRequest $request)
     {
-        //
+        $mail = new Mail();
+        $mail->type = Mail::TYPE_IN;
+        $mail->title = $request->title;
+        $mail->instance = $request->instance;
+        $mail->mail_created_at = $request->mail_created_at;
+        $mail->save();
+
+        event(new CreatedMailInProcess($mail, $request));
     }
 
     /**
@@ -67,9 +78,16 @@ class MailInController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MailInRequest $request, $id)
     {
-        //
+        $mail = Mail::findOrFail($id);
+        if ($mail->type != 'IN') {
+            return abort(404, 'Anda tidak punya akses.');
+        }
+
+        ///akses cek?
+
+        event(new UpdatedMailInProcess($mail, $request));
     }
 
     /**
