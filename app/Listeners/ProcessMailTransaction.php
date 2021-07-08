@@ -26,15 +26,12 @@ class ProcessMailTransaction
      */
     public function handle($event)
     {
-        if ($event->request->method() === 'POST') {
-            $this->handleCreated($event);
-        } elseif ($event->request->method() === 'PATCH') {
-            $this->handleUpdated($event);
-        }
-    }
+        // if ($event->request->method() === 'POST') {
+        //     $this->handleCreated($event);
+        // } elseif ($event->request->method() === 'PATCH') {
+        //     $this->handleUpdated($event);
+        // }
 
-    private function handleCreated($event)
-    {
         $user = $event->request->user();
 
         $mail_transaction = new MailTransaction();
@@ -45,6 +42,10 @@ class ProcessMailTransaction
         $mail_transaction->save();
 
         $event->mail_transaction = $mail_transaction;
+    }
+
+    private function handleCreated($event)
+    {
     }
 
     private function handleUpdated($event)

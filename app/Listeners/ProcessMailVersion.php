@@ -26,21 +26,22 @@ class ProcessMailVersion
      */
     public function handle($event)
     {
-        if ($event->request->method() === 'POST') {
-            $this->handleCreated($event);
-        } elseif ($event->request->method() === 'PATCH') {
-            $this->handleUpdated($event);
-        }
-    }
+        // if ($event->request->method() === 'POST') {
+        //     $this->handleCreated($event);
+        // } elseif ($event->request->method() === 'PATCH') {
+        //     $this->handleUpdated($event);
+        // }
 
-    private function handleCreated($event)
-    {
         $mail_version = MailVersion::create([
             'mail_id' => $event->mail->id,
             'file_id' => $event->file->id
         ]);
 
         $event->mail_version = $mail_version;
+    }
+
+    private function handleCreated($event)
+    {
     }
 
     private function handleUpdated($event)

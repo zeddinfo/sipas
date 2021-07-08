@@ -25,22 +25,18 @@ class ProcessMailAttributeTransaction
      */
     public function handle($event)
     {
-        if ($event->request->method() === 'POST') {
-            $this->handleCreated($event);
-        } elseif ($event->request->method() === 'PATCH') {
-            $this->handleUpdated($event);
-        }
-    }
+        $event->mail->attributes()->detach();
 
-    private function handleCreated($event)
-    {
         foreach ($event->request->mail_attributes as $mail_attribute_id) {
             $event->mail->attributes()->attach($mail_attribute_id);
         }
     }
 
+    private function handleCreated($event)
+    {
+    }
+
     private function handleUpdated($event)
     {
-        dd('Updated');
     }
 }

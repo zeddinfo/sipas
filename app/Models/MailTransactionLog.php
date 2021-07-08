@@ -10,6 +10,9 @@ class MailTransactionLog extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED = 'Dibuat oleh ';
+    const UPDATED = 'Diubah oleh ';
+
     protected $guarded = [];
 
     public function mailTransaction()

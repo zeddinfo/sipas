@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Models\MailTransactionLog;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use MailTransactions;
 
 class ProcessMailTransactionLog
 {
@@ -26,23 +27,37 @@ class ProcessMailTransactionLog
      */
     public function handle($event)
     {
-        if ($event->request->method() === 'POST') {
-            $this->handleCreated($event);
-        } elseif ($event->request->method() === 'PATCH') {
-            $this->handleUpdated($event);
+        // if ($event->request->method() === 'POST') {
+        //     $this->handleCreated($event);
+        // } elseif ($event->request->method() === 'PATCH') {
+        //     $this->handleUpdated($event);
+        // }
+        $user = $event->request->user();
+
+        switch ($event->request->method()) {
+            case 'POST':
+                $log_message = MailTransactionLog::CREATED;
+                break;
+            case 'PATCH':
+                $log_message = MailTransactionLog::UPDATED;
+                break;
+
+            default:
+                # code...
+                break;
         }
+
+
+        $mail_transaction_log = new MailTransactionLog();
+        $mail_transaction_log->mail_transaction_id = $event->mail_transaction->id;
+        $mail_transaction_log->log = $log_message;
+        $mail_transaction_log->user_name = $user->name;
+        $mail_transaction_log->user_level_department = $user->level?->name . " " . $user->department?->name;
+        $mail_transaction_log->save();
     }
 
     private function handleCreated($event)
     {
-        $user = $event->request->user();
-
-        $mail_transaction_log = new MailTransactionLog();
-        $mail_transaction_log->mail_transaction_id = $event->mail_transaction->id;
-        $mail_transaction_log->log = "Dibuat oleh ";
-        $mail_transaction_log->user_name = $user->name;
-        $mail_transaction_log->user_level_department = $user->level?->name . " " . $user->department?->name;
-        $mail_transaction_log->save();
 
         $event->mail_transaction_log = $mail_transaction_log;
     }
