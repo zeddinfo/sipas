@@ -94,7 +94,6 @@ class User extends Authenticatable
 
     public function getLowerUsers($mail_type = 'out')
     {
-
         $lower_level = $this->level->getLowerLevel($mail_type);
 
         if ($lower_level == null) return throw new Exception("Current user has lower level");
@@ -109,7 +108,5 @@ class User extends Authenticatable
             }
             return User::where('level_id', $lower_level->id)->whereIn('department_id', $department_ids)->get();
         }
-
-        // return User::where([['level_id', $lower_level->id], ['department_id', $department?->id]])->get();
     }
 }
