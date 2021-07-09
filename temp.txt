@@ -23,7 +23,7 @@ Flow Action
         ForwardedMailOut
             MailTransaction => $4A (Type is FORWARDED)
             MailTransactionLog => ::Only Change Log Msg::
-
+            
     Mail In 
         Created Mail In
             MailAttributeTransaction => $1A
