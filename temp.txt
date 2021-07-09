@@ -1,4 +1,7 @@
 Flow Action
+    Mail Out
+        Created Mail Out
+            MailAttributeTransaction => $1A 
             File => ::Always Same::
             MailTransaction => $4A
             MailTransactionLog => ::Only Change Log Msg::

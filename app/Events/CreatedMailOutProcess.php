@@ -29,6 +29,7 @@ class CreatedMailOutProcess
      */
     public function __construct(Mail $mail, Request $request)
     {
+
         $this->mail = $mail;
         $this->request = $request;
     }
