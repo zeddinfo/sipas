@@ -27,8 +27,7 @@ class MailOutRevisionController extends Controller
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
-        event(new RevisedMailOutProcess($mail, $request))
-        
+        event(new RevisedMailOutProcess($mail, $request));
     }
 
     public function show($id)

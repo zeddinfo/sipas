@@ -33,7 +33,7 @@ class RevisedMailOutProcess
 
     public function __construct(Mail $mail, Request $request)
     {
-        $this->event_type = "CREATED_MAIL_IN";
+        $this->event_type = "REVISED_MAIL_OUT";
         $this->mail = $mail;
         $this->request = $request;
     }

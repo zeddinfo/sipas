@@ -76,6 +76,14 @@ class User extends Authenticatable
         return $this->level->getRole() == $role;
     }
 
+    public function getSameUser()
+    {
+        $level = $this->level->getSameLevel();
+        $department = $this->department;
+
+        return User::where([['level_id', $level->id], ['department_id', $department?->id]])->first();
+    }
+
     public function getUpperUser($mail_type = 'out')
     {
         $upper_level = $this->level->getUpperLevel($mail_type);

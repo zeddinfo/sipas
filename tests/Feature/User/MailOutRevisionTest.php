@@ -7,6 +7,8 @@ use App\Models\Mail;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Storage;
 use Tests\TestCase;
 
 class MailOutRevisionTest extends TestCase
@@ -38,23 +40,65 @@ class MailOutRevisionTest extends TestCase
     {
         $user = $this->unauthorizedUser();
         $mail = Mail::find(1);
-        $response = $this->actingAs($user)->post(route('user.mail.out.revision.store', $mail));
+        $response = $this->actingAs($user)->post(route('user.mail.out.revision.store', $mail), [
+            'note' => 'Testing 123'
+        ]);
         $response->assertStatus(404);
     }
 
     /** @test */
     public function an_authorized_user_can_store_revision()
     {
+        $this->withoutExceptionHandling();
+
         $user = $this->authorizedUser();
         $mail = Mail::find(1);
-        $response = $this->actingAs($user)->post(route('user.mail.out.revision.store', $mail));
+        $response = $this->actingAs($user)->post(route('user.mail.out.revision.store', $mail), [
+            'note' => 'Testing 123'
+        ]);
         $response->assertOk();
 
         $this->assertDatabaseHas('mail_transactions', [
             'mail_version_id' => $mail->id,
             'type' => 'REVISION',
             'user_id' => $user->id,
-            'target_user_id' => $user->getUpperUser('out')->id,
+            'target_user_id' => 15,
+        ]);
+
+        $this->assertDatabaseHas('mail_transaction_corrections', [
+            'mail_transaction_id' => 3,
+            'note' => 'Testing 123',
+        ]);
+    }
+
+    /** @test */
+    public function an_authorized_user_can_store_revision_with_file()
+    {
+        $this->withoutExceptionHandling();
+        Storage::fake('files');
+
+        $user = $this->authorizedUser();
+        $mail = Mail::find(1);
+        $response = $this->actingAs($user)->post(route('user.mail.out.revision.store', $mail), [
+            'note' => 'Testing 123',
+            'file' => UploadedFile::fake()->image('test.jpg')
+        ]);
+
+        $response->assertOk();
+
+        $this->assertDatabaseHas('mail_transactions', [
+            'mail_version_id' => $mail->id,
+            'type' => 'REVISION',
+            'user_id' => $user->id,
+            'target_user_id' => 15,
+        ]);
+
+        $this->assertDatabaseCount('files', 3);
+
+        $this->assertDatabaseHas('mail_transaction_corrections', [
+            'mail_transaction_id' => 3,
+            'note' => 'Testing 123',
+            'file_id' => 3,
         ]);
     }
 

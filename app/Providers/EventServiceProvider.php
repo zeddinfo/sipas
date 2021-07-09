@@ -16,7 +16,7 @@ use App\Listeners\ProcessMailTransaction;
 use App\Listeners\ProcessMailVersion;
 use App\Listeners\SendNotification;
 use App\Events\UpdatedMailOutProcess;
-use App\Listeners\ProccessMailCorrection;
+use App\Listeners\ProcessMailCorrection;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -37,6 +37,7 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailTransactionLog::class,
             // SendNotification::class,
         ],
+
         UpdatedMailOutProcess::class => [
             ProcessMailAttributeTransaction::class,
             ProcessFile::class,
@@ -49,7 +50,7 @@ class EventServiceProvider extends ServiceProvider
         RevisedMailOutProcess::class => [
             ProcessMailTransaction::class,
             ProcessFile::class,
-            ProccessMailCorrection::class
+            ProcessMailCorrection::class
         ],
 
         CreatedMailInProcess::class => [
