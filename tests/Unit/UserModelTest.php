@@ -15,7 +15,7 @@ class UserModelTest extends TestCase
     protected $seed = true;
 
     /** @test */
-    public function get_upper_user_is_valid()
+    public function get_mail_out_upper_user_is_valid()
     {
         $user = User::query()
             ->whereHas('level', function ($query) {

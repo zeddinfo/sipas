@@ -82,9 +82,9 @@ class User extends Authenticatable
         $same_level = $this->level->getSameLevel();
 
         if ($direction == 'upper') {
-            $level = $same_level->getUpperLevel('out');
-        } else {
-            $level = $same_level->getUpperLower('out');
+            $level = $same_level->getMailOutOrderLevel('upper');
+        } elseif ($direction == 'lower') {
+            $level = $same_level->getMailOutOrderLevel('upper');
         }
 
         if ($level == null) {
@@ -93,11 +93,11 @@ class User extends Authenticatable
 
         // If Anggota, the upper Department still same
         if ($this->level->name == Level::LEVEL_ANGGOTA) {
-            $upper_department = $this->department;
+            $department = $this->department;
         } else {
-            $upper_department = $this->department?->upperDepartment;
+            $department = $this->department?->upperDepartment;
         }
 
-        return User::where([['level_id', $level->id], ['department_id', $upper_department?->id]])->first();
+        return User::where([['level_id', $level->id], ['department_id', $department?->id]])->first();
     }
 }
