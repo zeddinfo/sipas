@@ -35,7 +35,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -56,7 +56,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -77,7 +77,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -98,7 +98,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -119,7 +119,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -140,7 +140,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -161,7 +161,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -182,7 +182,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -197,7 +197,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -212,7 +212,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -227,7 +227,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
 
         $user = User::query()
@@ -242,7 +242,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+        $this->assertEquals($expected_upper_user, $user->getUpperUser('out'));
 
         $user = User::query()
             ->whereHas('level', function ($query) {
@@ -251,7 +251,7 @@ class UserModelTest extends TestCase
             ->first();
 
         try {
-            $user->getMailOutOrderUser('upper');
+            $user->getUpperUser('out');
         } catch (Exception $e) {
             $this->assertEquals($e->getMessage(), 'Current user has highest level');
         }

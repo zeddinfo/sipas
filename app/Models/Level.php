@@ -48,21 +48,16 @@ class Level extends Model
         }
     }
 
-    /**
-     * @param string $mail_type
-     */
-    public function getMailOutOrderLevel($direction = 'upper')
+    public function getUpperLevel($mail_type = 'out')
     {
-        $order = config('sipas.mail_order.out');
+        $order = config('sipas.mail_order.' . $mail_type);
         $index = array_search($this->name, $order);
 
         if ($index == 0) {
             return null;
         }
 
-        $direction == 'upper' ? $index = ($index - 1) : $index = ($index + 1);
-
-        return Level::where('name', $order[$index])->first();
+        return Level::where('name', $order[$index - 1])->first();
     }
 
     public function getSameLevel()

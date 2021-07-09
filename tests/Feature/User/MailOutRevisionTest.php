@@ -54,7 +54,7 @@ class MailOutRevisionTest extends TestCase
             'mail_version_id' => $mail->id,
             'type' => 'REVISION',
             'user_id' => $user->id,
-            'target_user_id' => $user->getMailOutOrderUser('upper')->id,
+            'target_user_id' => $user->getUpperUser('out')->id,
         ]);
     }
 

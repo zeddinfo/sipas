@@ -76,18 +76,14 @@ class User extends Authenticatable
         return $this->level->getRole() == $role;
     }
 
-    public function getMailOutOrderUser($direction = 'upper')
+    public function getUpperUser($mail_type = 'out')
     {
 
         $same_level = $this->level->getSameLevel();
 
-        if ($direction == 'upper') {
-            $level = $same_level->getMailOutOrderLevel('upper');
-        } elseif ($direction == 'lower') {
-            $level = $same_level->getMailOutOrderLevel('upper');
-        }
+        $upper_level = $same_level->getUpperLevel($mail_type);
 
-        if ($level == null) {
+        if ($upper_level == null) {
             return throw new Exception("Current user has highest level");
         }
 
@@ -98,6 +94,6 @@ class User extends Authenticatable
             $department = $this->department?->upperDepartment;
         }
 
-        return User::where([['level_id', $level->id], ['department_id', $department?->id]])->first();
+        return User::where([['level_id', $upper_level->id], ['department_id', $department?->id]])->first();
     }
 }
