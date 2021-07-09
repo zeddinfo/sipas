@@ -36,7 +36,7 @@ class ProcessMailTransaction
 
         $mail_transaction = new MailTransaction();
         $mail_transaction->user_id = $user->id;
-        $mail_transaction->target_user_id = $user->getUpperUser()->id;
+        $mail_transaction->target_user_id = $user->getMailOutOrderUser('upper')->id;
         $mail_transaction->mail_version_id = $event->mail_version->id;
         $mail_transaction->type = "FORWARD";
         $mail_transaction->save();

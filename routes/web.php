@@ -112,17 +112,17 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         Route::get('/keluar', 'MailOutController@index')->name('user.mail.out.index');
         Route::get('/keluar/tambah', 'MailOutController@create')->name('user.mail.out.create');
         Route::post('/keluar', 'MailOutController@store')->name('user.mail.out.store');
-        Route::get('/keluar/{id}', 'MailOutController@show')->name('user.mail.out.show');
-        Route::get('/keluar/{id}/koreksi', 'MailOutController@edit')->name('user.mail.out.edit');
-        Route::patch('/keluar/{id}', 'MailOutController@update')->name('user.mail.out.update');
-        Route::delete('/keluar/{id}', 'MailOutController@destroy')->name('user.mail.out.destroy');
+        Route::get('/keluar/{mail}', 'MailOutController@show')->name('user.mail.out.show');
+        Route::get('/keluar/{mail}/koreksi', 'MailOutController@edit')->name('user.mail.out.edit');
+        Route::patch('/keluar/{mail}', 'MailOutController@update')->name('user.mail.out.update');
+        Route::delete('/keluar/{mail}', 'MailOutController@destroy')->name('user.mail.out.destroy');
 
         // Mail Out Custom Action
         Route::post('/keluar/{id}/aksi/teruskan', 'MailOutActionController@forward')->name('user.mail.out.action.forward');
 
         // Mail Out Revision
-        Route::get('/keluar/{id}/revisi/tambah', 'MailOutRevisionController@create')->name('user.mail.out.revision.create');
-        Route::post('/keluar/{id}/revisi', 'MailOutRevisionController@store')->name('user.mail.out.revision.store');
+        Route::get('/keluar/{mail}/revisi/tambah', 'MailOutRevisionController@create')->name('user.mail.out.revision.create');
+        Route::post('/keluar/{mail}/revisi', 'MailOutRevisionController@store')->name('user.mail.out.revision.store');
 
         //!!! ONLY USER WITH ALL MAIL ACCESS !!!
         // Mail Ongoing 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -75,17 +76,28 @@ class User extends Authenticatable
         return $this->level->getRole() == $role;
     }
 
-    public function getUpperUser()
+    public function getMailOutOrderUser($direction = 'upper')
     {
-        $level_id = $this->level->getSameLevel()->getUpperLevel()->id;
+
+        $same_level = $this->level->getSameLevel();
+
+        if ($direction == 'upper') {
+            $level = $same_level->getUpperLevel('out');
+        } else {
+            $level = $same_level->getUpperLower('out');
+        }
+
+        if ($level == null) {
+            return throw new Exception("Current user has highest level");
+        }
 
         // If Anggota, the upper Department still same
         if ($this->level->name == Level::LEVEL_ANGGOTA) {
-            $department_id = $this->department->id;
+            $upper_department = $this->department;
         } else {
-            $department_id = $this->department?->upperDepartment?->id;
+            $upper_department = $this->department?->upperDepartment;
         }
 
-        return User::where([['level_id', $level_id], ['department_id', $department_id]])->first();
+        return User::where([['level_id', $level->id], ['department_id', $upper_department?->id]])->first();
     }
 }

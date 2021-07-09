@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\Level;
 use App\Models\User;
+use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -34,7 +35,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -55,7 +56,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -76,7 +77,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -97,7 +98,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -118,7 +119,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -139,7 +140,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -160,7 +161,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -181,7 +182,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -196,7 +197,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -211,7 +212,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -226,7 +227,7 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
 
 
         $user = User::query()
@@ -241,6 +242,18 @@ class UserModelTest extends TestCase
             })
             ->first();
 
-        $this->assertEquals($expected_upper_user, $user->getUpperUser());
+        $this->assertEquals($expected_upper_user, $user->getMailOutOrderUser('upper'));
+
+        $user = User::query()
+            ->whereHas('level', function ($query) {
+                $query->where('name', 'Asisten ' . Level::LEVEL_TU);
+            })
+            ->first();
+
+        try {
+            $user->getMailOutOrderUser('upper');
+        } catch (Exception $e) {
+            $this->assertEquals($e->getMessage(), 'Current user has highest level');
+        }
     }
 }

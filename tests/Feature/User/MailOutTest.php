@@ -236,6 +236,25 @@ class MailOutTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function a_user_wihtout_permission_cant_delete()
+    {
+        $user = $this->user();
+        $deleted_mail = Mail::find(1);
+        $response = $this->actingAs($user)->delete(route('user.mail.out.destroy', $deleted_mail->id));
+        $response->assertNotFound();
+        $this->assertDatabaseCount('mails', 2);
+    }
+
+    /** @test */
+    public function a_user_with_permission_can_delete()
+    {
+        $user = $this->authorizedMailOutUser();
+        $deleted_mail = Mail::select('id', 'title', 'instance', 'type')->find(1);
+        $response = $this->actingAs($user)->delete(route('user.mail.out.destroy', $deleted_mail->id));
+        $response->assertOk();
+        $this->assertSoftDeleted('mails', $deleted_mail->toArray());
+    }
 
 
 

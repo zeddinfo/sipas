@@ -20,15 +20,6 @@ class Level extends Model
     const LEVEL_KADEP = "Kepala Departemen";
     const LEVEL_ANGGOTA = "Anggota";
 
-    const UP_LEVEL_ORDER = [
-        Level::LEVEL_TU,
-        Level::LEVEL_KETUM,
-        Level::LEVEL_SEKRETARIS,
-        Level::LEVEL_KABID,
-        Level::LEVEL_KADEP,
-        Level::LEVEL_ANGGOTA,
-    ];
-
     // Relation Function
     public function sameLevel()
     {
@@ -57,14 +48,19 @@ class Level extends Model
         }
     }
 
-    public function getUpperLevel()
+    /**
+     * @param string $mail_type
+     */
+    public function getUpperLevel($mail_type = 'in')
     {
-        $index = array_search($this->name, Level::UP_LEVEL_ORDER) - 1;
-        if ($index == -1) {
-            return false;
+        $order = config('sipas.mail_order.' . $mail_type);
+        $index = array_search($this->name, $order);
+
+        if ($index == 0) {
+            return null;
         }
 
-        return Level::where('name', Level::UP_LEVEL_ORDER[$index])->first();
+        return Level::where('name', $order[$index - 1])->first();
     }
 
     public function getSameLevel()

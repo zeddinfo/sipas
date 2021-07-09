@@ -16,9 +16,9 @@ class CreatedMailOutProcess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $file;
     public $mail;
     public $request;
-    public $file;
     public $mail_version;
     public $mail_transaction;
     public $mail_transaction_log;
