@@ -78,14 +78,9 @@ class User extends Authenticatable
 
     public function getUpperUser($mail_type = 'out')
     {
+        $upper_level = $this->level->getUpperLevel($mail_type);
 
-        $same_level = $this->level->getSameLevel();
-
-        $upper_level = $same_level->getUpperLevel($mail_type);
-
-        if ($upper_level == null) {
-            return throw new Exception("Current user has highest level");
-        }
+        if ($upper_level == null) return throw new Exception("Current user has highest level");
 
         // If Anggota, the upper Department still same
         if ($this->level->name == Level::LEVEL_ANGGOTA) {
@@ -95,5 +90,26 @@ class User extends Authenticatable
         }
 
         return User::where([['level_id', $upper_level->id], ['department_id', $department?->id]])->first();
+    }
+
+    public function getLowerUsers($mail_type = 'out')
+    {
+
+        $lower_level = $this->level->getLowerLevel($mail_type);
+
+        if ($lower_level == null) return throw new Exception("Current user has lower level");
+
+        if ($this->department == null) {
+            return User::where('level_id', $lower_level->id)->get();
+        } else {
+            if ($this->department->hasDepartments->count() > 0) {
+                $department_ids = $this->department->hasDepartments->pluck('id')->toArray();
+            } else {
+                $department_ids = [$this->department_id];
+            }
+            return User::where('level_id', $lower_level->id)->whereIn('department_id', $department_ids)->get();
+        }
+
+        // return User::where([['level_id', $lower_level->id], ['department_id', $department?->id]])->get();
     }
 }

@@ -54,12 +54,12 @@ class ProcessMailTransactionLog
         $mail_transaction_log->user_name = $user->name;
         $mail_transaction_log->user_level_department = $user->level?->name . " " . $user->department?->name;
         $mail_transaction_log->save();
+
+        $event->mail_transaction_log = $mail_transaction_log;
     }
 
     private function handleCreated($event)
     {
-
-        $event->mail_transaction_log = $mail_transaction_log;
     }
 
     private function handleUpdated($event)
