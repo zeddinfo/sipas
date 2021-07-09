@@ -1,9 +1,5 @@
 Flow Action
-<<<<<<< HEAD
     Mail Out
-=======
-    MailOut
->>>>>>> 1bf9d9552d6cc82793379d39443c86b02ea0ef94
         Created Mail Out
             MailAttributeTransaction => $1A 
             File => ::Always Same::
