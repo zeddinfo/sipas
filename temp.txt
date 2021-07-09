@@ -1,36 +1,48 @@
 Flow Action
-    Created Mail Out
-        MailAttributeTransaction => $1A 
-        File => ::Always Same::
-        MailVersion => $3A
-        MailTransaction => $4A
-        MailTransactionLog => ::Only Change Log Msg::
+    Mail Out
+        Created Mail Out
+            MailAttributeTransaction => $1A 
+            File => ::Always Same::
+            MailVersion => $3A
+            MailTransaction => $4A
+            MailTransactionLog => ::Only Change Log Msg::
 
-    Updated Mail Out
-        MailAttributeTransaction =>$1A
-        File => ::Always Same::
-        MailVersion => $3A
-        MailTransaction => $4A
-        MailTransactionLog => ::Only Change Log Msg::
-        
-    Revised Mail Out
-        MailTransaction => $4B (Type is REVISION && Target User is the current sender User)
-        File => ::Always Same::
-        MailTransactionCorrection => ::ONLY SINGLE ACTION::
-        MailTransactionLog => ::Only Change Log Msg::
+        Updated Mail Out
+            MailAttributeTransaction =>$1A
+            File => ::Always Same::
+            MailVersion => $3A
+            MailTransaction => $4A
+            MailTransactionLog => ::Only Change Log Msg::
+            
+        Revised Mail Out
+            MailTransaction => $4B (Type is REVISION && Target User is the current sender User)
+            File => ::Always Same::
+            MailTransactionCorrection => ::ONLY SINGLE ACTION::
+            MailTransactionLog => ::Only Change Log Msg::
 
-    ForwardedMailOut
-        MailTransaction => $4A (Type is FORWARDED)
-        MailTransactionLog => ::Only Change Log Msg::
+        ForwardedMailOut
+            MailTransaction => $4A (Type is FORWARDED)
+            MailTransactionLog => ::Only Change Log Msg::
 
-    Created Mail In
-        MailAttributeTransaction => $1A
-        File => ::Always Same::
-        MailVersion => $3A
-        MailTransaction => $4B (Target user is lower user level)
-        MailTransactionLog => ::Only Change Log Msg::
+    Mail In 
+        Created Mail In
+            MailAttributeTransaction => $1A
+            File => ::Always Same::
+            MailVersion => $3A
+            MailTransaction => $4B (Target user is lower user level)
+            MailTransactionLog => ::Only Change Log Msg::
+                    
+        Forwarded MailIn 
+            MailTransaction => $4C (Type is FORWARDED(Beda Jauh))
+            MailTransactionLog => ::Only Change Log Msg::
 
+        DispositedMailIn
+            MailTransaction => $4C (Type is Disposition)
+            MailTransactionLog => ::Only Change Log Msg::
 
+        ArchivedMailIn
+            MailTransaction => $4C (Type is Archived)
+            MailTransactionLog => ::Only Change Log Msg::
 
 
 Master Action
