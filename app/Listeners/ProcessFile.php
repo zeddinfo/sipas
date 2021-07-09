@@ -26,13 +26,6 @@ class ProcessFile
      */
     public function handle($event)
     {
-        // if ($event->request->method() === 'POST') {
-        //     $this->handleCreated($event);
-        // } elseif ($event->request->method() === 'PATCH') {
-        //     $this->handleUpdated($event);
-        // }
-
-
         if ($event->request->hasFile('file')) {
             $file = $event->request->file('file');
             $original_name = $file->getClientOriginalName();

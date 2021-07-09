@@ -12,13 +12,13 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Http\Request;
 use Illuminate\Queue\SerializesModels;
 
-class CreatedMailOutProcess
+class RevisedMailOutProcess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $file;
     public $mail;
     public $request;
+    public $file;
     public $mail_version;
     public $mail_transaction;
     public $mail_transaction_log;
@@ -29,9 +29,11 @@ class CreatedMailOutProcess
      *
      * @return void
      */
+
+
     public function __construct(Mail $mail, Request $request)
     {
-        $this->event_type = "CREATED_MAIL_OUT";
+        $this->event_type = "CREATED_MAIL_IN";
         $this->mail = $mail;
         $this->request = $request;
     }

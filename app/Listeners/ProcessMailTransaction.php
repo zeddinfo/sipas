@@ -26,12 +26,19 @@ class ProcessMailTransaction
      */
     public function handle($event)
     {
-        // if ($event->request->method() === 'POST') {
-        //     $this->handleCreated($event);
-        // } elseif ($event->request->method() === 'PATCH') {
-        //     $this->handleUpdated($event);
-        // }
+        switch ($event->event_type) {
+            case 'CREATED_MAIL_OUT' || 'UPDATED_MAIL_OUT' || 'FORWARDED_MAIL_OUT':
+                $this->handleForwardedMailOut($event);
+                break;
+        }
+    }
 
+    private function handleMailIn($event)
+    {
+    }
+
+    public function handleForwardedMailOut($event)
+    {
         $user = $event->request->user();
 
         $mail_transaction = new MailTransaction();
@@ -42,13 +49,5 @@ class ProcessMailTransaction
         $mail_transaction->save();
 
         $event->mail_transaction = $mail_transaction;
-    }
-
-    private function handleCreated($event)
-    {
-    }
-
-    private function handleUpdated($event)
-    {
     }
 }

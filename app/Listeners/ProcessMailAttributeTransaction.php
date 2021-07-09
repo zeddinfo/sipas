@@ -25,8 +25,6 @@ class ProcessMailAttributeTransaction
      */
     public function handle($event)
     {
-        dd($request->url());
-
         $event->mail->attributes()->detach();
 
         foreach ($event->request->mail_attributes as $mail_attribute_id) {

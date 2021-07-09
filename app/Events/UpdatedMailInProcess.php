@@ -19,6 +19,9 @@ class UpdatedMailInProcess
     public $mail;
     public $request;
 
+    public $event_type;
+
+
     /**
      * Create a new event instance.
      *
@@ -26,6 +29,7 @@ class UpdatedMailInProcess
      */
     public function __construct(Mail $mail, Request $request)
     {
+        $this->event_type = "CREATED_MAIL_IN";
         $this->mail = $mail;
         $this->request = $request;
     }

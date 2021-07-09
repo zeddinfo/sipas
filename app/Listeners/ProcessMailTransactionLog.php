@@ -27,18 +27,13 @@ class ProcessMailTransactionLog
      */
     public function handle($event)
     {
-        // if ($event->request->method() === 'POST') {
-        //     $this->handleCreated($event);
-        // } elseif ($event->request->method() === 'PATCH') {
-        //     $this->handleUpdated($event);
-        // }
         $user = $event->request->user();
 
-        switch ($event->request->method()) {
-            case 'POST':
+        switch ($event->event_type) {
+            case 'CREATED_MAIL_OUT':
                 $log_message = MailTransactionLog::CREATED;
                 break;
-            case 'PATCH':
+            case 'UPDATED_MAIL_OUT':
                 $log_message = MailTransactionLog::UPDATED;
                 break;
 

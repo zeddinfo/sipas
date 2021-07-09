@@ -18,6 +18,9 @@ class UpdatedMailOutProcess
 
     public $mail;
     public $request;
+
+    public $event_type;
+
     /**
      * Create a new event instance.
      *
@@ -25,6 +28,7 @@ class UpdatedMailOutProcess
      */
     public function __construct(Mail $mail, Request $request)
     {
+        $this->event_type = "UPDATED_MAIL_OUT";
         $this->mail = $mail;
         $this->request = $request;
     }

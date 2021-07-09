@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Models\MailVersion;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class ProcessMailVersion
+class ProccessMailCorrection
 {
     /**
      * Create the event listener.
@@ -26,11 +25,6 @@ class ProcessMailVersion
      */
     public function handle($event)
     {
-        $mail_version = MailVersion::create([
-            'mail_id' => $event->mail->id,
-            'file_id' => $event->file->id
-        ]);
-
-        $event->mail_version = $mail_version;
+        //
     }
 }

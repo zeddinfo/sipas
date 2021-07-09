@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\CreatedMailInProcess;
 use App\Events\CreatedMailOutProcess;
+use App\Events\RevisedMailOutProcess;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -15,6 +16,7 @@ use App\Listeners\ProcessMailTransaction;
 use App\Listeners\ProcessMailVersion;
 use App\Listeners\SendNotification;
 use App\Events\UpdatedMailOutProcess;
+use App\Listeners\ProccessMailCorrection;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -42,6 +44,12 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailTransaction::class,
             ProcessMailTransactionLog::class,
             // SendNotification::class,
+        ],
+
+        RevisedMailOutProcess::class => [
+            ProcessMailTransaction::class,
+            ProcessFile::class,
+            ProccessMailCorrection::class
         ],
 
         CreatedMailInProcess::class => [
