@@ -27,10 +27,4 @@ class Department extends Model
     {
         return $this->hasOne(User::class);
     }
-
-    // Custom Function
-    public function getUpperDepartment()
-    {
-        return $this->belongsToDepartment();
-    }
 }

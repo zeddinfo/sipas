@@ -48,10 +48,17 @@ class Level extends Model
         }
     }
 
+    public function getSameLevel()
+    {
+        return $this->sameLevel ?? $this;
+    }
+
     public function getUpperLevel($mail_type = 'out')
     {
         $order = config('sipas.mail_order.' . $mail_type);
-        $index = array_search($this->name, $order);
+        $level = $this->getSameLevel();
+        $index = array_search($level->name, $order);
+
 
         if ($index == 0) {
             return null;
@@ -60,8 +67,15 @@ class Level extends Model
         return Level::where('name', $order[$index - 1])->first();
     }
 
-    public function getSameLevel()
+    public function getLowerLevel($mail_type = 'out')
     {
-        return $this->sameLevel ?? $this;
+        $order = config('sipas.mail_order.' . $mail_type);
+        $level = $this->getSameLevel();
+        $index = array_search($level->name, $order);
+
+        if ($index == count($order) - 1) {
+            return null;
+        }
+        return Level::where('name', $order[$index + 1])->first();
     }
 }

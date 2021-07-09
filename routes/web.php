@@ -104,7 +104,6 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         Route::post('/masuk/{id}/aksi/arsipkan', 'MailInActionController@archive')->name('user.mail.in.action.archive');
 
         // Mail In Disposition
-        Route::get('/masuk/{id}/disposisi', 'MailInDispositionController@index')->name('user.mail.in.disposition.index');
         Route::get('/masuk/{id}/teruskan/disposisi/tambah', 'MailInDispositionController@create')->name('user.mail.in.disposition.create');
         Route::post('/masuk/{id}/teruskan/disposisi', 'MailInDispositionController@store')->name('user.mail.in.disposition.store');
 
