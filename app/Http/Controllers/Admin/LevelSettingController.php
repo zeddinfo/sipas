@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LevelRequest;
+use App\Models\Level;
 use Illuminate\Http\Request;
 
 class LevelSettingController extends Controller
@@ -33,29 +35,28 @@ class LevelSettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LevelRequest $request)
     {
-        //
+        Level::create($request->validated());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Level $level)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Level $level)
     {
         //
     }
@@ -64,22 +65,22 @@ class LevelSettingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LevelRequest $request, Level $level)
     {
-        //
+        $level->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Level $level)
     {
-        //
+        $level->delete();
     }
 }

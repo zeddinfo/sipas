@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class MailAttributeSettingTest extends TestCase
+class DepartmentSettingTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,7 +17,7 @@ class MailAttributeSettingTest extends TestCase
     /** @test */
     public function unauthorized_user_cant_access_index()
     {
-        $response = $this->actingAs($this->normalUser())->get(route('admin.setting.mail.attribute.index'));
+        $response = $this->actingAs($this->normalUser())->get(route('admin.setting.department.index'));
 
         $response->assertNotFound();
     }
@@ -25,7 +25,7 @@ class MailAttributeSettingTest extends TestCase
     /** @test */
     public function unauthorized_tu_user_cant_access_index()
     {
-        $response = $this->actingAs($this->tuUser())->get(route('admin.setting.mail.attribute.index'));
+        $response = $this->actingAs($this->tuUser())->get(route('admin.setting.department.index'));
 
         $response->assertNotFound();
     }
@@ -33,7 +33,7 @@ class MailAttributeSettingTest extends TestCase
     /** @test */
     public function authorized_user_can_access_index()
     {
-        $response = $this->actingAs($this->adminUser())->get(route('admin.setting.mail.attribute.index'));
+        $response = $this->actingAs($this->adminUser())->get(route('admin.setting.department.index'));
 
         $response->assertOk();
     }
@@ -41,7 +41,7 @@ class MailAttributeSettingTest extends TestCase
     /** @test */
     public function admin_can_access_show()
     {
-        $response = $this->actingAs($this->adminUser())->get(route('admin.setting.mail.attribute.show', 1));
+        $response = $this->actingAs($this->adminUser())->get(route('admin.setting.department.show', 1));
 
         $response->assertOk();
     }
@@ -49,25 +49,20 @@ class MailAttributeSettingTest extends TestCase
     /** @test */
     public function admin_can_access_create()
     {
-        $response = $this->actingAs($this->adminUser())->get(route('admin.setting.mail.attribute.create'));
+        $response = $this->actingAs($this->adminUser())->get(route('admin.setting.department.create'));
 
         $response->assertOk();
     }
 
     /** @test */
-    public function admin_can_perform_store()
+    public function admin_canperform__store()
     {
-        $response = $this->actingAs($this->adminUser())->post(route('admin.setting.mail.attribute.store'), $this->validDataRequest());
+        $response = $this->actingAs($this->adminUser())->post(route('admin.setting.department.store'), $this->validDataRequest());
 
         $response->assertOk();
 
-        $this->assertDatabaseCount('mail_attributes', 11);
-        $this->assertDatabaseHas('mail_attributes', [
-            'type' => 'Tipe',
-            'name' => 'Undangan',
-            'code' => 'UDG',
-            'color' => '#FCBA03'
-        ]);
+        $this->assertDatabaseCount('departments', 10);
+        $this->assertDatabaseHas('departments', $this->validDataRequest());
     }
 
     /** @test */
@@ -75,7 +70,7 @@ class MailAttributeSettingTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->actingAs($this->adminUser())->get(route('admin.setting.mail.attribute.edit', 1));
+        $response = $this->actingAs($this->adminUser())->get(route('admin.setting.department.edit', 1));
 
         $response->assertOk();
     }
@@ -85,31 +80,23 @@ class MailAttributeSettingTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->actingAs($this->adminUser())->patch(route('admin.setting.mail.attribute.update', 1), $this->validDataRequest());
+        $response = $this->actingAs($this->adminUser())->patch(route('admin.setting.department.update', 1), $this->validDataRequest());
 
         $response->assertOk();
 
-        $this->assertDatabaseCount('mail_attributes', 10);
-        $this->assertDatabaseHas('mail_attributes', [
-            'type' => 'Tipe',
-            'name' => 'Undangan',
-            'code' => 'UDG',
-            'color' => '#FCBA03'
-        ]);
+        $this->assertDatabaseCount('departments', 9);
+        $this->assertDatabaseHas('departments', $this->validDataRequest());
     }
 
     /** @test */
     public function admin_can_perform_delete()
     {
-        $response = $this->actingAs($this->adminUser())->delete(route('admin.setting.mail.attribute.destroy', 1));
+        $this->actingAs($this->adminUser())->post(route('admin.setting.department.store'), $this->validDataRequest());
+        $response = $this->actingAs($this->adminUser())->delete(route('admin.setting.department.destroy', 10));
 
         $response->assertOk();
 
-        $this->assertSoftDeleted('mail_attributes', [
-            'type' => 'Tipe',
-            'name' => 'PERMOHONAN',
-            'code' => 'PRMHN'
-        ]);
+        $this->assertSoftDeleted('departments', $this->validDataRequest());
     }
 
 
@@ -138,10 +125,8 @@ class MailAttributeSettingTest extends TestCase
     public function validDataRequest()
     {
         return [
-            'type' => 'Tipe',
-            'name' => 'Undangan',
-            'code' => 'UDG',
-            'color' => '#fcba03'
+            'name' => 'IPTEK',
+            'depends_on_id' => 7,
         ];
     }
 }

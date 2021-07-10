@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\Facades\MailService;
+use App\Http\Requests\DepartmentRequest;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class DepartmentSettingController extends Controller
@@ -15,6 +16,7 @@ class DepartmentSettingController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -33,29 +35,28 @@ class DepartmentSettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
-        //
+        Department::create($request->validated());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Department $department)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Department $department)
     {
         //
     }
@@ -64,22 +65,22 @@ class DepartmentSettingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentRequest $request, Department $department)
     {
-        //
+        $department->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Department $department)
     {
-        //
+        $department->delete();
     }
 }
