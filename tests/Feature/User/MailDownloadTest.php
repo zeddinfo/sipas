@@ -30,7 +30,7 @@ class MailDownloadTest extends TestCase
         $response->assertRedirect();
     }
 
-    // STATIC DATA SECTION
+    // STATIC DATA
     public function authorizedUser()
     {
         return User::whereHas('level', function ($query) {

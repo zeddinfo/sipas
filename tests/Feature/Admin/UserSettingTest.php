@@ -290,7 +290,7 @@ class UserSettingTest extends TestCase
 
 
 
-    // STATIC DATA SECTION
+    // STATIC DATA
     public function adminUser()
     {
         return User::whereHas('level', function ($query) {

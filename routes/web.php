@@ -171,7 +171,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
         Route::get('/pengguna', 'UserSettingController@index')->name('admin.setting.user.index');
         Route::get('/pengguna/tambah', 'UserSettingController@create')->name('admin.setting.user.create');
         Route::post('/pengguna', 'UserSettingController@store')->name('admin.setting.user.store');
-        Route::post('/pengguna/{id}', 'UserSettingController@show')->name('admin.setting.user.show');
+        Route::get('/pengguna/{id}', 'UserSettingController@show')->name('admin.setting.user.show');
         Route::get('/pengguna/{id}/ubah', 'UserSettingController@edit')->name('admin.setting.user.edit');
         Route::patch('/pengguna/{id}', 'UserSettingController@update')->name('admin.setting.user.update');
         Route::delete('/pengguna/{id}', 'UserSettingController@destroy')->name('admin.setting.user.destroy');
@@ -180,7 +180,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
         Route::get('/level-pengguna', 'LevelSettingController@index')->name('admin.setting.level.index');
         Route::get('/level-pengguna/tambah', 'LevelSettingController@create')->name('admin.setting.level.create');
         Route::post('/level-pengguna', 'LevelSettingController@store')->name('admin.setting.level.store');
-        Route::post('/level-pengguna/{id}', 'LevelSettingController@show')->name('admin.setting.level.show');
+        Route::get('/level-pengguna/{id}', 'LevelSettingController@show')->name('admin.setting.level.show');
         Route::get('/level-pengguna/{id}/ubah', 'LevelSettingController@edit')->name('admin.setting.level.edit');
         Route::patch('/level-pengguna/{id}', 'LevelSettingController@update')->name('admin.setting.level.update');
         Route::delete('/level-pengguna/{id}', 'LevelSettingController@destroy')->name('admin.setting.level.destroy');
@@ -189,7 +189,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
         Route::get('/bagian', 'DepartmentSettingController@index')->name('admin.setting.department.index');
         Route::get('/bagian/tambah', 'DepartmentSettingController@create')->name('admin.setting.department.create');
         Route::post('/bagian', 'DepartmentSettingController@store')->name('admin.setting.department.store');
-        Route::post('/bagian/{id}', 'DepartmentSettingController@show')->name('admin.setting.department.show');
+        Route::get('/bagian/{id}', 'DepartmentSettingController@show')->name('admin.setting.department.show');
         Route::get('/bagian/{id}/ubah', 'DepartmentSettingController@edit')->name('admin.setting.department.edit');
         Route::patch('/bagian/{id}', 'DepartmentSettingController@update')->name('admin.setting.department.update');
         Route::delete('/bagian/{id}', 'DepartmentSettingController@destroy')->name('admin.setting.department.destroy');
@@ -198,10 +198,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
         Route::get('/atribut-surat', 'MailAtrributeSettingController@index')->name('admin.setting.mail.attribute.index');
         Route::get('/atribut-surat/tambah', 'MailAtrributeSettingController@create')->name('admin.setting.mail.attribute.create');
         Route::post('/atribut-surat', 'MailAtrributeSettingController@store')->name('admin.setting.mail.attribute.store');
-        Route::post('/atribut-surat/{id}', 'MailAtrributeSettingController@show')->name('admin.setting.mail.attribute.show');
-        Route::get('/atribut-surat/{id}/ubah', 'MailAtrributeSettingController@edit')->name('admin.setting.mail.attribute.edit');
-        Route::get('/atribut-surat/{id}', 'MailAtrributeSettingController@update')->name('admin.setting.mail.attribute.update');
-        Route::patch('/atribut-surat/{id}', 'MailAtrributeSettingController@destroy')->name('admin.setting.mail.attribute.destroy');
+        Route::get('/atribut-surat/{mail_attribute}', 'MailAtrributeSettingController@show')->name('admin.setting.mail.attribute.show');
+        Route::get('/atribut-surat/{mail_attribute}/ubah', 'MailAtrributeSettingController@edit')->name('admin.setting.mail.attribute.edit');
+        Route::patch('/atribut-surat/{mail_attribute}', 'MailAtrributeSettingController@update')->name('admin.setting.mail.attribute.update');
+        Route::delete('/atribut-surat/{mail_attribute}', 'MailAtrributeSettingController@destroy')->name('admin.setting.mail.attribute.destroy');
     });
 });
 

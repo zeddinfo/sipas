@@ -62,6 +62,8 @@ class MailInTest extends TestCase
     /** @test */
     public function user_can_store_mail_in()
     {
+        $this->markTestSkipped();
+
         $this->withoutExceptionHandling();
 
         Storage::fake("files");
@@ -81,6 +83,8 @@ class MailInTest extends TestCase
     }
 
 
+
+    // STATIC DATA
     public function authorizedMailInUser()
     {
         return User::whereHas('level', function ($query) {
@@ -88,7 +92,6 @@ class MailInTest extends TestCase
         })->first();
     }
 
-    // STATIC DATA SECTION
     public function user()
     {
         return User::whereHas('level', function ($query) {

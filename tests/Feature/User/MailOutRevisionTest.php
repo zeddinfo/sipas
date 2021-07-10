@@ -112,7 +112,7 @@ class MailOutRevisionTest extends TestCase
         ]);
     }
 
-    // STATIC DATA SECTION
+    // STATIC DATA
     public function authorizedUser()
     {
         return User::whereHas('level', function ($query) {

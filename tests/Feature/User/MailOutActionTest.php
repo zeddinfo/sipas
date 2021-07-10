@@ -51,7 +51,7 @@ class MailOutActionTest extends TestCase
         ]);
     }
 
-    // STATIC DATA SECTION
+    // STATIC DATA
     public function user()
     {
         return User::whereHas('level', function ($query) {

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MailAttributeRequest;
+use App\Models\MailAttribute;
 use Illuminate\Http\Request;
 
 class MailAtrributeSettingController extends Controller
@@ -33,29 +35,28 @@ class MailAtrributeSettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MailAttributeRequest $request)
     {
-        //
+        MailAttribute::create($request->validated());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\MailAttribute  $mail_attribute
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(MailAttribute $mail_attribute)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\MailAttribute  $mail_attribute
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(MailAttribute $mail_attribute)
     {
         //
     }
@@ -64,22 +65,22 @@ class MailAtrributeSettingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\MailAttribute  $mail_attribute
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MailAttributeRequest $request, MailAttribute $mail_attribute)
     {
-        //
+        $mail_attribute->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\MailAttribute  $mail_attribute
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MailAttribute $mail_attribute)
     {
-        //
+        $mail_attribute->delete();
     }
 }

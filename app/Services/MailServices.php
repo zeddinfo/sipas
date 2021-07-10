@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Mail;
 use App\Models\MailTransaction;
 use App\Models\User;
-use App\Repositories\UsersMailRepository;
+use App\Repositories\UsersMailVersionRepository;
 use Illuminate\Database\Eloquent\Builder;
 
 class MailServices
@@ -22,7 +22,7 @@ class MailServices
 
     public static function mailViewGate(Mail $mail, User $user)
     {
-        $mails = (new UsersMailRepository($user))->findMail($mail);
+        $mails = (new UsersMailVersionRepository($user))->findMail($mail);
         // dd($mails);
         return $mails != false;
     }
