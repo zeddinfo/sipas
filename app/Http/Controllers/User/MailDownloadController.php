@@ -17,8 +17,7 @@ class MailDownloadController extends Controller
         abort_if(!MailServices::mailViewGate($mail, Auth::user()), 404);
 
         $mail = (new UsersMailRepository(Auth::user()))->findMail($mail);
-        dd($mail);
-
+        dd($mail->versions);
         return redirect(Storage::url('files/' . $mail->versions()));
     }
 }

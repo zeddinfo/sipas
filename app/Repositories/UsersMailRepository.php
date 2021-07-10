@@ -17,13 +17,11 @@ class UsersMailRepository
 
     public function all()
     {
-        return Mail::whereHas('versions.mailTransactions', function ($query) {
+
+        return Mail::with(['versions.mailTransactions' => function ($query) {
             $query->where('user_id', $this->user->getSameUser()->id)
                 ->orWhere('target_user_id', $this->user->getSameUser()->id);
-        })
-            ->with([
-                'versions'
-            ])
+        }])
             ->get();
     }
 
