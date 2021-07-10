@@ -59,14 +59,14 @@ class UserSettingTest extends TestCase
     public function store_can_performed_if_data_is_valid()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $user = $this->adminUser();
 
         $response = $this->actingAs($user)->post(route('admin.setting.user.store', $this->validUserData()));
 
         $response->assertStatus(200);
-        $this->assertDatabaseCount('users', 17);
+        $this->assertDatabaseCount('users', 19);
         $this->assertDatabaseHas('users', $this->validUserData());
     }
 
@@ -74,7 +74,7 @@ class UserSettingTest extends TestCase
     public function validate_when_name_is_empty()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['name' => '']);
     }
@@ -83,7 +83,7 @@ class UserSettingTest extends TestCase
     public function validate_when_name_is_less_than_3_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['name' => str_repeat('a', 2)]);
     }
@@ -92,7 +92,7 @@ class UserSettingTest extends TestCase
     public function validate_when_name_is_more_than_than_100_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['name' => str_repeat('a', 101)]);
     }
@@ -101,7 +101,7 @@ class UserSettingTest extends TestCase
     public function validate_when_nip_is_less_than_3_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['nip' => str_repeat('a', 2)]);
     }
@@ -110,7 +110,7 @@ class UserSettingTest extends TestCase
     public function validate_when_nip_is_more_than_50_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['nip' => str_repeat('a', 51)]);
     }
@@ -119,7 +119,7 @@ class UserSettingTest extends TestCase
     public function validate_when_phone_number_is_less_than_8_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['phone_number' => str_repeat('a', 7)]);
     }
@@ -128,7 +128,7 @@ class UserSettingTest extends TestCase
     public function validate_when_nip_is_more_than_than_50_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['nip' => str_repeat('a', 51)]);
     }
@@ -137,7 +137,7 @@ class UserSettingTest extends TestCase
     public function validate_when_email_is_empty()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['email' => '']);
     }
@@ -146,7 +146,7 @@ class UserSettingTest extends TestCase
     public function validate_when_email_is_less_than_5_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['email' => str_repeat('a', 4)]);
     }
@@ -155,7 +155,7 @@ class UserSettingTest extends TestCase
     public function validate_when_email_is_more_than_than_50_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['email' => str_repeat('a', 51)]);
     }
@@ -164,7 +164,7 @@ class UserSettingTest extends TestCase
     public function validate_when_email_is_not_valid_format()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['email' => 'asd5123']);
     }
@@ -173,7 +173,7 @@ class UserSettingTest extends TestCase
     public function validate_when_email_is_duplicate()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['email' => User::first()->email]);
     }
@@ -182,7 +182,7 @@ class UserSettingTest extends TestCase
     public function validate_when_password_is_empty()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['password' => '']);
     }
@@ -191,7 +191,7 @@ class UserSettingTest extends TestCase
     public function validate_when_password_is_less_than_6_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['password' => str_repeat('a', 5)]);
     }
@@ -200,7 +200,7 @@ class UserSettingTest extends TestCase
     public function validate_when_password_is_more_than_than_50_char()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['password' => str_repeat('a', 51)]);
     }
@@ -209,7 +209,7 @@ class UserSettingTest extends TestCase
     public function validate_when_level_id_is_empty()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['level_id' => '']);
     }
@@ -218,7 +218,7 @@ class UserSettingTest extends TestCase
     public function validate_when_level_id_is_not_valid_case_1()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['level_id' => (Level::all('id')->first()->id - 1)]);
     }
@@ -227,7 +227,7 @@ class UserSettingTest extends TestCase
     public function validate_when_level_id_is_not_valid_case_2()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['level_id' => (Level::all('id')->last()->id + 1)]);
     }
@@ -236,7 +236,7 @@ class UserSettingTest extends TestCase
     public function validate_when_department_id_is_not_valid_case_1()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['department_id' => (Department::all('id')->first()->id - 1)]);
     }
@@ -245,7 +245,7 @@ class UserSettingTest extends TestCase
     public function validate_when_department_id_is_not_valid_case_2()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $this->checkDataIsInvalid($this->adminUser(), ['department_id' => (Department::all('id')->last()->id + 1)]);
     }
@@ -264,7 +264,7 @@ class UserSettingTest extends TestCase
     public function edit_cant_accessed_if_selected_id_is_not_valid()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
+        // $this->markTestSkipped('Skipped');
 
         $user = $this->adminUser();
 
@@ -277,15 +277,23 @@ class UserSettingTest extends TestCase
     public function destroy_can_performed()
     {
         // Remove code bellow if code is complete
-        $this->markTestSkipped('Skipped');
-
+        // $this->markTestSkipped('Skipped');
         $user = $this->adminUser();
-        $deleted_user = User::all()->last();
-        $response = $this->actingAs($user)->delete(route('admin.setting.user.destroy', $deleted_user->id));
 
-        $response->assertRedirect(route('admin.setting.user.index'));
-        $this->assertDatabaseCount('users', 15);
-        $this->assertDatabaseMissing('users', $deleted_user);
+        $this->actingAs($user)->post(route('admin.setting.user.store', $this->validUserData()));
+
+
+        $response = $this->actingAs($user)->delete(route('admin.setting.user.destroy', 19));
+
+        $response->assertOk();
+
+
+        $this->assertSoftDeleted('users', [
+            'nip' => 'A11.2017.10810',
+            'name' => 'Khusnul Hisyam',
+            'phone_number' => '082225210125',
+            'email' => 'hisyam@hmti.com',
+        ]);
     }
 
 
@@ -301,13 +309,13 @@ class UserSettingTest extends TestCase
     public function validUserData()
     {
         $level = Level::where('name', 'Anggota')->first();
-        $department = Department::where('name', 'Sub-Department IPTEK-B')->first();
+        $department = Department::where('name', 'Software')->first();
 
         return [
             'nip' => 'A11.2017.10810',
-            'name' => 'Fajar Heru Maulana',
+            'name' => 'Khusnul Hisyam',
             'phone_number' => '082225210125',
-            'email' => 'fajar@hmti.com',
+            'email' => 'hisyam@hmti.com',
             'password' => '123123',
             'level_id' => $level->id,
             'department_id' => $department->id,
@@ -319,6 +327,6 @@ class UserSettingTest extends TestCase
         // $this->withoutExceptionHandling();
         $response = $this->actingAs($user)->post(route('admin.setting.user.store', array_merge($this->validUserData(), $data)));
         $response->assertSessionHasErrors(array_key_first($data));
-        $this->assertDatabaseCount('users', 16);
+        $this->assertDatabaseCount('users', 18);
     }
 }

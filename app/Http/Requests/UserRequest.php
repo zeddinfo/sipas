@@ -24,10 +24,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip' => 'nullable|max:50:|min:3',
-            'name' => 'required|max:100:|min:3',
+            'nip' => 'nullable|min:3|max:50',
+            'name' => 'required|min:3|max:100',
             'phone_number' => 'required|min:8|max:50',
-            'email' => 'required|email|unique:users|max:50|min:5',
+            'email' => 'required|email|unique:users|min:5|max:50',
             'password' => 'required|min:6|max:50',
             'level_id' => 'required|exists:App\Models\Level,id',
             'department_id' => 'required|exists:App\Models\Department,id',

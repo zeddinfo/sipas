@@ -168,6 +168,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
     // Setting
     Route::group(['prefix' => 'pengaturan'], function () {
         // User
+        /** DONE ACTION */
         Route::get('/pengguna', 'UserSettingController@index')->name('admin.setting.user.index');
         Route::get('/pengguna/tambah', 'UserSettingController@create')->name('admin.setting.user.create');
         Route::post('/pengguna', 'UserSettingController@store')->name('admin.setting.user.store');
@@ -177,6 +178,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
         Route::delete('/pengguna/{user}', 'UserSettingController@destroy')->name('admin.setting.user.destroy');
 
         // Level
+        /** DONE ACTION */
         Route::get('/level-pengguna', 'LevelSettingController@index')->name('admin.setting.level.index');
         Route::get('/level-pengguna/tambah', 'LevelSettingController@create')->name('admin.setting.level.create');
         Route::post('/level-pengguna', 'LevelSettingController@store')->name('admin.setting.level.store');
