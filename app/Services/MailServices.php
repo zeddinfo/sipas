@@ -23,6 +23,7 @@ class MailServices
     public static function mailViewGate(Mail $mail, User $user)
     {
         $mails = (new UsersMailRepository($user))->findMail($mail);
+        // dd($mails);
         return $mails != false;
     }
 }

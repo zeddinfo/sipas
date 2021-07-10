@@ -90,11 +90,13 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
     // Mail
     Route::group(['prefix' => 'surat'], function () {
         // Mail Download
+        /** DONE ACTION */
         Route::post('/{mail}/download', 'MailDownloadController@download')->name('user.mail.download');
 
         // Mail In
         Route::get('/masuk', 'MailInController@index')->name('user.mail.in.index');
         Route::get('/masuk/{id}', 'MailInController@show')->name('user.mail.in.show');
+
         // ??? (UNDER CONSIDERATION)
         Route::delete('/masuk/{id}', 'MailInController@destroy')->name('user.mail.in.destroy');
         // ??? (UNDER CONSIDERATION)

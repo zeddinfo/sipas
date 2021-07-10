@@ -3,8 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Mail;
+use App\Models\MailVersion;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UsersMailRepository
 {
@@ -17,19 +19,17 @@ class UsersMailRepository
 
     public function all()
     {
-
-        return Mail::with(['versions.mailTransactions' => function ($query) {
+        return MailVersion::whereHas('mailTransactions', function ($query) {
             $query->where('user_id', $this->user->getSameUser()->id)
                 ->orWhere('target_user_id', $this->user->getSameUser()->id);
-        }])
-            ->get();
+        })->orderBy('id', 'desc')->get();
     }
 
     public function findMail(Mail $mail)
     {
         $mails = $this->all();
         foreach ($mails as $key => $value) {
-            if ($mail->id == $value->id) {
+            if ($mail->id == $value->mail_id) {
                 return $value;
             }
         }

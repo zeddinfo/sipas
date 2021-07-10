@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\File;
 use App\Models\Mail;
 use App\Repositories\UsersMailRepository;
 use App\Services\MailServices;
@@ -16,8 +17,8 @@ class MailDownloadController extends Controller
     {
         abort_if(!MailServices::mailViewGate($mail, Auth::user()), 404);
 
-        $mail = (new UsersMailRepository(Auth::user()))->findMail($mail);
-        dd($mail->versions);
-        return redirect(Storage::url('files/' . $mail->versions()));
+        $users_mail_version = (new UsersMailRepository(Auth::user()))->findMail($mail);
+
+        return redirect($users_mail_version->file->directory_name);
     }
 }

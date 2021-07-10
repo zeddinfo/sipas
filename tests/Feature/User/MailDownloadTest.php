@@ -27,7 +27,7 @@ class MailDownloadTest extends TestCase
     {
         $response = $this->actingAs($this->authorizedUser())->post(route('user.mail.download', 1));
 
-        $response->assertOk();
+        $response->assertRedirect();
     }
 
     // STATIC DATA SECTION
@@ -45,10 +45,10 @@ class MailDownloadTest extends TestCase
     public function unauthorizedUser()
     {
         return User::whereHas('level', function ($query) {
-            return $query->where('name', Level::LEVEL_ANGGOTA);
+            return $query->where('name', Level::LEVEL_KABID);
         })
             ->whereHas('department', function ($query) {
-                return $query->where('name', 'Software');
+                return $query->where('name', 'Penelitian dan Pengembangan SDM');
             })
             ->first();
     }
