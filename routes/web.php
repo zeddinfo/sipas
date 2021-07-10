@@ -63,10 +63,10 @@ Route::group(['prefix' => 'tu', 'namespace' => 'App\Http\Controllers\Administrat
         Route::get('/keluar/{id}/kode-surat', 'MailOutCodeController@update')->name('tu.mail.out.code.update');
         Route::patch('/keluar/{id}/kode-surat', 'MailOutCodeController@edit')->name('tu.mail.out.code.edit');
 
-        // Mail Ongoing 
+        // Mail Ongoing
         Route::get('/dalam-proses', 'OngoingMailController@index')->name('tu.mail.ongoing.index');
 
-        // Mail Archived 
+        // Mail Archived
         Route::get('/terarsip', 'ArchivedMailController@index')->name('tu.mail.archived.index');
 
         // Mail Master Action
@@ -124,10 +124,10 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         Route::post('/keluar/{mail}/revisi', 'MailOutRevisionController@store')->name('user.mail.out.revision.store');
 
         //!!! ONLY USER WITH ALL MAIL ACCESS !!!
-        // Mail Ongoing 
+        // Mail Ongoing
         Route::get('/dalam-proses', 'OngoingMailController@index')->name('user.mail.ongoing.index');
 
-        // Mail Archived 
+        // Mail Archived
         Route::get('/terarsip', 'ArchivedMailController@index')->name('user.mail.archived.index');
     });
 });
@@ -153,10 +153,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
         Route::delete('/semua-surat/{id}', 'MailMasterController@destroy')->name('admin.mail.master.destroy');
         Route::post('/semua-surat/{id}/arsipkan', 'MailMasterController@archive')->name('admin.mail.master.archive');
 
-        // Mail Ongoing 
+        // Mail Ongoing
         Route::get('/dalam-proses', 'OngoingMailController@index')->name('admin.mail.ongoing.index');
 
-        // Mail Archived 
+        // Mail Archived
         Route::get('/terarsip', 'ArchivedMailController@index')->name('admin.mail.archived.index');
     });
 
@@ -205,3 +205,6 @@ require __DIR__ . '/auth.php';
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/dashboard', function (){
+    return view('dashboard.index');
+})->name('dashboard');
