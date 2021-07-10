@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 */
 
 // Administration
-Route::group(['prefix' => 'tu', 'namespace' => 'App\Http\Controllers\Administration'], function () {
+Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace' => 'App\Http\Controllers\Administration'], function () {
     // Dashboard
     Route::get('/', 'DashboardController@index')->name('tu.dashboard.index');
 
