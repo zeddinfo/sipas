@@ -36,7 +36,12 @@ class ProcessMailTransactionLog
             case 'UPDATED_MAIL_OUT':
                 $log_message = MailTransactionLog::UPDATED;
                 break;
-
+            case 'FORWARDED_MAIL_OUT':
+                $log_message = MailTransactionLog::FORWARDED;
+                break;
+            case 'REVISED_MAIL_OUT':
+                $log_message = MailTransactionLog::REVISED;
+                break;
             default:
                 # code...
                 break;

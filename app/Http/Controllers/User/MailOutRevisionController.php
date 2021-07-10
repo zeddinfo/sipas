@@ -23,6 +23,7 @@ class MailOutRevisionController extends Controller
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
     }
 
+
     public function store(Mail $mail, MailRevisionRequest $request)
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);

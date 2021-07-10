@@ -30,14 +30,20 @@ class ProcessMailTransaction
 
         switch (true) {
 
-            case in_array($event->event_type, ['CREATED_MAIL_OUT', 'UPDATED_MAIL_OUT', 'FORWARDED_MAIL_OUT']):
+            case in_array($event->event_type, ['CREATED_MAIL_OUT', 'UPDATED_MAIL_OUT']):
                 $mail_transaction_mail_version_id = $event->mail_version->id;
                 $mail_transaction_target_user_id = $user->getUpperUser('out')->id;
                 $mail_transaction_type = "FORWARD";
                 break;
 
+            case $event->event_type == 'FORWARDED_MAIL_OUT':
+                $mail_transaction_mail_version_id = $event->mail->versions()->orderBy('id', 'DESC')->first()->id;
+                $mail_transaction_target_user_id = $user->getUpperUser('out')->id;
+                $mail_transaction_type = "FORWARD";
+                break;
+
             case $event->event_type == 'REVISED_MAIL_OUT':
-                $mail_transaction_mail_version_id = $event->mail->id;
+                $mail_transaction_mail_version_id = $event->mail->versions()->orderBy('id', 'DESC')->first()->id;
                 $mail_transaction_target_user_id = $user->getSameUser()->targetMailTransactions()->where('mail_version_id', $event->mail->id)->first()->user_id;
                 $mail_transaction_type = "REVISION";
                 break;

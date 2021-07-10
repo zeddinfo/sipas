@@ -90,7 +90,7 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
     // Mail
     Route::group(['prefix' => 'surat'], function () {
         // Mail Download
-        Route::post('/{id}/download', 'MailDownloadController@download')->name('user.mail.download');
+        Route::post('/{mail}/download', 'MailDownloadController@download')->name('user.mail.download');
 
         // Mail In
         Route::get('/masuk', 'MailInController@index')->name('user.mail.in.index');
@@ -108,6 +108,7 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         Route::post('/masuk/{id}/teruskan/disposisi', 'MailInDispositionController@store')->name('user.mail.in.disposition.store');
 
         // Mail Out
+        /** DONE ACTION */
         Route::get('/keluar', 'MailOutController@index')->name('user.mail.out.index');
         Route::get('/keluar/tambah', 'MailOutController@create')->name('user.mail.out.create');
         Route::post('/keluar', 'MailOutController@store')->name('user.mail.out.store');
@@ -117,9 +118,11 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         Route::delete('/keluar/{mail}', 'MailOutController@destroy')->name('user.mail.out.destroy');
 
         // Mail Out Custom Action
-        Route::post('/keluar/{id}/aksi/teruskan', 'MailOutActionController@forward')->name('user.mail.out.action.forward');
+        /** DONE ACTION */
+        Route::post('/keluar/{mail}/aksi/teruskan', 'MailOutActionController@forward')->name('user.mail.out.action.forward');
 
         // Mail Out Revision
+        /** DONE ACTION */
         Route::get('/keluar/{mail}/revisi/tambah', 'MailOutRevisionController@create')->name('user.mail.out.revision.create');
         Route::post('/keluar/{mail}/revisi', 'MailOutRevisionController@store')->name('user.mail.out.revision.store');
 
