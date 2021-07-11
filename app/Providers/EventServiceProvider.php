@@ -6,6 +6,7 @@ use App\Events\CreatedMailInProcess;
 use App\Events\CreatedMailOutProcess;
 use App\Events\ForwardedMailOut;
 use App\Events\RevisedMailOutProcess;
+use App\Events\UpdatedMailMasterProcess;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -72,13 +73,20 @@ class EventServiceProvider extends ServiceProvider
             // SendNotification::class,
         ],
 
-        UpdatedMailOutProcess::class => [
+        UpdatedMailInProcess::class => [
             ProcessMailAttributeTransaction::class,
             ProcessFile::class,
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
             ProcessMailTransactionLog::class,
             // SendNotification::class,
+        ],
+
+        UpdatedMailMasterProcess::class => [
+            ProcessMailAttributeTransaction::class,
+            ProcessFile::class,
+            ProcessMailVersion::class,
+            ProcessMailTransactionLog::class,
         ],
 
     ];

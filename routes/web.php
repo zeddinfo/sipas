@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -149,14 +150,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
     // Mail
     Route::group(['prefix' => 'surat'], function () {
         // Mail Download
-        Route::post('/{id}/download', 'MailDownloadController@download')->name('admin.mail.download');
 
         // Mail Master Action
-        Route::get('/semua-surat/{id}', 'MailMasterController@show')->name('admin.mail.master.show');
-        Route::get('/semua-surat/{id}/ubah', 'MailMasterController@update')->name('admin.mail.master.update');
-        Route::patch('/semua-surat/{id}', 'MailMasterController@edit')->name('admin.mail.master.edit');
-        Route::delete('/semua-surat/{id}', 'MailMasterController@destroy')->name('admin.mail.master.destroy');
-        Route::post('/semua-surat/{id}/arsipkan', 'MailMasterController@archive')->name('admin.mail.master.archive');
+        /** DONE ACTION */
+        Route::get('/semua-surat/{mail}', 'MailMasterController@show')->name('admin.mail.master.show');
+        Route::get('/semua-surat/{mail}/ubah', 'MailMasterController@edit')->name('admin.mail.master.edit');
+        Route::patch('/semua-surat/{mail}', 'MailMasterController@update')->name('admin.mail.master.update');
+        Route::delete('/semua-surat/{mail}', 'MailMasterController@destroy')->name('admin.mail.master.destroy');
+        Route::post('/semua-surat/{mail}/arsipkan', 'MailMasterController@archive')->name('admin.mail.master.archive');
+        Route::post('/semua-surat/{mail}/download', 'MailMasterController@download')->name('admin.mail.download');
 
         // Mail Ongoing 
         Route::get('/dalam-proses', 'OngoingMailController@index')->name('admin.mail.ongoing.index');
@@ -212,5 +214,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
 require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $users_count = "5";
+    $user = User::find(5);
+    return view('welcome', compact(['user', 'users_count']));
+})->name('testing123');

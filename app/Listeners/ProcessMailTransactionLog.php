@@ -32,15 +32,23 @@ class ProcessMailTransactionLog
         switch ($event->event_type) {
             case 'CREATED_MAIL_OUT':
                 $log_message = MailTransactionLog::CREATED;
+                $mail_transaction_id = $event->mail_transaction->id;
                 break;
             case 'UPDATED_MAIL_OUT':
                 $log_message = MailTransactionLog::UPDATED;
+                $mail_transaction_id = $event->mail_transaction->id;
                 break;
             case 'FORWARDED_MAIL_OUT':
                 $log_message = MailTransactionLog::FORWARDED;
+                $mail_transaction_id = $event->mail_transaction->id;
                 break;
             case 'REVISED_MAIL_OUT':
                 $log_message = MailTransactionLog::REVISED;
+                $mail_transaction_id = $event->mail_transaction->id;
+                break;
+            case 'UPDATED_MAIL_MASTER':
+                $log_message = MailTransactionLog::UPDATED;
+                $mail_transaction_id = $event->mail->versions()->latest()->first()->id;
                 break;
             default:
                 # code...
@@ -49,20 +57,12 @@ class ProcessMailTransactionLog
 
 
         $mail_transaction_log = new MailTransactionLog();
-        $mail_transaction_log->mail_transaction_id = $event->mail_transaction->id;
+        $mail_transaction_log->mail_transaction_id = $mail_transaction_id;
         $mail_transaction_log->log = $log_message;
         $mail_transaction_log->user_name = $user->name;
         $mail_transaction_log->user_level_department = $user->level?->name . " " . $user->department?->name;
         $mail_transaction_log->save();
 
         $event->mail_transaction_log = $mail_transaction_log;
-    }
-
-    private function handleCreated($event)
-    {
-    }
-
-    private function handleUpdated($event)
-    {
     }
 }

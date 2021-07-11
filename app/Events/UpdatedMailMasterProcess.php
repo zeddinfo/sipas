@@ -9,10 +9,10 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Http\Request;
+use Illuminate\Queue\SerializesModels;
 
-class CreatedMailInProcess
+class UpdatedMailMasterProcess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,20 +20,12 @@ class CreatedMailInProcess
     public $request;
     public $file;
     public $mail_version;
-    public $mail_transaction;
     public $mail_transaction_log;
     public $event_type;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-
-
     public function __construct(Mail $mail, Request $request)
     {
-        $this->event_type = "CREATED_MAIL_IN";
+        $this->event_type = "UPDATED_MAIL_MASTER";
         $this->mail = $mail;
         $this->request = $request;
     }
