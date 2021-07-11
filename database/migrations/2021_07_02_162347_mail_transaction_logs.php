@@ -17,8 +17,8 @@ class MailTransactionLogs extends Migration
             $table->bigIncrements('id');
             $table->foreignId('mail_transaction_id')->constrained('mail_transactions');
             $table->string('log');
-            $table->string('user_level_department')->nullable();
             $table->string('user_name');
+            $table->string('user_level_department')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

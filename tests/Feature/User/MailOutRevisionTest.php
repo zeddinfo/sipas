@@ -100,6 +100,16 @@ class MailOutRevisionTest extends TestCase
             'note' => 'Testing 123',
             'file_id' => 3,
         ]);
+
+        $this->assertDatabaseCount('mail_transaction_logs', 1);
+
+        $this->assertDatabaseHas('mail_transaction_logs', [
+            'id' => 1,
+            'mail_transaction_id' => 3,
+            'log' => "Direvisi oleh ",
+            'user_name' => 'Adis Wing Kasenda',
+            'user_level_department' => 'Kepala Departemen Software'
+        ]);
     }
 
     // STATIC DATA SECTION

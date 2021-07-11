@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\Mail;
 use App\Models\MailTransaction;
 use App\Models\User;
+use App\Repositories\UsersMailRepository;
+use Illuminate\Database\Eloquent\Builder;
 
 class MailServices
 {
@@ -15,6 +17,13 @@ class MailServices
             ->orderBy('id', 'desc')
             ->first();
 
-        return $latest_mail_version_transaction->target_user_id == $user->id;
+        return $latest_mail_version_transaction->target_user_id == $user->getSameUser()->id;
+    }
+
+    public static function mailViewGate(Mail $mail, User $user)
+    {
+        $mails = (new UsersMailRepository($user))->findMail($mail);
+        // dd($mails);
+        return $mails != false;
     }
 }

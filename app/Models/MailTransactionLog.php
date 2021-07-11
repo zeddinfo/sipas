@@ -12,6 +12,8 @@ class MailTransactionLog extends Model
 
     const CREATED = 'Dibuat oleh ';
     const UPDATED = 'Diubah oleh ';
+    const REVISED = 'Direvisi oleh ';
+    const FORWARDED = 'Diteruskan oleh ';
 
     protected $guarded = [];
 
