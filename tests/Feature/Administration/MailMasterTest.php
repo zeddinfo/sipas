@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature\Administration;
 
-use App\Models\Level;
-use App\Models\Mail;
-use App\Models\MailAttribute;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
+use App\Models\Mail;
+use App\Models\User;
+use App\Models\Level;
+use App\Models\MailAttribute;
+use Illuminate\Support\Carbon;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MailMasterTest extends TestCase
 {
@@ -21,43 +21,43 @@ class MailMasterTest extends TestCase
     /** @test */
     public function unauthorized_user_cant_access_show()
     {
-        $response = $this->actingAs($this->normalUser())->get(route('admin.mail.master.show', 1));
+        $response = $this->actingAs($this->normalUser())->get(route('tu.mail.master.show', 1));
 
         $response->assertNotFound();
     }
 
     /** @test */
-    public function unauthorized_tu_user_cant_access_show()
+    public function unauthorized_admin_user_cant_access_show()
     {
-        $response = $this->actingAs($this->tuUser())->get(route('admin.mail.master.show', 1));
+        $response = $this->actingAs($this->adminUser())->get(route('tu.mail.master.show', 1));
 
         $response->assertNotFound();
     }
 
     /** @test */
-    public function admin_can_access_show()
+    public function tu_can_access_show()
     {
-        $response = $this->actingAs($this->adminUser())->get(route('admin.mail.master.show', 1));
+        $response = $this->actingAs($this->tuUser())->get(route('tu.mail.master.show', 1));
 
         $response->assertOk();
     }
 
     /** @test */
-    public function admin_can_access_edit()
+    public function tu_can_access_edit()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->actingAs($this->adminUser())->get(route('admin.mail.master.edit', 1));
+        $response = $this->actingAs($this->tuUser())->get(route('tu.mail.master.edit', 1));
 
         $response->assertOk();
     }
 
     /** @test */
-    public function admin_can_perform_update_with_file()
+    public function tu_can_perform_update_with_file()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->actingAs($this->adminUser())->patch(route('admin.mail.master.update', 1), $this->validMailRequestData());
+        $response = $this->actingAs($this->tuUser())->patch(route('tu.mail.master.update', 1), $this->validMailRequestData());
 
         $response->assertOk();
 
@@ -75,16 +75,16 @@ class MailMasterTest extends TestCase
             'id' => 1,
             'mail_transaction_id' => 1,
             'log' => 'Diubah oleh ',
-            'user_name' => 'Admin'
+            'user_name' => 'TU'
         ]);
     }
 
     /** @test */
-    public function admin_can_perform_update_without_file()
+    public function tu_can_perform_update_without_file()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->actingAs($this->adminUser())->patch(route('admin.mail.master.update', 1), array_merge($this->validMailRequestData(), ['file' => '']));
+        $response = $this->actingAs($this->tuUser())->patch(route('tu.mail.master.update', 1), array_merge($this->validMailRequestData(), ['file' => '']));
 
         $response->assertOk();
 
@@ -102,14 +102,14 @@ class MailMasterTest extends TestCase
             'id' => 1,
             'mail_transaction_id' => 1,
             'log' => 'Diubah oleh ',
-            'user_name' => 'Admin'
+            'user_name' => 'TU'
         ]);
     }
 
     /** @test */
-    public function admin_can_perform_delete()
+    public function tu_can_perform_delete()
     {
-        $response = $this->actingAs($this->adminUser())->delete(route('admin.mail.master.destroy', 1));
+        $response = $this->actingAs($this->tuUser())->delete(route('tu.mail.master.destroy', 1));
 
         $response->assertOk();
 
@@ -119,11 +119,11 @@ class MailMasterTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_perform_archive()
+    public function tu_can_perform_archive()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->actingAs($this->adminUser())->post(route('admin.mail.master.archive', 1));
+        $response = $this->actingAs($this->tuUser())->post(route('tu.mail.master.archive', 1));
 
         $response->assertOk();
 
@@ -132,9 +132,9 @@ class MailMasterTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_perform_download()
+    public function tu_can_perform_download()
     {
-        $response = $this->actingAs($this->adminUser())->post(route('admin.mail.master.download', 1));
+        $response = $this->actingAs($this->tuUser())->post(route('tu.mail.master.download', 1));
 
         $response->assertRedirect();
     }

@@ -6,6 +6,7 @@ use App\Events\UpdatedMailMasterProcess;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MailMasterRequest;
 use App\Models\Mail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MailMasterController extends Controller
@@ -71,5 +72,16 @@ class MailMasterController extends Controller
     public function destroy(Mail $mail)
     {
         $mail->delete();
+    }
+
+    public function archive(Mail $mail)
+    {
+        $mail->archived_at = Carbon::now();
+        $mail->save();
+    }
+
+    public function download(Mail $mail)
+    {
+        return redirect($mail->versions()->latest()->first()->file->directory_name);
     }
 }

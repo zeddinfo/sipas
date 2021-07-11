@@ -26,8 +26,6 @@ Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace
 
     // Mail
     Route::group(['prefix' => 'surat'], function () {
-        // Mail Download
-        Route::get('/{id}/download', 'MailDownloadController@download')->name('tu.mail.download');
 
         // Mail In
         Route::get('/masuk', 'MailInController@index')->name('tu.mail.in.index');
@@ -71,11 +69,13 @@ Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace
         Route::get('/terarsip', 'ArchivedMailController@index')->name('tu.mail.archived.index');
 
         // Mail Master Action
-        Route::get('/semua/{id}', 'MailMasterController@show')->name('tu.mail.master.show');
-        Route::get('/semua/{id}/ubah', 'MailMasterController@update')->name('tu.mail.master.update');
-        Route::patch('/semua/{id}', 'MailMasterController@edit')->name('tu.mail.master.edit');
-        Route::delete('/semua/{id}', 'MailMasterController@destroy')->name('tu.mail.master.destroy');
-        Route::post('/semua/{id}/arsipkan', 'MailMasterController@archive')->name('tu.mail.master.archive');
+        /** DONE ACTION */
+        Route::get('/semua/{mail}', 'MailMasterController@show')->name('tu.mail.master.show');
+        Route::get('/semua/{mail}/ubah', 'MailMasterController@edit')->name('tu.mail.master.edit');
+        Route::patch('/semua/{mail}', 'MailMasterController@update')->name('tu.mail.master.update');
+        Route::delete('/semua/{mail}', 'MailMasterController@destroy')->name('tu.mail.master.destroy');
+        Route::post('/semua/{mail}/arsipkan', 'MailMasterController@archive')->name('tu.mail.master.archive');
+        Route::post('/semua/{mail}/download', 'MailMasterController@download')->name('tu.mail.master.download');
     });
 });
 
@@ -158,7 +158,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
         Route::patch('/semua-surat/{mail}', 'MailMasterController@update')->name('admin.mail.master.update');
         Route::delete('/semua-surat/{mail}', 'MailMasterController@destroy')->name('admin.mail.master.destroy');
         Route::post('/semua-surat/{mail}/arsipkan', 'MailMasterController@archive')->name('admin.mail.master.archive');
-        Route::post('/semua-surat/{mail}/download', 'MailMasterController@download')->name('admin.mail.download');
+        Route::post('/semua-surat/{mail}/download', 'MailMasterController@download')->name('admin.mail.master.download');
 
         // Mail Ongoing 
         Route::get('/dalam-proses', 'OngoingMailController@index')->name('admin.mail.ongoing.index');
@@ -212,9 +212,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
 });
 
 require __DIR__ . '/auth.php';
-
-Route::get('/', function () {
-    $users_count = "5";
-    $user = User::find(5);
-    return view('welcome', compact(['user', 'users_count']));
-})->name('testing123');
