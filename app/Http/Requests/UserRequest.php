@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip' => 'nullable|min:3|max:100',
+            'nip' => 'nullable|min:3|max:50',
             'name' => 'required|min:3|max:100',
             'phone_number' => 'required|min:8|max:50',
             'email' => 'required|email|unique:users|min:5|max:50',

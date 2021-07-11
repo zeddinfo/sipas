@@ -28,8 +28,10 @@ class MailServices
     {
         $mail = (new UsersMailVersionRepository($user))->findMail($mail);
 
-        if ($mail->archived_at != null) {
-            return false;
+        if ($mail != false) {
+            if ($mail->archived_at != null) {
+                return false;
+            }
         }
 
         return $mail != false;
