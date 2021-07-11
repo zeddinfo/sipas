@@ -21,8 +21,9 @@ Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace
     Route::get('/', 'DashboardController@index')->name('tu.dashboard.index');
 
     // User Account Setting
-    Route::get('/pengaturan/akun', 'AccountSettingController@edit')->name('tu.setting.account.edit');
-    Route::patch('/pengaturan/akun', 'AccountSettingController@update')->name('tu.setting.account.update');
+    /** DONE ACTION */
+    Route::get('/pengaturan/akun', 'AccountController@edit')->name('tu.setting.account.edit');
+    Route::patch('/pengaturan/akun', 'AccountController@update')->name('tu.setting.account.update');
 
     // Mail
     Route::group(['prefix' => 'surat'], function () {
@@ -85,8 +86,9 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
     Route::get('/', 'DashboardController@index')->name('user.dashboard.index');
 
     // User Account Setting
-    Route::get('/pengaturan/akun', 'AccountSettingController@edit')->name('user.setting.account.edit');
-    Route::patch('/pengaturan/akun', 'AccountSettingController@update')->name('user.setting.account.update');
+    /** DONE ACTION */
+    Route::get('/pengaturan/akun', 'AccountController@edit')->name('user.setting.account.edit');
+    Route::patch('/pengaturan/akun', 'AccountController@update')->name('user.setting.account.update');
 
     // Mail
     Route::group(['prefix' => 'surat'], function () {
@@ -144,8 +146,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
     Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
 
     // User Account Setting
-    Route::get('/pengaturan/akun', 'AccountSettingController@edit')->name('admin.setting.account.edit');
-    Route::patch('/pengaturan/akun', 'AccountSettingController@update')->name('admin.setting.account.update');
+    /** DONE ACTION */
+    Route::get('/pengaturan/akun', 'AccountController@edit')->name('admin.setting.account.edit');
+    Route::patch('/pengaturan/akun', 'AccountController@update')->name('admin.setting.account.update');
 
     // Mail
     Route::group(['prefix' => 'surat'], function () {

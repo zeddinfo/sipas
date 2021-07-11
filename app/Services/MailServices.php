@@ -12,6 +12,10 @@ class MailServices
 {
     public static function mailActionGate(Mail $mail, User $user)
     {
+        if ($mail->archived_at != null) {
+            return false;
+        }
+
         $latest_mail_version = $mail->versions()->latest()->first();
         $latest_mail_version_transaction = MailTransaction::where('mail_version_id', $latest_mail_version->id)
             ->orderBy('id', 'desc')
@@ -22,8 +26,12 @@ class MailServices
 
     public static function mailViewGate(Mail $mail, User $user)
     {
-        $mails = (new UsersMailVersionRepository($user))->findMail($mail);
-        // dd($mails);
-        return $mails != false;
+        $mail = (new UsersMailVersionRepository($user))->findMail($mail);
+
+        if ($mail->archived_at != null) {
+            return false;
+        }
+
+        return $mail != false;
     }
 }
