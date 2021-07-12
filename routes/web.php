@@ -60,8 +60,9 @@ Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace
         // ??? (UNDER CONSIDERATION)
 
         // Mail Out Code
-        Route::get('/keluar/{id}/kode-surat', 'MailOutCodeController@update')->name('tu.mail.out.code.update');
-        Route::patch('/keluar/{id}/kode-surat', 'MailOutCodeController@edit')->name('tu.mail.out.code.edit');
+        /** DONE ACTION */
+        Route::get('/keluar/{mail}/kode-surat', 'MailOutCodeController@edit')->name('tu.mail.out.code.edit');
+        Route::patch('/keluar/{mail}/kode-surat', 'MailOutCodeController@update')->name('tu.mail.out.code.update');
 
         // Mail Ongoing 
         Route::get('/dalam-proses', 'OngoingMailController@index')->name('tu.mail.ongoing.index');

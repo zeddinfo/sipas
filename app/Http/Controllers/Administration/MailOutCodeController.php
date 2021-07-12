@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MailOutCodeRequest;
+use App\Models\Mail;
 use Illuminate\Http\Request;
 
 class MailOutCodeController extends Controller
@@ -22,7 +24,7 @@ class MailOutCodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Mail $mail)
     {
         //
     }
@@ -33,9 +35,8 @@ class MailOutCodeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MailOutCodeRequest $request, Mail $mail)
     {
-        //
     }
 
     /**
@@ -55,7 +56,7 @@ class MailOutCodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Mail $mail)
     {
         //
     }
@@ -67,9 +68,9 @@ class MailOutCodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MailOutCodeRequest $request, Mail $mail)
     {
-        //
+        $mail->update($request->validated());
     }
 
     /**
