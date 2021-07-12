@@ -62,7 +62,7 @@ class MailInTest extends TestCase
     /** @test */
     public function user_can_store_mail_in()
     {
-        $this->markTestSkipped();
+        // $this->markTestSkipped();
 
         $this->withoutExceptionHandling();
 

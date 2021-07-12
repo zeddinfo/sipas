@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\DispositionMailIn;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DispositionRequest;
+use App\Models\Mail;
+use App\Models\MailTransactionMemo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MailInDispositionController extends Controller
 {
@@ -22,9 +28,12 @@ class MailInDispositionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Mail $mail)
     {
-        //
+        // dd('sdfs');
+        if (!User::hasDispostion()) {
+            abort(404);
+        }
     }
 
     /**
@@ -33,9 +42,22 @@ class MailInDispositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Mail $mail)
     {
-        //
+
+        $user_ids = $request->user_ids;
+
+        $lower_users = Auth::user()->getLowerUsers('in')->pluck('id');
+        // dd($lower_users);
+
+        foreach ($request->user_ids as $user_id) {
+            if (!in_array($user_id, $lower_users->toArray())) {
+                dd('miss');
+            } else {
+                // dd('masuk');
+                event(new DispositionMailIn($mail, request()));
+            }
+        }
     }
 
     /**

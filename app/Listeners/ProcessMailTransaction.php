@@ -26,7 +26,6 @@ class ProcessMailTransaction
      */
     public function handle($event)
     {
-        $user = $event->request->user();
 
         switch (true) {
             case in_array($event->event_type, ['CREATED_MAIL_OUT', 'UPDATED_MAIL_OUT']):
@@ -40,8 +39,18 @@ class ProcessMailTransaction
             case $event->event_type == 'REVISED_MAIL_OUT':
                 $this->handleRevisedMailOut($event);
                 break;
+
+            case $event->event_type = 'FORWARDED_MAIL_IN':
+
+                $this->handleCreateUpdatedForwardMailIn($event);
+                break;
+
             case in_array($event->event_type, ['CREATED_MAIL_IN', 'UPDATED_MAIL_IN']):
-                $this->handleLowerUsers($event);
+                $this->handleCreateUpdatedForwardMailIn($event);
+                break;
+
+            case $event->event_type = 'DISPOSITION_MAIL_IN':
+                $this->handleDispositionMailIn($event);
                 break;
         }
     }
@@ -89,12 +98,12 @@ class ProcessMailTransaction
     }
 
 
-    public function handleLowerUsers($event)
+    public function handleCreateUpdatedForwardMailIn($event)
     {
         $user = $event->request->user();
         $lower_users = $user->getLowerUsers('in');
-
         foreach ($lower_users as $lower_user) {
+            // dd()
             $mail_transaction = new MailTransaction();
             $mail_transaction->user_id = $user->id;
             $mail_transaction->target_user_id = $lower_user->id;
@@ -104,5 +113,19 @@ class ProcessMailTransaction
 
             $event->mail_transaction = $mail_transaction;
         }
+    }
+
+    public function handleDispositionMailIn($event)
+    {
+        $user = $event->request->user();
+
+        $mail_transaction = new MailTransaction();
+        $mail_transaction->user_id = $user->id;
+        $mail_transaction->target_user_id = $user->ids;
+        $mail_transaction->mail_version_id = $event->mail->versions()->orderBy('id', 'DESC')->first()->id;
+        $mail_transaction->type = "";
+        $mail_transaction->save();
+
+        $event->mail_transaction = $mail_transaction;
     }
 }

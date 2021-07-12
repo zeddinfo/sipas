@@ -15,12 +15,12 @@ class MailServices
         if ($mail->archived_at != null) {
             return false;
         }
-
         $latest_mail_version = $mail->versions()->latest()->first();
         $latest_mail_version_transaction = MailTransaction::where('mail_version_id', $latest_mail_version->id)
             ->orderBy('id', 'desc')
             ->first();
 
+        // dd($latest_mail_version_transaction->target_user_id == $user->getSameUser()->id);
         return $latest_mail_version_transaction->target_user_id == $user->getSameUser()->id;
     }
 

@@ -50,11 +50,16 @@ class ProcessMailTransactionLog
                 $log_message = MailTransactionLog::UPDATED;
                 $mail_transaction_id = $event->mail->versions()->latest()->first()->id;
                 break;
+
+            case in_array($event->event_type, ['CREATED_MAIL_IN', 'FORWARDED_MAIL_IN']):
+
+                $log_message = MailTransactionLog::CREATED;
+                $mail_transaction_id = $event->mail_transaction->id;
+                break;
             default:
                 # code...
                 break;
         }
-
 
         $mail_transaction_log = new MailTransactionLog();
         $mail_transaction_log->mail_transaction_id = $mail_transaction_id;

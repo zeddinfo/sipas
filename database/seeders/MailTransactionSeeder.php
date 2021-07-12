@@ -52,7 +52,7 @@ class MailTransactionSeeder extends Seeder
 
             'target_user_id' => User::query()
                 ->whereHas('level', function ($query) {
-                    $query->where('name', Level::LEVEL_KETUM);
+                    $query->where('name', Level::LEVEL_SEKRETARIS);
                 })->first()->id,
 
             'type' => 'FORWARD',

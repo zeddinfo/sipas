@@ -19,6 +19,7 @@ use App\Listeners\ProcessMailVersion;
 use App\Listeners\SendNotification;
 use App\Events\UpdatedMailOutProcess;
 use App\Listeners\ProcessMailCorrection;
+use App\Events\ForwardedMailIn;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -70,6 +71,12 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
             ProcessMailTransactionLog::class,
+            // SendNotification::class,
+        ],
+
+        ForwardedMailIn::class => [
+            ProcessMailTransaction::class,
+            ProcessMailTransactionLog::class
             // SendNotification::class,
         ],
 
