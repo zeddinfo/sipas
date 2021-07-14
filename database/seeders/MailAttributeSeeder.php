@@ -206,35 +206,35 @@ class MailAttributeSeeder extends Seeder
 
         ///Mail Folder
         MailAttribute::create([
-            "type" => "FOLDER",
+            "type" => "Folder",
             "name" => "KEUANGAN",
             "code" => "KNGN",
             "color" => "#1bcfb4",
         ]);
 
         MailAttribute::create([
-            "type" => "FOLDER",
+            "type" => "Folder",
             "name" => "PENGADAAN",
             "code" => "PNGDN",
             "color" => "#1bcfb4",
         ]);
 
         MailAttribute::create([
-            "type" => "FOLDER",
+            "type" => "Folder",
             "name" => "LAPORAN PERJALANAN",
             "code" => "LPPRJ",
             "color" => "#1bcfb4",
         ]);
 
         MailAttribute::create([
-            "type" => "FOLDER",
+            "type" => "Folder",
             "name" => "PEMBANGUNAN",
             "code" => "PMBGN",
             "color" => "#1bcfb4",
         ]);
 
         MailAttribute::create([
-            "type" => "FOLDER",
+            "type" => "Folder",
             "name" => "ASPIRASI",
             "code" => "ASPR",
             "color" => "#1bcfb4",
