@@ -153,6 +153,7 @@ class MailInTest extends TestCase
     public function validData()
     {
         return [
+            'type' => 'IN',
             'title' => 'Surat Masuk Baru',
             'instance' => 'Instansi Tertuju',
             'code' => 'ABC123',
