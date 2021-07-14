@@ -25,7 +25,7 @@ class MailInRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:255',
-            'code' => 'required|min:3|max:25',
+            // 'code' => 'required|min:3|max:25',
             'instance' => 'required|min:3|max:255',
             'mail_attributes.*' => 'required|numeric|min:1|max:255|exists:mail_attributes,id',
             'mail_created_at' => 'required|date',

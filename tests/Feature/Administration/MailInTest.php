@@ -80,6 +80,38 @@ class MailInTest extends TestCase
         $response = $this->actingAs($user)->post(route('tu.mail.in.store'), $this->validMailRequestData());
 
         $response->assertStatus(200);
+        $this->assertDatabaseCount('mails', $state['mails_count'] + 1);
+
+        $this->assertDatabaseHas('mails', $this->validMailInData());
+
+        $this->assertDatabaseCount('mail_attribute_transactions', $state['mail_attribute_transactions_count'] + $state['mail_attribute_types']->count());
+
+        $this->assertDatabaseCount('files', $state['files_count'] + 1);
+
+        Storage::disk('files')->assertExists('test.jpg');
+
+        $this->assertDatabaseCount('files', $state['files_count'] + 1);
+        $this->assertDatabaseHas('files', [
+            'original_name' => 'test.jpg'
+        ]);
+
+        $this->assertDatabaseCount('mail_transactions', $state['mail_transactions_count'] + 1);
+
+        $this->assertDatabaseHas('mail_transactions', [
+            'user_id' => $user->id,
+            'target_user_id' => User::whereHas('level', function ($query) {
+                return $query->where('name', Level::LEVEL_SEKRETARIS);
+            })->first()->id,
+            'mail_version_id' => $state['mail_versions_count'] + 1,
+            'type' => "FORWARD",
+        ]);
+
+        $this->assertDatabaseHas('mail_transaction_logs', [
+            'mail_transaction_id' => $state['mail_transactions_count'] + 1,
+            'log' => 'Dibuat oleh ',
+            'user_name' => $user->name,
+            'user_level_department' => $user->level?->name . " " . $user->department?->name,
+        ]);
     }
 
 
@@ -114,9 +146,10 @@ class MailInTest extends TestCase
     public function validMailInData()
     {
         return [
+            'type' => 'IN',
             'title' => 'Surat Masuk Baru',
             'instance' => 'Instansi Tertuju',
-            'code' => '123123',
+            // 'code' => 'abcde',
             'mail_created_at' => Carbon::create(2020, 5, 1)->toDateString(),
         ];
     }
