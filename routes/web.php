@@ -106,6 +106,7 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         // ??? (UNDER CONSIDERATION)
 
         // Mail In Forward
+        /** DONE ACTION */
         Route::get('/masuk/{mail}/aksi/teruskan', 'MailInForwardController@create')->name('user.mail.in.forward.create');
         Route::post('/masuk/{mail}/aksi/teruskan', 'MailInForwardController@store')->name('user.mail.in.forward.store');
 
@@ -113,6 +114,8 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         Route::post('/masuk/{mail}/aksi/arsipkan', 'MailInActionController@archive')->name('user.mail.in.action.archive');
 
         // Mail In Disposition
+        /** DONE ACTION */
+        Route::get('/masuk/{mail}/disposisi', 'MailInDispositionController@show')->name('user.mail.in.disposition.show');
         Route::get('/masuk/{mail}/teruskan/disposisi/tambah', 'MailInDispositionController@create')->name('user.mail.in.disposition.create');
         Route::post('/masuk/{mail}/teruskan/disposisi', 'MailInDispositionController@store')->name('user.mail.in.disposition.store');
 
