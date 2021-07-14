@@ -6,6 +6,7 @@ use App\Models\MailAttribute;
 use App\Models\MailAttributeTransaction;
 use App\Models\MailTransaction;
 use Illuminate\Database\Seeder;
+use MailTransactionLogs;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
             MailAttributeTransactionSeeder::class,
             MailVersionSeeder::class,
             MailTransactionSeeder::class,
+            // MailTransactionLogSeeder::class,
         ]);
     }
 }

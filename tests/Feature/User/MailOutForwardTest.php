@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class MailOutActionTest extends TestCase
+class MailOutForwardTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,8 +17,7 @@ class MailOutActionTest extends TestCase
     /** @test */
     public function unauthorized_user_cant_forward_mail_out()
     {
-
-        $response = $this->actingAs($this->user())->post(route('user.mail.out.action.forward', 1));
+        $response = $this->actingAs($this->user())->post(route('user.mail.out.forward.store', 1));
 
         $response->assertNotFound();
     }
@@ -28,7 +27,7 @@ class MailOutActionTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->actingAs($this->authorizedMailOutUser())->post(route('user.mail.out.action.forward', 1));
+        $response = $this->actingAs($this->authorizedMailOutUser())->post(route('user.mail.out.forward.store', 1));
 
         $response->assertOk();
         $this->assertDatabaseCount('mail_transactions', 3);

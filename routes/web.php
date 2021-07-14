@@ -105,13 +105,16 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         Route::delete('/masuk/{id}', 'MailInController@destroy')->name('user.mail.in.destroy');
         // ??? (UNDER CONSIDERATION)
 
+        // Mail In Forward
+        Route::get('/masuk/{mail}/aksi/teruskan', 'MailInForwardController@create')->name('user.mail.in.forward.create');
+        Route::post('/masuk/{mail}/aksi/teruskan', 'MailInForwardController@store')->name('user.mail.in.forward.store');
+
         // Mail In Custom Action
-        Route::post('/masuk/{id}/aksi/teruskan', 'MailInActionController@forward')->name('user.mail.in.action.forward');
-        Route::post('/masuk/{id}/aksi/arsipkan', 'MailInActionController@archive')->name('user.mail.in.action.archive');
+        Route::post('/masuk/{mail}/aksi/arsipkan', 'MailInActionController@archive')->name('user.mail.in.action.archive');
 
         // Mail In Disposition
-        Route::get('/masuk/{id}/teruskan/disposisi/tambah', 'MailInDispositionController@create')->name('user.mail.in.disposition.create');
-        Route::post('/masuk/{id}/teruskan/disposisi', 'MailInDispositionController@store')->name('user.mail.in.disposition.store');
+        Route::get('/masuk/{mail}/teruskan/disposisi/tambah', 'MailInDispositionController@create')->name('user.mail.in.disposition.create');
+        Route::post('/masuk/{mail}/teruskan/disposisi', 'MailInDispositionController@store')->name('user.mail.in.disposition.store');
 
         // Mail Out
         /** DONE ACTION */
@@ -125,7 +128,7 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
 
         // Mail Out Custom Action
         /** DONE ACTION */
-        Route::post('/keluar/{mail}/aksi/teruskan', 'MailOutActionController@forward')->name('user.mail.out.action.forward');
+        Route::post('/keluar/{mail}/aksi/teruskan', 'MailOutForwardController@store')->name('user.mail.out.forward.store');
 
         // Mail Out Revision
         /** DONE ACTION */

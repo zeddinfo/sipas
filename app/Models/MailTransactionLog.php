@@ -14,6 +14,7 @@ class MailTransactionLog extends Model
     const UPDATED = 'Diubah oleh ';
     const REVISED = 'Direvisi oleh ';
     const FORWARDED = 'Diteruskan oleh ';
+    const DISPOSITED = 'Didisposisikan oleh ';
 
     protected $guarded = [];
 

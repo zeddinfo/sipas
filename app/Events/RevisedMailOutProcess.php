@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Mail;
+use App\Models\MailTransaction;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -16,13 +17,9 @@ class RevisedMailOutProcess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $mail;
     public $request;
-    public $file;
-    public $mail_version;
-    public $mail_transaction;
-    public $mail_transaction_log;
     public $event_type;
+    public $mail_transaction;
 
     /**
      * Create a new event instance.
@@ -31,11 +28,11 @@ class RevisedMailOutProcess
      */
 
 
-    public function __construct(Mail $mail, Request $request)
+    public function __construct(MailTransaction $mail_transaction, Request $request)
     {
-        $this->event_type = "REVISED_MAIL_OUT";
-        $this->mail = $mail;
         $this->request = $request;
+        $this->mail_transaction = $mail_transaction;
+        $this->event_type = "REVISED_MAIL_OUT";
     }
 
     /**

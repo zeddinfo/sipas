@@ -42,7 +42,7 @@ class UserSettingTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('admin.setting.user.index'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     /** @test */
@@ -52,7 +52,7 @@ class UserSettingTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('admin.setting.user.create'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     /** @test */
@@ -65,7 +65,7 @@ class UserSettingTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('admin.setting.user.store', $this->validUserData()));
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertDatabaseCount('users', 19);
         $this->assertDatabaseHas('users', $this->validUserData());
     }
@@ -257,7 +257,7 @@ class UserSettingTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('admin.setting.user.edit', User::all()->last()->id));
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     /** @test */

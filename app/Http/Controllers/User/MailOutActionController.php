@@ -14,8 +14,8 @@ class MailOutActionController extends Controller
 {
     public function forward(Mail $mail)
     {
-        abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
+        // abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
-        event(new ForwardedMailOut($mail, request()));
+        // event(new ForwardedMailOut($mail, request()));
     }
 }

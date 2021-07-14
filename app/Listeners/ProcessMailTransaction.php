@@ -26,22 +26,23 @@ class ProcessMailTransaction
      */
     public function handle($event)
     {
-        $user = $event->request->user();
 
         switch (true) {
             case in_array($event->event_type, ['CREATED_MAIL_OUT', 'UPDATED_MAIL_OUT']):
                 $this->handleCreatedUpdatedMailOut($event);
                 break;
 
-            case $event->event_type == 'FORWARDED_MAIL_OUT':
-                $this->handleForwardedMailOut($event);
-                break;
-
             case $event->event_type == 'REVISED_MAIL_OUT':
                 $this->handleRevisedMailOut($event);
                 break;
-            case in_array($event->event_type, ['CREATED_MAIL_IN', 'UPDATED_MAIL_IN']):
-                $this->handleLowerUsers($event);
+
+            case $event->event_type = 'CREATED_MAIL_IN':
+                $this->handleCreatedMailIn($event);
+                break;
+
+
+            case $event->event_type = 'DISPOSITION_MAIL_IN':
+                $this->handleDispositionMailIn($event);
                 break;
         }
     }
@@ -55,21 +56,7 @@ class ProcessMailTransaction
         $mail_transaction->user_id = $user->id;
         $mail_transaction->target_user_id = $user->getUpperUser('out')->id;
         $mail_transaction->mail_version_id = $event->mail_version->id;
-        $mail_transaction->type = "FORWARD";
-        $mail_transaction->save();
-
-        $event->mail_transaction = $mail_transaction;
-    }
-
-    public function handleForwardedMailOut($event)
-    {
-        $user = $event->request->user();
-
-        $mail_transaction = new MailTransaction();
-        $mail_transaction->user_id = $user->id;
-        $mail_transaction->target_user_id = $user->getUpperUser('out')->id;
-        $mail_transaction->mail_version_id = $event->mail->versions()->orderBy('id', 'DESC')->first()->id;
-        $mail_transaction->type = "FORWARD";
+        $mail_transaction->type = MailTransaction::TYPE_FORWARD;
         $mail_transaction->save();
 
         $event->mail_transaction = $mail_transaction;
@@ -82,27 +69,39 @@ class ProcessMailTransaction
         $mail_transaction->user_id = $user->id;
         $mail_transaction->target_user_id = $user->getSameUser()->targetMailTransactions()->where('mail_version_id', $event->mail->id)->first()->user_id;
         $mail_transaction->mail_version_id = $event->mail->versions()->orderBy('id', 'DESC')->first()->id;
-        $mail_transaction->type = "REVISION";
+        $mail_transaction->type = MailTransaction::TYPE_REVISION;
         $mail_transaction->save();
 
         $event->mail_transaction = $mail_transaction;
     }
 
 
-    public function handleLowerUsers($event)
+    public function handleCreatedMailIn($event)
     {
         $user = $event->request->user();
-        $lower_users = $user->getLowerUsers('in');
+        $lower_users = $user->getLowerUsers('in')->first();
 
-        foreach ($lower_users as $lower_user) {
-            $mail_transaction = new MailTransaction();
-            $mail_transaction->user_id = $user->id;
-            $mail_transaction->target_user_id = $lower_user->id;
-            $mail_transaction->mail_version_id = $event->mail->versions()->orderBy('id', 'DESC')->first()->id;
-            $mail_transaction->type = "FORWARD";
-            $mail_transaction->save();
+        $mail_transaction = new MailTransaction();
+        $mail_transaction->user_id = $user->id;
+        $mail_transaction->target_user_id = $lower_users->id;
+        $mail_transaction->mail_version_id = $event->mail_version->id;
+        $mail_transaction->type = MailTransaction::TYPE_FORWARD;
+        $mail_transaction->save();
 
-            $event->mail_transaction = $mail_transaction;
-        }
+        $event->mail_transaction = $mail_transaction;
+    }
+
+    public function handleDispositionMailIn($event)
+    {
+        $user = $event->request->user();
+
+        $mail_transaction = new MailTransaction();
+        $mail_transaction->user_id = $user->id;
+        $mail_transaction->target_user_id = $user->ids;
+        $mail_transaction->mail_version_id = $event->mail->versions()->orderBy('id', 'DESC')->first()->id;
+        $mail_transaction->type = "";
+        $mail_transaction->save();
+
+        $event->mail_transaction = $mail_transaction;
     }
 }

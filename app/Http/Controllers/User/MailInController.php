@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Events\CreatedMailinProcess;
+use App\Events\CreatedMailInProcess;
 use App\Events\UpdatedMailInProcess;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MailInRequest;
@@ -42,6 +42,7 @@ class MailInController extends Controller
         $mail = new Mail();
         $mail->type = Mail::TYPE_IN;
         $mail->title = $request->title;
+        $mail->code = $request->code;
         $mail->instance = $request->instance;
         $mail->mail_created_at = $request->mail_created_at;
         $mail->save();

@@ -34,27 +34,47 @@ class ProcessMailTransactionLog
                 $log_message = MailTransactionLog::CREATED;
                 $mail_transaction_id = $event->mail_transaction->id;
                 break;
+
             case 'UPDATED_MAIL_OUT':
                 $log_message = MailTransactionLog::UPDATED;
                 $mail_transaction_id = $event->mail_transaction->id;
                 break;
+
             case 'FORWARDED_MAIL_OUT':
                 $log_message = MailTransactionLog::FORWARDED;
                 $mail_transaction_id = $event->mail_transaction->id;
                 break;
+
             case 'REVISED_MAIL_OUT':
                 $log_message = MailTransactionLog::REVISED;
                 $mail_transaction_id = $event->mail_transaction->id;
                 break;
+
             case 'UPDATED_MAIL_MASTER':
                 $log_message = MailTransactionLog::UPDATED;
-                $mail_transaction_id = $event->mail->versions()->latest()->first()->id;
+                $mail_transaction_id = $event->mail->versions()->latest()->first()->mailTransactions()->latest()->first()->id;
                 break;
+
+            case 'DISPOSITED_MAIL_IN':
+                $log_message = MailTransactionLog::DISPOSITED;
+                $mail_transaction_id = $event->mail_transaction->id;
+                break;
+
+            case 'CREATED_MAIL_IN':
+                $log_message = MailTransactionLog::CREATED;
+                $mail_transaction_id = $event->mail_transaction->id;
+                break;
+
+            case 'FORWARDED_MAIL_IN':
+                $log_message = MailTransactionLog::FORWARDED;
+                $mail_transaction_id = $event->mail_transaction->id;
+                break;
+
+
             default:
                 # code...
                 break;
         }
-
 
         $mail_transaction_log = new MailTransactionLog();
         $mail_transaction_log->mail_transaction_id = $mail_transaction_id;

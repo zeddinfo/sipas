@@ -17,11 +17,14 @@ class MailServices
         }
 
         $latest_mail_version = $mail->versions()->latest()->first();
-        $latest_mail_version_transaction = MailTransaction::where('mail_version_id', $latest_mail_version->id)
-            ->orderBy('id', 'desc')
-            ->first();
+        $latest_mail_version_transactions = MailTransaction::where('mail_version_id', $latest_mail_version->id)->get();
 
-        return $latest_mail_version_transaction->target_user_id == $user->getSameUser()->id;
+        foreach ($latest_mail_version_transactions as $key => $latest_mail_version_transaction) {
+            if ($latest_mail_version_transaction->target_user_id == $user->getSameUser()->id) {
+                return true;
+            }
+        }
+        return  false;
     }
 
     public static function mailViewGate(Mail $mail, User $user)

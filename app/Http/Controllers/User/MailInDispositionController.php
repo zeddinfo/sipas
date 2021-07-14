@@ -2,8 +2,19 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\DispositedMailInProcess;
+use App\Events\DispositionMailIn;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DispositionRequest;
+use App\Http\Requests\MailInForwardRequest;
+use App\Models\Mail;
+use App\Models\MailTransaction;
+use App\Models\MailTransactionMemo;
+use App\Models\User;
+use App\Services\MailServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use MailTransactions;
 
 class MailInDispositionController extends Controller
 {
@@ -22,9 +33,9 @@ class MailInDispositionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Mail $mail)
     {
-        //
+        abort_if(!MailServices::mailActionGate($mail, Auth::user()) || !Auth::user()->hasDisposition(), 404);
     }
 
     /**
@@ -33,9 +44,24 @@ class MailInDispositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DispositionRequest $request, Mail $mail)
     {
-        //
+        abort_if(!MailServices::mailActionGate($mail, Auth::user())
+            || !Auth::user()->hasDisposition()
+            || !Auth::user()->checkLowerUserIds($request->target_user_ids), 404);
+
+        $target_user_ids = $request->target_user_ids;
+
+        foreach ($target_user_ids as $target_user_id) {
+            $mail_transaction = new MailTransaction();
+            $mail_transaction->mail_version_id = $mail->versions()->orderBy('id', 'DESC')->first()->id;
+            $mail_transaction->user_id = Auth::user()->id;
+            $mail_transaction->target_user_id = $target_user_id;
+            $mail_transaction->type = MailTransaction::TYPE_DISPOSITION;
+            $mail_transaction->save();
+
+            event(new DispositedMailInProcess($mail_transaction, $request));
+        }
     }
 
     /**

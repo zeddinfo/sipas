@@ -2,34 +2,34 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 use App\Models\Mail;
+use App\Models\MailTransaction;
 use Illuminate\Http\Request;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class UpdatedMailOutProcess
+class DispositedMailInProcess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $mail;
     public $request;
+    public $mail_transaction;
     public $event_type;
-
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Mail $mail, Request $request)
+    public function __construct(MailTransaction $mail_transaction, Request $request)
     {
-        $this->mail = $mail;
         $this->request = $request;
-        $this->event_type = "UPDATED_MAIL_OUT";
+        $this->mail_transaction = $mail_transaction;
+        $this->event_type = "DISPOSITED_MAIL_IN";
     }
 
     /**

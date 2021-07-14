@@ -51,7 +51,7 @@ class MailOutTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('user.mail.out.index'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     /** @test */
@@ -72,7 +72,7 @@ class MailOutTest extends TestCase
         $user = $this->user();
         $response = $this->actingAs($user)->post(route('user.mail.out.store'), $this->validMailRequestData());
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertDatabaseCount('mails', $state['mails_count'] + 1);
         $this->assertDatabaseHas('mails', $this->validMailOutData());
 
@@ -225,7 +225,7 @@ class MailOutTest extends TestCase
                 })
                 ->first()->id,
             'mail_version_id' => 4,
-            'type' => "FORWARD",
+            'type' => MailTransaction::TYPE_FORWARD,
         ]);
 
         $this->assertDatabaseHas('mail_transaction_logs', [

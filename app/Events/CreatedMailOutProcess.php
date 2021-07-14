@@ -16,12 +16,8 @@ class CreatedMailOutProcess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $file;
     public $mail;
     public $request;
-    public $mail_version;
-    public $mail_transaction;
-    public $mail_transaction_log;
     public $event_type;
 
     /**
@@ -31,9 +27,9 @@ class CreatedMailOutProcess
      */
     public function __construct(Mail $mail, Request $request)
     {
-        $this->event_type = "CREATED_MAIL_OUT";
         $this->mail = $mail;
         $this->request = $request;
+        $this->event_type = "CREATED_MAIL_OUT";
     }
 
     /**

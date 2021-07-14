@@ -58,7 +58,7 @@ User
     - ProcessMail
     - ProcessMailAttributeTransaction
     - ProcessMailVersion
-    - ProcessFile
+    - ProcessMailFile
     - ProcessMailTransaction
     - ProcessMailTransactionLog
     - Send Notification Mail    

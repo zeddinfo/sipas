@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\MailTransactionLog;
 use Illuminate\Database\Seeder;
+use MailTransactionLogs;
 
 class MailTransactionLogSeeder extends Seeder
 {
@@ -18,28 +19,35 @@ class MailTransactionLogSeeder extends Seeder
             'mail_transaction_id' => 1,
             'log' => 'dibuat',
             'user_level_department' => 16,
-            'username' => 'kepala_tu',
+            'user_name' => 'kepala_tu',
         ]);
 
         MailTransactionLog::create([
             'mail_transaction_id' => 1,
             'log' => 'diteruskan',
             'user_level_department' => 4,
-            'username' => 'sekretaris',
+            'user_name' => 'sekretaris',
         ]);
 
         MailTransactionLog::create([
             'mail_transaction_id' => 2,
             'log' => 'dibuat',
             'user_level_department' => 8,
-            'username' => 'kadepipteka',
+            'user_name' => 'kadepipteka',
         ]);
 
         MailTransactionLog::create([
             'mail_transaction_id' => 2,
             'log' => 'diteruskan',
             'user_level_department' => 6,
-            'username' => 'kabidiptek',
+            'user_name' => 'kabidiptek',
+        ]);
+
+        MailTransactionLog::create([
+            'mail_transaction_id' => 2,
+            'log' => "Diteruskan oleh ",
+            'user_name' => 'TU',
+            'user_level_department' => 2
         ]);
     }
 }

@@ -31,40 +31,30 @@ class MailInTest extends TestCase
     /** @test */
     public function not_authencticaed_user_cant_access_features()
     {
-        $response = $this->get(route('tu.mail.in.index'));
+        $response = $this->get(route('tu.mail.in.create'));
 
         $response->assertRedirect('/login');
     }
 
     /** @test */
-    public function other_than_users_cant_access_features()
+    public function unauthorized_user_cant_access_features()
     {
-        $user = User::whereHas('level', function ($query) {
-            return $query->where('name', 'Admin');
-        })->first();
-
-        $response = $this->actingAs($user)->get(route('tu.mail.in.index'));
+        $response = $this->actingAs($this->unathorizedUser())->get(route('tu.mail.in.index'));
 
         $response->assertNotFound();
     }
 
     /** @test */
-    public function user_can_access_features()
+    public function authorized_user_can_access_features()
     {
-        $user = $this->user();
+        $response = $this->actingAs($this->tuUser())->get(route('tu.mail.in.index'));
 
-
-        $response = $this->actingAs($user)->get(route('tu.mail.in.index'));
-
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     /** @test */
     public function user_can_store_mail_in()
     {
-        $this->markTestSkipped();
-
-        $this->withoutExceptionHandling();
 
         Storage::fake("files");
 
@@ -76,32 +66,81 @@ class MailInTest extends TestCase
         $state['mail_transactions_count'] = MailTransaction::count();
         $state['mail_transaction_logs_count'] = MailTransactionLog::count();
 
-        $user = $this->user();
-        $response = $this->actingAs($user)->post(route('tu.mail.in.store'), $this->validMailRequestData());
+        $user = $this->tuUser();
+        $response = $this->actingAs($user)->post(route('tu.mail.in.store'), $this->validRequestData());
 
-        $response->assertStatus(200);
+        $response->assertOk();
+
+        $this->assertDatabaseCount('mails', 3);
+
+        $this->assertDatabasehas('mails', [
+            'type' => 'IN',
+            'title' => 'Surat Masuk Baru',
+            'instance' => 'Instansi Tertuju',
+            'code' => 'ABC123',
+            'directory_code' => 'DEF123',
+        ]);
+
+        $this->assertDatabaseCount('mail_attribute_transactions', 9);
+
+
+        $this->assertDatabasehas('mail_attribute_transactions', [
+            'mail_id' => 3,
+            'mail_attribute_id' => 1,
+        ]);
+
+        $this->assertDatabasehas('mail_attribute_transactions', [
+            'mail_id' => 3,
+            'mail_attribute_id' => 5,
+        ]);
+
+        $this->assertDatabasehas('mail_attribute_transactions', [
+            'mail_id' => 3,
+            'mail_attribute_id' => 8,
+        ]);
+
+
+        $this->assertDatabasehas('mail_versions', [
+            'id' => 3,
+            'mail_id' => 3,
+            'file_id' => 3,
+        ]);
+
+        $this->assertDatabasehas('mail_transactions', [
+            'id' => 3,
+            'type' => MailTransaction::TYPE_FORWARD,
+            'mail_version_id' => 3,
+            'user_id' => 2,
+            'target_user_id' => 6,
+        ]);
+
+        $this->assertDatabasehas('mail_transaction_logs', [
+            'log' => "Dibuat oleh ",
+            'user_name' => $this->tuUser()->name,
+            'user_level_department' => "TU ",
+        ]);
     }
 
 
 
     // STATIC DATA
-    public function authorizedMailInUser()
+    public function unathorizedUser()
     {
         return User::whereHas('level', function ($query) {
-            return $query->where('name', Level::LEVEL_SEKRETARIS);
+            return $query->where('name', Level::LEVEL_KADEP);
         })->first();
     }
 
-    public function user()
+    public function tuUser()
     {
         return User::whereHas('level', function ($query) {
             return $query->where('name', Level::LEVEL_TU);
         })->first();
     }
 
-    public function validMailRequestData()
+    public function validRequestData()
     {
-        return array_merge($this->validMailInData(), [
+        return array_merge($this->validData(), [
             'mail_attributes' => [
                 MailAttribute::where('type', 'Tipe')->first()->id,
                 MailAttribute::where('type', 'Sifat')->first()->id,
@@ -111,12 +150,13 @@ class MailInTest extends TestCase
         ]);
     }
 
-    public function validMailInData()
+    public function validData()
     {
         return [
             'title' => 'Surat Masuk Baru',
             'instance' => 'Instansi Tertuju',
-            'code' => '123123',
+            'code' => 'ABC123',
+            'directory_code' => 'DEF123',
             'mail_created_at' => Carbon::create(2020, 5, 1)->toDateString(),
         ];
     }

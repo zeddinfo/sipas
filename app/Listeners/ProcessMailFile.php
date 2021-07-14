@@ -6,7 +6,7 @@ use App\Models\File;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class ProcessFile
+class ProcessMailFile
 {
     /**
      * Create the event listener.

@@ -118,4 +118,38 @@ class User extends Authenticatable
             return User::where('level_id', $lower_level->id)->whereIn('department_id', $department_ids)->get();
         }
     }
+
+    public function hasDisposition()
+    {
+        $disposition_levels = config('sipas.disposition_tag');
+        $user_level = $this->level->getSameLevel();
+
+        return in_array($user_level->name, $disposition_levels);
+    }
+
+    public function checkLowerUserIds($ids = [])
+    {
+        $lower_level_ids = $this->getLowerUsers('in')->pluck('id')->toArray();
+
+        foreach ($ids as $user_id) {
+            if (!in_array($user_id, $lower_level_ids)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // public function hasDispositionAccess()
+    // {
+    //     $order = config('sipas.disposition_tag');
+    //     $level = $this->getSameLevel();
+    //     $index = array_search($level->name, $order);
+
+    //     if ($index == 0) {
+    //         return null;
+    //     }
+
+    //     return Level::where('name', $order[$index - 1])->first();
+    // }
 }
