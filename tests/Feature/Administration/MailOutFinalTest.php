@@ -78,6 +78,7 @@ class MailOutFinalTest extends TestCase
 
     public function validData()
     {
+
         return [
             'code' => 'A11.2017.10810',
             'directory_code' => 'A11.2017',
