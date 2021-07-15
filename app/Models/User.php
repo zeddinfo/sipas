@@ -85,6 +85,17 @@ class User extends Authenticatable
         return User::where([['level_id', $level->id], ['department_id', $department?->id]])->first();
     }
 
+    public function getSameUsers()
+    {
+        $master_level = $this->level->getSameLevel()->id;
+        $lower_levels = $this->level->getSameLevel()->sameLevels->pluck('id');
+        $same_levels = $lower_levels->prepend($master_level);
+
+        $department = $this->department;
+
+        return User::whereIn('level_id', $same_levels)->where('department_id', $department?->id)->get();
+    }
+
     public function getUpperUser($mail_type = 'out')
     {
         $upper_level = $this->level->getUpperLevel($mail_type);

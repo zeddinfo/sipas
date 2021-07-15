@@ -99,8 +99,20 @@
             <li class="dropdown ms-2">
                 <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <div class="avatar avatar-md avatar-indicators avatar-online">
-                        <img alt="avatar" src="@@webRoot/assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                    <div class="avatar avatar-md avatar-indicators avatar-online rounded-circle bg-warning">
+                        <h4 class="text-center mt-2">
+                            @php
+                                $name = Auth::user()->name;
+                                $words = explode(' ', $name);
+                                $acronym = '';
+                                
+                                for ($i = 0; $i < str_word_count($name) && $i < 2; $i++) {
+                                    $acronym .= $words[$i][0];
+                                }
+                                
+                                echo $acronym;
+                            @endphp
+                        </h4>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
@@ -116,29 +128,17 @@
                     </div>
 
                     <ul class="list-unstyled">
+                        <li>
+                            <a class="dropdown-item disabled" href="#">
+                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="activity"></i>Riwayat
+                                Aktivitas
+                            </a>
+                        </li>
 
                         <li>
                             <a class="dropdown-item" href="#">
-                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>Edit
-                                Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="activity"></i>Activity Log
-                            </a>
-
-
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item text-primary" href="#">
-                                <i class="me-2 icon-xxs text-primary dropdown-item-icon" data-feather="star"></i>Go Pro
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="settings"></i>Account Settings
+                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="settings"></i>Pengaturan
+                                Pengguna
                             </a>
                         </li>
                         <li>

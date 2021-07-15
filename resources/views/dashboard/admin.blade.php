@@ -31,16 +31,16 @@
                         <div class="d-flex justify-content-between align-items-center
                     mb-3">
                             <div>
-                                <h4 class="mb-0">Surat Masuk</h4>
+                                <h4 class="mb-0">Total Pengguna</h4>
                             </div>
                             <div class="icon-shape icon-md bg-light-primary text-primary
                       rounded-1">
-                                <i class="bi bi-briefcase fs-4"></i>
+                                <i class="bi bi-people   fs-4"></i>
                             </div>
                         </div>
                         <!-- project number -->
                         <div>
-                            <h1 class="fw-bold">{{ $stat['mail_in'] }}</h1>
+                            <h1 class="fw-bold">{{ $stat['users_count'] }}</h1>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,30 @@
                         <div class="d-flex justify-content-between align-items-center
                     mb-3">
                             <div>
-                                <h4 class="mb-0">Surat Keluar</h4>
+                                <h4 class="mb-0">Total Surat</h4>
+                            </div>
+                            <div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-1">
+                                <i class="bi bi-envelope-open fs-4"></i>
+                            </div>
+                        </div>
+                        <!-- project number -->
+                        <div>
+                            <h1 class="fw-bold">{{ $stat['mails_count'] }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-12 mt-6">
+                <!-- card -->
+                <div class="card rounded-3">
+                    <!-- card body -->
+                    <div class="card-body">
+                        <!-- heading -->
+                        <div class="d-flex justify-content-between align-items-center
+                    mb-3">
+                            <div>
+                                <h4 class="mb-0">Total Transaksi</h4>
                             </div>
                             <div class="icon-shape icon-md bg-light-primary text-primary
                       rounded-1">
@@ -63,30 +86,7 @@
                         </div>
                         <!-- project number -->
                         <div>
-                            <h1 class="fw-bold">{{ $stat['mail_out'] }}</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-12 col-12 mt-6">
-                <!-- card -->
-                <div class="card rounded-3">
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- heading -->
-                        <div class="d-flex justify-content-between align-items-center
-                    mb-3">
-                            <div>
-                                <h4 class="mb-0">Seluruh Surat</h4>
-                            </div>
-                            <div class="icon-shape icon-md bg-light-primary text-primary
-                      rounded-1">
-                                <i class="bi bi-people fs-4"></i>
-                            </div>
-                        </div>
-                        <!-- project number -->
-                        <div>
-                            <h1 class="fw-bold">{{ $stat['mail_total'] }}</h1>
+                            <h1 class="fw-bold">{{ $stat['transactions_count'] }}</h1>
                         </div>
                     </div>
                 </div>
