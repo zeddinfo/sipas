@@ -8,5 +8,6 @@ window.feather = require("feather-icons");
 require("./sidebarMenu");
 require("./main");
 require("./feather");
+require("sweetalert2");
 
-$(function () {});
+$(function() {});

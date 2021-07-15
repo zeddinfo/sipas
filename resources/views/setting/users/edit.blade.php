@@ -20,7 +20,7 @@
                                 <form class="row g-3" method="post"
                                     action="{{ route('admin.setting.user.update', ['user' => $user]) }}">
                                     @csrf
-                                    @method('patch')
+                                    @method('PATCH')
 
                                     <div class="col-md-6">
                                         <x-input type="text" class="form-control" label="Nama"
@@ -32,37 +32,49 @@
                                             :value="$user->nip" placeholder="NIP"></x-input>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <x-select label="Level" class="form-control" :value="$user->level->id"
-                                            name="level" :options="$level">
+                                            name="level_id" :options="$level">
 
                                         </x-select>
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-6">
                                         <x-select label="Departemen" class="form-control"
                                             :value="isset($user->department) ? $user->department->id : ''"
-                                            name="department" :options="$department">
+                                            name="department_id" :options="$department">
 
                                         </x-select>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <x-input type="text" class="form-control" value="{{ $user->phone_number }}"
-                                            label="Kontak" name="kontak" placeholder="Kontak WA"></x-input>
+                                    <div class="col-md-6">
+                                        <x-input type="text" class="form-control" value="{{ $user->email }}"
+                                            label="Email" name="email" placeholder="Email"></x-input>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <x-input type="text" class="form-control" value="{{ $user->phone_number }}"
+                                            label="Nomor HP" name="phone_number" placeholder="Nomor HP"></x-input>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <x-input type="text" class="form-control" label="Password" name="password"
                                             placeholder="Password">
                                         </x-input>
                                     </div>
+
                                     <div class="col-md-6">
                                         <x-input type="text" class="form-control" label="Konfirmasi Password"
-                                            name="konfirmasi_password" placeholder="Konfirmasi Password"></x-input>
+                                            name="password_confirmation" placeholder="Konfirmasi Password"></x-input>
                                     </div>
 
-                                    <div class="col-12">
+                                    <div class="col-md-6 col-12 d-grid">
                                         <button class="btn btn-primary" type="submit">Ubah</button>
+                                    </div>
+
+                                    <div class="col-md-6 col-12 d-grid">
+                                        <a class="btn btn-secondary"
+                                            href="{{ route('admin.setting.user.index') }}">Batalkan</a>
                                     </div>
 
                                 </form>
@@ -73,4 +85,9 @@
             </div>
         </div>
     </div>
+
+
+    @section('script')
+        @include('sweetalert::alert')
+    @endsection
 </x-app-layout>

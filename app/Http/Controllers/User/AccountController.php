@@ -19,13 +19,12 @@ class AccountController extends Controller
 
     public function update(AccountSettingRequest $request)
     {
-        $request->validated();
-
         $user = Auth::user();
         $user->nip = $request->nip;
         $user->name = $request->name;
         $user->phone_number = $request->phone_number;
         $user->email = $request->email;
+
         if ($request->password != null) {
             $user->password = Hash::make($request->password);
         }

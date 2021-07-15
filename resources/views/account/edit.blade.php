@@ -17,9 +17,19 @@
                         <div class="tab-content p-4" id="pills-tabContent-basic-forms">
                             <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design"
                                 role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <form class="row g-3" method="POST" action="{{ route('admin.setting.user.store') }}">
                                     @csrf
                                     @method('POST')
+
                                     <div class="col-md-6">
                                         <x-input label="Nama" value="{{ $user->name }}" name="name"
                                             placeholder="Nama">

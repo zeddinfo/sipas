@@ -27,7 +27,7 @@
                         <div class="tab-pane tab-example-design fade show active" id="pills-responsive-tables-design"
                             role="tabpanel" aria-labelledby="pills-responsive-tables-design-tab">
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center" scope="col">No</th>
@@ -60,7 +60,7 @@
 
                                                     <x-button
                                                         action="{{ route('admin.setting.user.destroy', $user->id) }}"
-                                                        method="delete" class="btn btn-danger mt-2 mt-md-0">
+                                                        method="DELETE" class="btn btn-danger mt-2 mt-md-0">
                                                         <i class="bi bi-trash fs-4"></i>
                                                     </x-button>
                                                 </td>
@@ -77,4 +77,8 @@
             </div>
         </div>
     </div>
+
+    @section('script')
+        @include('sweetalert::alert')
+    @endsection
 </x-app-layout>

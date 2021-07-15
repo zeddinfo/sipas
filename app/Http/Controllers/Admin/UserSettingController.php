@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
-use App\Models\Department;
-use App\Models\Level;
+use Hash;
 use App\Models\User;
+use App\Models\Level;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserSettingController extends Controller
 {
@@ -45,7 +49,7 @@ class UserSettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(CreateUserRequest $request)
     {
         User::create($request->validated());
     }
@@ -74,10 +78,7 @@ class UserSettingController extends Controller
         $user = $user->with('level', 'department')->where('id', $user->id)->first();
         $level = Level::select('id', 'name')->get();
         $department = Department::select('id', 'name')->get();
-        // dd($user->department->id);
-        // if ($position->count() == 0 || $department->count() == 0) {
-        //     return redirect('/')->withErrors('Silahkan tambahkan jabatan atau bidang untuk menambahkan user');
-        // }
+
         return view('setting.users.edit')->with(compact('level', 'department', 'user'));
     }
 
@@ -88,10 +89,23 @@ class UserSettingController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        // dd($request->all());
-        $user->update($request->validated());
+        $user->nip = $request->nip;
+        $user->name = $request->name;
+        $user->phone_number = $request->phone_number;
+        $user->email = $request->email;
+        $user->level_id = $request->level_id;
+        $user->department_id = $request->department_id;
+
+        if ($request->password != null) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        Alert::success('Yay :D', 'Berhasil mengubah pengguna');
+        return redirect(route('admin.setting.user.edit', $user));
     }
 
     /**
@@ -102,9 +116,8 @@ class UserSettingController extends Controller
      */
     public function destroy(User $user)
     {
-        $page = 'Data Pengguna';
-        $users = User::with('level', 'department')->get();
         $user->delete();
-        return redirect(route('admin.setting.user.index', compact('users', 'page')));
+        Alert::success('Yay :D', 'Berhasil menghapus pengguna');
+        return redirect(route('admin.setting.user.index'));
     }
 }
