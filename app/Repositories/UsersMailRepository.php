@@ -28,7 +28,7 @@ class UsersMailRepository
 
     public static function getMails($mail_kind)
     {
-        $user = User::find(2);
+        $user = Auth::user();
         $user_ids = $user->getSameUsers()->pluck('id');
 
         $mails = UsersMailRepository::getMailTransactions($mail_kind, $user_ids)

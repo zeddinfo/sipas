@@ -107,7 +107,7 @@
                                 $acronym = '';
                                 
                                 for ($i = 0; $i < str_word_count($name) && $i < 2; $i++) {
-                                    $acronym .= $words[$i][0];
+                                    $acronym .= strtoupper($words[$i][0]);
                                 }
                                 
                                 echo $acronym;
@@ -117,8 +117,6 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
                     <div class="px-4 pb-0 pt-2">
-
-
                         <div class="lh-1 ">
                             <h5 class="mb-1">{{ Str::limit(Auth::user()->name, 20) }}</h5>
                             <a href="#"
@@ -130,17 +128,16 @@
                     <ul class="list-unstyled">
                         <li>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="activity"></i>Riwayat
-                                Aktivitas
+                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="activity"></i>Riwayat Aktivitas
                             </a>
                         </li>
 
                         <li>
                             <a class="dropdown-item" href="#">
-                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="settings"></i>Pengaturan
-                                Pengguna
+                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="settings"></i>Pengaturan Akun
                             </a>
                         </li>
+                        
                         <li>
                             <x-button action="{{ route('logout') }}" class="dropdown-item">
                                 <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>Sign Out

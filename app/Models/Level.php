@@ -39,9 +39,9 @@ class Level extends Model
     // Custom Function
     public function getRole()
     {
-        if ($this->name === 'Admin') {
+        if ($this->getSameLevel()->name === 'Admin') {
             return 'Admin';
-        } elseif ($this->name === 'TU') {
+        } elseif ($this->getSameLevel()->name === 'TU') {
             return 'TU';
         } else {
             return 'User';

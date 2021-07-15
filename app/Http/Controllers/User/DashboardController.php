@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Models\Mail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $stat['mails_count'] = Mail::whereHas('versions.mailTransactions', function($query){
+            $query->where('user_id', Auth::id())->orWhere('target_user_id', Auth::id());
+        })->count();
+        
+        $stat['mails_in_count'] = Mail::where('type', 'IN')->whereHas('versions.mailTransactions', function($query){
+            $query->where('user_id', Auth::id())->orWhere('target_user_id', Auth::id());
+        })->count();
+        
+        $stat['mails_out_count'] = $stat['mails_count'] - $stat['mails_in_count'];
+ 
+        return view('dashboard.user', compact('stat'));
     }
 
     /**
