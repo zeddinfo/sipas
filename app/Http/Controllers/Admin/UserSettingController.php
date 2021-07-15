@@ -58,7 +58,7 @@ class UserSettingController extends Controller
      */
     public function show(User $user, $id)
     {
-        // dd($user);
+        dd($user);
         $user = $user->where('id', $id);
         return view('settings.users.show', compact('user'));
     }
@@ -74,6 +74,7 @@ class UserSettingController extends Controller
         $user = $user->with('level', 'department')->where('id', $user->id)->first();
         $level = Level::select('id', 'name')->get();
         $department = Department::select('id', 'name')->get();
+        // dd($user->department->id);
         // if ($position->count() == 0 || $department->count() == 0) {
         //     return redirect('/')->withErrors('Silahkan tambahkan jabatan atau bidang untuk menambahkan user');
         // }

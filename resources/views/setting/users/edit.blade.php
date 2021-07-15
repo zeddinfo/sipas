@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="tab-content p-4" id="pills-tabContent-basic-forms">
                             <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design" role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
-                                <form class="row g-3" method="post" action="{{ route('admin.setting.user.update', ['id' => $user->id]) }}">
+                                <form class="row g-3" method="post" action="{{ route('admin.setting.user.update', ['user' => $user]) }}">
                                     @csrf
                                     @method('patch')
                                     <div class="col-md-8">
@@ -31,7 +31,7 @@
                                         </x-select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <x-select label="Departemen" class="form-control" :value="$user->department->id" name="department" :options="$department">
+                                        <x-select label="Departemen" class="form-control" :value="isset($user->department) ? $user->department->id : ''" name="department" :options="$department">
 
                                         </x-select>
                                     </div>
