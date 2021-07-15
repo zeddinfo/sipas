@@ -15,38 +15,54 @@
                     <!-- Card -->
                     <div class="card">
                         <div class="tab-content p-4" id="pills-tabContent-basic-forms">
-                            <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design" role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
-                                <form class="row g-3" method="post" action="{{ route('admin.setting.user.update', ['user' => $user]) }}">
+                            <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design"
+                                role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
+                                <form class="row g-3" method="post"
+                                    action="{{ route('admin.setting.user.update', ['user' => $user]) }}">
                                     @csrf
                                     @method('patch')
-                                    <div class="col-md-8">
-                                        <x-input type="text" class="form-control" label="Nama" value="{{$user->name}}" name="nama" placeholder="Nama"></x-input>
+                                    <div class="col-md-6">
+                                        <x-input type="text" class="form-control" label="Nama" value="{{$user->name}}"
+                                            name="nama" placeholder="Nama"></x-input>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <x-input type="text" class="form-control" label="NIP" name="nip"
+                                            :value="$user->nip" placeholder="NIP"></x-input>
+                                    </div>
+
                                     <div class="col-md-4">
-                                        <x-input type="text" class="form-control" label="NIP" name="nip" :value="$user->nip" placeholder="NIP"></x-input>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <x-select label="Level" class="form-control" :value="$user->level->id" name="level" :options="$level">
+                                        <x-select label="Level" class="form-control" :value="$user->level->id"
+                                            name="level" :options="$level">
 
                                         </x-select>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <x-select label="Departemen" class="form-control" :value="isset($user->department) ? $user->department->id : ''" name="department" :options="$department">
+
+                                    <div class="form-group col-md-4">
+                                        <x-select label="Departemen" class="form-control"
+                                            :value="isset($user->department) ? $user->department->id : ''"
+                                            name="department" :options="$department">
 
                                         </x-select>
                                     </div>
-                                    <div class="col-md-6">
-                                        <x-input type="password" class="form-control" label="Password"  name="password" placeholder="Password"></x-input>
+
+                                    <div class="col-md-4">
+                                        <x-input type="text" class="form-control" value="{{$user->phone_number}}" label="Kontak"
+                                            name="kontak" placeholder="Kontak WA"></x-input>
                                     </div>
                                     <div class="col-md-6">
-                                        <x-input type="text" class="form-control" label="Email" :value="$user->email" name="email" placeholder="Email"></x-input>
+                                        <x-input type="text" class="form-control" label="Password" name="password" placeholder="Password">
+                                        </x-input>
                                     </div>
                                     <div class="col-md-6">
-                                        <x-input type="text" :value="$user->phone_number" class="form-control" label="Telepon" name="phone_number" placeholder="Telepone"></x-input>
+                                        <x-input type="text" class="form-control" label="Konfirmasi Password" name="konfirmasi_password"
+                                            placeholder="Konfirmasi Password"></x-input>
                                     </div>
+
                                     <div class="col-12">
                                         <button class="btn btn-primary" type="submit">Submit form</button>
                                     </div>
+
                                 </form>
                             </div>
                         </div>

@@ -15,50 +15,49 @@
                     <!-- Card -->
                     <div class="card">
                         <!-- Content -->
-                        <div class="tab-content p-4"
-                             id="pills-tabContent-responsive-tables">
+                        <div class="tab-content p-4" id="pills-tabContent-responsive-tables">
                             <div class="tab-pane tab-example-design fade show active"
-                                 id="pills-responsive-tables-design"
-                                 role="tabpanel"
-                                 aria-labelledby="pills-responsive-tables-design-tab">
-                                <div class="">
+                                id="pills-responsive-tables-design" role="tabpanel"
+                                aria-labelledby="pills-responsive-tables-design-tab">
+                                <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">Pengguna</th>
-                                            <th scope="col">Jabatan</th>
-                                            <th scope="col">Akun</th>
-                                            <th scope="col">Kontak</th>
-                                            <th class="text-center" scope="col">Aksi</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">No</th>
+                                                <th scope="col">Nama Pengguna</th>
+                                                <th class="text-center" scope="col">Jabatan</th>
+                                                <th class="text-center" scope="col">Email</th>
+                                                <th class="text-center" scope="col">Nomor HP</th>
+                                                <th class="text-center" scope="col">Aksi</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($users as $user)
+                                            @forelse($users as $key => $user)
                                             <tr>
-                                                <td>{{ Str::limit($user->name, 40) }}</td>
-                                                <td>{{ Str::limit($user->level->name, 40) }}</td>
-                                                <td>{{ Str::limit($user->email, 40) }}</td>
-                                                <td>{{ Str::limit($user->phone_number, 40) }}</td>
-                                                <td>
-                                                    <div class="tab-pane tab-example-design fade show active" id="pills-button-icon-fixed-design" role="tabpanel" aria-labelledby="pills-button-icon-fixed-design-tab">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <a class="btn btn-warning text-center" href="{{ route('admin.setting.user.edit', $user->id) }}">Ubah</a>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <x-button action="{{ route('admin.setting.user.destroy', $user->id) }}" method="delete" class="btn btn-danger">
-                                                                    Hapus
-                                                                </x-button>
-                                                            </div>
-                                                        </div>
+                                                <td class="text-center align-middle">{{ ($key+1) }}</td>
+                                                <td class="fw-bold align-middle">{{ Str::limit($user->name, 40) }}</td>
+                                                <td class="align-middle"><nav class="fw-bolder">
+                                                    {!! $user->level->name ."</nav><br>". $user->department?->name !!}
 
-                                                            {{-- <a class="btn btn-danger text-center" href="{{ route('admin.setting.user.destroy', $user->id) }}"><i data-feather="delete" class="nav-icon icon-xs me-2"></i></a> --}}
-                                                    </div>
+                                                </td>
+                                                <td class="align-middle">{{ Str::limit($user->email, 40) }}</td>
+                                                <td class="text-center align-middle">{{ Str::limit($user->phone_number, 40) }}</td>
+                                                <td class="text-center align-middle">
+                                                        <a class="btn btn-warning text-center"
+                                                            href="{{ route('admin.setting.user.edit', $user->id) }}">
+                                                            <i class="bi bi-envelope-open fs-4"></i>
+                                                        </a>
+
+                                                        <x-button
+                                                        action="{{ route('admin.setting.user.destroy', $user->id) }}"
+                                                        method="delete" class="btn btn-danger mt-2 mt-md-0">
+                                                            <i class="bi bi-trash fs-4"></i>
+                                                        </x-button>
                                                 </td>
                                             </tr>
-                                        @empty
+                                            @empty
                                             <h4>Tidak ada data.</h4>
-                                        @endforelse
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
