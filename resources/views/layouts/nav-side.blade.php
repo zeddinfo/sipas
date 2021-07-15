@@ -52,7 +52,7 @@
 
                 <li class="nav-item">
                     <div class="nav-link text-center">
-                        <a class="btn btn-block btn-success" href="{{ route('admin.setting.user.create') }}">
+                        <a class="btn btn-block btn-primary" href="{{ route('admin.setting.user.create') }}">
                             <i data-feather="plus" class="nav-icon icon-xs me-2"></i>
                             Tambah Pengguna
                         </a>
