@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\Department;
+use App\Models\Level;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,9 @@ class UserSettingController extends Controller
      */
     public function index()
     {
-        //
+        $page = 'Data Pengguna';
+        $users = User::with('level', 'department')->get();
+        return view('setting.users.index', compact('users', 'page'));
     }
 
     /**
@@ -26,7 +30,13 @@ class UserSettingController extends Controller
      */
     public function create()
     {
-        //
+        $position = Level::select('id', 'name')->get();
+        $department = Department::select('id', 'name')->get();
+
+        if ($position->count() == 0 || $department->count() == 0) {
+            return redirect('/')->withErrors('Silahkan tambahkan jabatan atau bidang untuk menambahkan user');
+        }
+        return view('settings.users.create')->with(compact('position', 'department'));
     }
 
     /**
@@ -46,8 +56,11 @@ class UserSettingController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, $id)
     {
+        // dd($user);
+        $user = $user->where('id', $id);
+        return view('settings.users.show', compact('user'));
     }
 
     /**
@@ -58,7 +71,13 @@ class UserSettingController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $user = $user->with('level', 'department')->where('id', $user->id)->first();
+        $level = Level::select('id', 'name')->get();
+        $department = Department::select('id', 'name')->get();
+        // if ($position->count() == 0 || $department->count() == 0) {
+        //     return redirect('/')->withErrors('Silahkan tambahkan jabatan atau bidang untuk menambahkan user');
+        // }
+        return view('setting.users.edit')->with(compact('level', 'department', 'user'));
     }
 
     /**
@@ -70,6 +89,7 @@ class UserSettingController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+        // dd($request->all());
         $user->update($request->validated());
     }
 
@@ -81,6 +101,9 @@ class UserSettingController extends Controller
      */
     public function destroy(User $user)
     {
+        $page = 'Data Pengguna';
+        $users = User::with('level', 'department')->get();
         $user->delete();
+        return redirect(route('admin.setting.user.index', compact('users', 'page')));
     }
 }
