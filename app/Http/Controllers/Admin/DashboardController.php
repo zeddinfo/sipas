@@ -14,7 +14,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        $stat['mail_in'] = 0;
+        $stat['mail_out'] = 0;
+        $stat['mail_total'] = 0;
+        return view('dashboard.index', compact('stat'));
     }
 
     /**

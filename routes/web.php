@@ -221,4 +221,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
     });
 });
 
+Route::get('/', function () {
+    return redirect('/login');
+})->middleware('guest');
+
 require __DIR__ . '/auth.php';
