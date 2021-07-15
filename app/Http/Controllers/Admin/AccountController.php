@@ -13,6 +13,7 @@ class AccountController extends Controller
     public function edit()
     {
         $user = Auth::user();
+        return view('account.edit', compact('user'));
     }
 
     public function update(AccountSettingRequest $request)

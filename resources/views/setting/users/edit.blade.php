@@ -21,9 +21,10 @@
                                     action="{{ route('admin.setting.user.update', ['user' => $user]) }}">
                                     @csrf
                                     @method('patch')
+
                                     <div class="col-md-6">
-                                        <x-input type="text" class="form-control" label="Nama" value="{{$user->name}}"
-                                            name="nama" placeholder="Nama"></x-input>
+                                        <x-input type="text" class="form-control" label="Nama"
+                                            value="{{ $user->name }}" name="name" placeholder="Nama"></x-input>
                                     </div>
 
                                     <div class="col-md-6">
@@ -47,20 +48,21 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <x-input type="text" class="form-control" value="{{$user->phone_number}}" label="Kontak"
-                                            name="kontak" placeholder="Kontak WA"></x-input>
+                                        <x-input type="text" class="form-control" value="{{ $user->phone_number }}"
+                                            label="Kontak" name="kontak" placeholder="Kontak WA"></x-input>
                                     </div>
                                     <div class="col-md-6">
-                                        <x-input type="text" class="form-control" label="Password" name="password" placeholder="Password">
+                                        <x-input type="text" class="form-control" label="Password" name="password"
+                                            placeholder="Password">
                                         </x-input>
                                     </div>
                                     <div class="col-md-6">
-                                        <x-input type="text" class="form-control" label="Konfirmasi Password" name="konfirmasi_password"
-                                            placeholder="Konfirmasi Password"></x-input>
+                                        <x-input type="text" class="form-control" label="Konfirmasi Password"
+                                            name="konfirmasi_password" placeholder="Konfirmasi Password"></x-input>
                                     </div>
 
                                     <div class="col-12">
-                                        <button class="btn btn-primary" type="submit">Submit form</button>
+                                        <button class="btn btn-primary" type="submit">Ubah</button>
                                     </div>
 
                                 </form>
