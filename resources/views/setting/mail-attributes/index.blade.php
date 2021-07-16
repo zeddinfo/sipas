@@ -46,6 +46,7 @@
                                                         <td class="fw-bold">
                                                             {{ Str::limit($mail_attribute->name, 40) }}</td>
                                                         <td>{{ Str::limit($mail_attribute->code, 40) }}</td>
+
                                                         <td class="text-center">
                                                             <button type="button" class="btn"
                                                                 style="background-color: {{ $mail_attribute->color }}">
@@ -54,6 +55,7 @@
                                                                 </div>
                                                             </button>
                                                         </td>
+
                                                         <td class="text-center align-middle">
                                                             <a class="btn btn-warning text-center"
                                                                 href="{{ route('admin.setting.mail.attribute.edit', $mail_attribute->id) }}">

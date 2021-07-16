@@ -34,7 +34,7 @@
                                             <th scope="col">Nama Pengguna</th>
                                             <th class="text-center" scope="col">Jabatan</th>
                                             <th class="text-center" scope="col">Email</th>
-                                            <th class="text-center" scope="col">Nomor HP</th>
+                                            {{-- <th class="text-center" scope="col">Nomor HP</th> --}}
                                             <th class="text-center" scope="col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -50,17 +50,18 @@
 
                                                 </td>
                                                 <td class="align-middle">{{ Str::limit($user->email, 40) }}</td>
+                                                {{-- <td class="text-center align-middle">
+                                                    {{ Str::limit($user->phone_number, 40) }}</td> --}}
+
                                                 <td class="text-center align-middle">
-                                                    {{ Str::limit($user->phone_number, 40) }}</td>
-                                                <td class="text-center align-middle">
-                                                    <a class="btn btn-warning text-center"
+                                                    <a class="btn btn-sm btn-warning text-center"
                                                         href="{{ route('admin.setting.user.edit', $user->id) }}">
                                                         <i class="bi bi-pencil fs-4"></i>
                                                     </a>
 
                                                     <x-button
                                                         action="{{ route('admin.setting.user.destroy', $user->id) }}"
-                                                        method="DELETE" class="btn btn-danger mt-2 mt-md-0">
+                                                        method="DELETE" class="btn btn-sm btn-danger mt-2 mt-md-0">
                                                         <i class="bi bi-trash fs-4"></i>
                                                     </x-button>
                                                 </td>

@@ -40,7 +40,7 @@ class UserSettingController extends Controller
         if ($position->count() == 0 || $department->count() == 0) {
             return redirect('/')->withErrors('Silahkan tambahkan jabatan atau bidang untuk menambahkan user');
         }
-        return view('settings.users.create')->with(compact('position', 'department'));
+        return view('setting.users.create')->with(compact('position', 'department'));
     }
 
     /**
@@ -51,7 +51,23 @@ class UserSettingController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        User::create($request->validated());
+        $user = new User();
+
+        $user->nip = $request->nip;
+        $user->name = $request->name;
+        $user->phone_number = $request->phone_number;
+        $user->email = $request->email;
+        $user->level_id = $request->level_id;
+        $user->department_id = $request->department_id;
+
+        if ($request->password != null) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        Alert::success('Yay :D', 'Berhasil menambahkan pengguna');
+        return redirect(route('admin.setting.user.index'));
     }
 
     /**
@@ -62,9 +78,8 @@ class UserSettingController extends Controller
      */
     public function show(User $user, $id)
     {
-        dd($user);
         $user = $user->where('id', $id);
-        return view('settings.users.show', compact('user'));
+        return view('setting.users.show', compact('user'));
     }
 
     /**
