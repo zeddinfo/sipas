@@ -55,7 +55,7 @@
                                                 <td class="text-center align-middle">
                                                     <a class="btn btn-warning text-center"
                                                         href="{{ route('admin.setting.user.edit', $user->id) }}">
-                                                        <i class="bi bi-envelope-open fs-4"></i>
+                                                        <i class="bi bi-pencil fs-4"></i>
                                                     </a>
 
                                                     <x-button

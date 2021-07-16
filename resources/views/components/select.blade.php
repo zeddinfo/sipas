@@ -1,14 +1,14 @@
 <label class="form-label">{{ $label }}</label>
 <select class="form-control selectpicker show-tick" id="{{ $name }}" name="{{ $name }}"
-        data-live-search="true" title="Pilih {{ $label }}">
+    data-live-search="true" title="Pilih {{ $label }}">
     @forelse($options as $option)
-        <option value="{{ $option->id }}" {{$option->id == $value ? 'selected' : ''}}>
-            {{ $option->name }}
+        <option value="{{ $option->{$field ?? 'id'} }}" {{ $option->{$field ?? 'id'} == $value ? 'selected' : '' }}>
+            {{ $option->{$field ?? 'name'} }}
         </option>
     @empty
         {!! $slot !!}
     @endforelse
 </select>
 @error($name)
-<em>{{ $message  }}</em>
+    <em>{{ $message }}</em>
 @enderror
