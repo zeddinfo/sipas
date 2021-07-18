@@ -31,7 +31,9 @@ Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace
         // Mail In
         Route::get('/masuk', 'MailInController@index')->name('tu.mail.in.index');
         Route::get('/masuk/tambah', 'MailInController@create')->name('tu.mail.in.create');
-        Route::post('/masuk', 'MailInController@store')->name('tu.mail.in.store');
+        Route::post('/masuk', 'MailInController@store', function () {
+            dd('masul');
+        })->name('tu.mail.in.store');
         Route::get('/masuk/{id}', 'MailInController@show')->name('tu.mail.in.show');
         Route::delete('/masuk/{id}', 'MailInController@destroy')->name('tu.mail.in.destroy');
 
@@ -137,6 +139,7 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         /** DONE ACTION */
         Route::get('/keluar/{mail}/revisi/tambah', 'MailOutRevisionController@create')->name('user.mail.out.revision.create');
         Route::post('/keluar/{mail}/revisi', 'MailOutRevisionController@store')->name('user.mail.out.revision.store');
+        Route::post('/semua/{mail}/download', 'MailMasterController@download')->name('user.mail.master.download');
 
         //!!! ONLY USER WITH ALL MAIL ACCESS !!!
         // Mail Ongoing 

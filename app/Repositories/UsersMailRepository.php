@@ -44,6 +44,7 @@ class UsersMailRepository
                 return $transaction;
             })->unique('mail_id');
 
+
         $mails = $mails->map(function ($transaction) use ($user_ids) {
 
             $status_option = [
