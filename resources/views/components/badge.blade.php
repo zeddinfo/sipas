@@ -1,3 +1,3 @@
 <div>
-    <span class="badge rounded-pill" style="background-color: {{ $color }};">{{ $name }}</span>
+    <span class="badge p-2 rounded-pill" style="background-color: {{ $color }};">{{ $name }}</span>
 </div>

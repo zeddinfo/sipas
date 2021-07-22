@@ -16,9 +16,9 @@ class CreatedMailInProcess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $mail;
     public $request;
     public $event_type;
+    public $mail;
 
     /**
      * Create a new event instance.
@@ -29,9 +29,9 @@ class CreatedMailInProcess
 
     public function __construct(Mail $mail, Request $request)
     {
-        $this->mail = $mail;
         $this->request = $request;
         $this->event_type = "CREATED_MAIL_IN";
+        $this->mail = $mail;
     }
 
     /**

@@ -133,7 +133,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route(RouteHelper::get('setting.account.edit')) }}">
                                 <i class="me-2 icon-xxs dropdown-item-icon" data-feather="settings"></i>Pengaturan Akun
                             </a>
                         </li>

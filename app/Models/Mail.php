@@ -24,4 +24,9 @@ class Mail extends Model
     {
         return $this->hasMany(MailVersion::class);
     }
+
+    public function logs()
+    {
+        return $this->hasMany(MailLog::class);
+    }
 }

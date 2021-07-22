@@ -15,11 +15,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserSettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $page = 'Data Pengguna';
@@ -27,11 +22,6 @@ class UserSettingController extends Controller
         return view('setting.users.index', compact('users', 'page'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $position = Level::select('id', 'name')->get();
@@ -43,12 +33,6 @@ class UserSettingController extends Controller
         return view('setting.users.create')->with(compact('position', 'department'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CreateUserRequest $request)
     {
         $user = new User();
@@ -70,24 +54,12 @@ class UserSettingController extends Controller
         return redirect(route('admin.setting.user.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user, $id)
     {
         $user = $user->where('id', $id);
         return view('setting.users.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         $user = $user->with('level', 'department')->where('id', $user->id)->first();
@@ -97,13 +69,6 @@ class UserSettingController extends Controller
         return view('setting.users.edit')->with(compact('level', 'department', 'user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->nip = $request->nip;
@@ -123,12 +88,6 @@ class UserSettingController extends Controller
         return redirect(route('admin.setting.user.edit', $user));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
         $user->delete();

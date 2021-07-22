@@ -26,9 +26,9 @@ class AccountSettingRequest extends FormRequest
     {
         return [
             'nip' => 'nullable|min:3|max:100',
-            'name' => 'required|min:3|max:100',
+            'name' => 'required|min:2|max:100',
             'phone_number' => 'required|min:8|max:50',
-            'email' => 'required|email|unique:users,email,' . Auth::user()->id . '|min:5|max:100',
+            'email' => 'required|email|unique:users,id,' . Auth::id() . '|min:5|max:100',
             'password' => 'nullable|confirmed|min:6|max:50',
         ];
     }

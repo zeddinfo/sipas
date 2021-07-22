@@ -30,11 +30,11 @@ class ProcessMailFile
             $file = $event->request->file('file');
             $original_name = $file->getClientOriginalName();
 
-            //!! Staging
-            // $directory_name = $file->store('files');
+            // !! Staging
+            $directory_name = $file->store('files');
 
             // //!! Testing
-            $directory_name = $file->store($original_name, 'files');
+            // $directory_name = $file->store($original_name, 'files');
 
             $file = new File();
             $file->original_name = $original_name;

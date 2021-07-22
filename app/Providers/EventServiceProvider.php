@@ -14,7 +14,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Listeners\ProcessMailFile;
 use App\Listeners\ProcessMailAttributeTransaction;
-use App\Listeners\ProcessMailTransactionLog;
+use App\Listeners\ProcessMailLog;
 use App\Listeners\ProcessMailTransaction;
 use App\Listeners\ProcessMailVersion;
 use App\Listeners\SendNotification;
@@ -42,7 +42,7 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailFile::class,
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
-            ProcessMailTransactionLog::class,
+            ProcessMailLog::class,
             // SendNotification::class,
         ],
 
@@ -51,19 +51,19 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailFile::class,
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
-            ProcessMailTransactionLog::class,
+            ProcessMailLog::class,
             // SendNotification::class,
         ],
 
         ForwardedMailOut::class => [
-            ProcessMailTransactionLog::class
+            ProcessMailLog::class
             // SendNotification::class,
         ],
 
         RevisedMailOutProcess::class => [
             ProcessRevisionFile::class,
             ProcessMailCorrection::class,
-            ProcessMailTransactionLog::class
+            ProcessMailLog::class
             // SendNotification::class,
         ],
 
@@ -72,19 +72,19 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailFile::class,
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
-            ProcessMailTransactionLog::class,
+            ProcessMailLog::class,
             // SendNotification::class,
         ],
 
         DispositedMailInProcess::class => [
             ProcessMailTransactionMemo::class,
-            ProcessMailTransactionLog::class
+            ProcessMailLog::class
             // SendNotification::class,
 
         ],
 
         ForwardedMailInProcess::class => [
-            ProcessMailTransactionLog::class
+            ProcessMailLog::class
             // SendNotification::class,
         ],
 
@@ -93,7 +93,7 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailFile::class,
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
-            ProcessMailTransactionLog::class,
+            ProcessMailLog::class,
             // SendNotification::class,
         ],
 
@@ -101,7 +101,7 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailAttributeTransaction::class,
             ProcessMailFile::class,
             ProcessMailVersion::class,
-            ProcessMailTransactionLog::class,
+            ProcessMailLog::class,
         ],
 
     ];

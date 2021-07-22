@@ -82,6 +82,6 @@ class MailMasterController extends Controller
 
     public function download(Mail $mail)
     {
-        return redirect($mail->versions()->latest()->first()->file->directory_name);
+        return redirect('storage/' . $mail->versions()->latest()->first()->file->directory_name);
     }
 }

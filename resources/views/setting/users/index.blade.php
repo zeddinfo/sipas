@@ -26,15 +26,18 @@
                     <div class="tab-content p-4" id="pills-tabContent-responsive-tables">
                         <div class="tab-pane tab-example-design fade show active" id="pills-responsive-tables-design"
                             role="tabpanel" aria-labelledby="pills-responsive-tables-design-tab">
-                            <div class="table-responsive">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a class="btn btn-primary" href="{{ route('admin.setting.user.create') }}">Tambah
+                                    Pengguna</a>
+                            </div>
+                            <div class="table-responsive mt-5">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center" scope="col">No</th>
-                                            <th scope="col">Nama Pengguna</th>
+                                            <th scope="col">Nama</th>
                                             <th class="text-center" scope="col">Jabatan</th>
                                             <th class="text-center" scope="col">Email</th>
-                                            {{-- <th class="text-center" scope="col">Nomor HP</th> --}}
                                             <th class="text-center" scope="col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -50,18 +53,16 @@
 
                                                 </td>
                                                 <td class="align-middle">{{ Str::limit($user->email, 40) }}</td>
-                                                {{-- <td class="text-center align-middle">
-                                                    {{ Str::limit($user->phone_number, 40) }}</td> --}}
 
                                                 <td class="text-center align-middle">
-                                                    <a class="btn btn-sm btn-warning text-center"
+                                                    <a class="btn btn-warning text-center"
                                                         href="{{ route('admin.setting.user.edit', $user->id) }}">
                                                         <i class="bi bi-pencil fs-4"></i>
                                                     </a>
 
                                                     <x-button
                                                         action="{{ route('admin.setting.user.destroy', $user->id) }}"
-                                                        method="DELETE" class="btn btn-sm btn-danger mt-2 mt-md-0">
+                                                        method="DELETE" class="btn btn-danger mt-2 mt-md-0">
                                                         <i class="bi bi-trash fs-4"></i>
                                                     </x-button>
                                                 </td>
@@ -78,8 +79,4 @@
             </div>
         </div>
     </div>
-
-    @section('script')
-        @include('sweetalert::alert')
-    @endsection
 </x-app-layout>

@@ -26,9 +26,10 @@
                                         </ul>
                                     </div>
                                 @endif
-                                <form class="row g-3" method="POST" action="{{ route('admin.setting.user.store') }}">
+                                <form class="row g-3" method="POST"
+                                    action="{{ route(RouteHelper::get('setting.account.update')) }}">
                                     @csrf
-                                    @method('POST')
+                                    @method('PATCH')
 
                                     <div class="col-md-6">
                                         <x-input label="Nama" value="{{ $user->name }}" name="name"
@@ -53,7 +54,8 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <x-input label="Password" name="password" placeholder="Password"></x-input>
+                                        <x-input type="password" label="Password" name="password"
+                                            placeholder="Password"></x-input>
                                     </div>
 
                                     <div class="col-md-6">
@@ -61,9 +63,9 @@
                                             placeholder="Konfirmasi Password"></x-input>
                                     </div>
 
-                                    <div class="col-12">
-                                        <button class="btn btn-primary" type="submit">Update Profil</button>
-                                        <button class="btn btn-secondary" type="submit">Batal</button>
+                                    <div class="col-12 d-grid d-md-block">
+                                        <button class="btn btn-primary" type="submit">Ubah</button>
+                                        <a href="/" class="btn btn-secondary mt-2 mt-md-0" type="submit">Kembali</a>
                                     </div>
                                 </form>
                             </div>

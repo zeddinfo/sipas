@@ -30,7 +30,7 @@ class MailInRequest extends FormRequest
             'instance' => 'required|min:3|max:255',
             'mail_attributes.*' => 'required|numeric|min:1|max:255|exists:mail_attributes,id',
             'mail_created_at' => 'required|date',
-            'file' => 'nullable|file|mimes:pdf,doc,docx,jpeg,jpg,png|max:5120',
+            'file' => 'required|file|mimes:pdf,doc,docx,jpeg,jpg,png|max:5120',
         ];
     }
 }

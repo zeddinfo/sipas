@@ -17,8 +17,9 @@ class ForwardedMailInProcess
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $request;
-    public $mail_transaction;
     public $event_type;
+    public $mail;
+    public $mail_transaction;
     /**
      * Create a new event instance.
      *
@@ -27,8 +28,9 @@ class ForwardedMailInProcess
     public function __construct(MailTransaction $mail_transaction, Request $request)
     {
         $this->request = $request;
-        $this->mail_transaction = $mail_transaction;
         $this->event_type = "FORWARDED_MAIL_IN";
+        $this->mail = $mail_transaction->mailVersion->mail;
+        $this->mail_transaction = $mail_transaction;
     }
 
     /**

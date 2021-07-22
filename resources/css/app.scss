@@ -1,3 +1,7 @@
 $primary: #ebae34;
 @import "./dash-ui/theme.scss";
-@import "../../node_modules/bootstrap-select/sass/bootstrap-select.scss"
+@import "../../node_modules/bootstrap-select/sass/bootstrap-select.scss";
+
+.navbar-vertical .navbar-nav .nav-item .nav-link.active {
+    background-color: $primary;
+}

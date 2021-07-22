@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MailTransactionLogs extends Migration
+class MailLogs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class MailTransactionLogs extends Migration
      */
     public function up()
     {
-        Schema::create('mail_transaction_logs', function (Blueprint $table) {
+        Schema::create('mail_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('mail_transaction_id')->constrained('mail_transactions');
+            $table->foreignId('mail_id')->constrained('mails');
             $table->string('log');
             $table->string('user_name');
             $table->string('user_level_department')->nullable();
+            $table->string('target_user_name')->nullable();
+            $table->string('target_user_level_department')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

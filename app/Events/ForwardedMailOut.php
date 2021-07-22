@@ -19,6 +19,7 @@ class ForwardedMailOut
 
     public $request;
     public $event_type;
+    public $mail;
     public $mail_transaction;
 
     /**
@@ -30,6 +31,7 @@ class ForwardedMailOut
     {
         $this->request = $request;
         $this->event_type = "FORWARDED_MAIL_OUT";
+        $this->mail = $mail_transaction->mailVersion->mail;
         $this->mail_transaction = $mail_transaction;
     }
 

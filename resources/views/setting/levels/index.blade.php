@@ -26,15 +26,16 @@
                     <div class="tab-content p-4" id="pills-tabContent-responsive-tables">
                         <div class="tab-pane tab-example-design fade show active" id="pills-responsive-tables-design"
                             role="tabpanel" aria-labelledby="pills-responsive-tables-design-tab">
-                            <div class="table-responsive">
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <a class="btn btn-success" href="{{ route('admin.setting.level.create') }}">Tambah</a>
-                                </div>
-                                <table class="table">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a class="btn btn-primary" href="{{ route('admin.setting.level.create') }}">Tambah
+                                    Jabatan</a>
+                            </div>
+                            <div class="table-responsive mt-5">
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center" scope="col">No</th>
-                                            <th scope="col">Nama Level</th>
+                                            <th scope="col">Nama Jabatan</th>
                                             <th scope="col">Privelege Akses</th>
                                             <th class="text-center" scope="col">Aksi</th>
                                         </tr>
@@ -48,18 +49,11 @@
                                                 <td class="fw-bold align-middle">
                                                     {!! $level->sameLevel != null ? $level->sameLevel->name : '' !!}
                                                 </td>
-                                                {{-- <td class="align-middle">
-                                                    {!! $user->level->name !!}
-                                                    {!! $user->department != null ? '<br>(' . $user->department->name . ')' : '' !!}
 
-                                                </td> --}}
-                                                {{-- <td class="align-middle">{{ Str::limit($user->email, 40) }}</td>
-                                                <td class="text-center align-middle">
-                                                    {{ Str::limit($user->phone_number, 40) }}</td> --}}
                                                 <td class="text-center align-middle">
                                                     <a class="btn btn-warning text-center"
                                                         href="{{ route('admin.setting.level.edit', $level->id) }}">
-                                                        <i class="bi bi-envelope-open fs-4"></i>
+                                                        <i class="bi bi-pencil fs-4"></i>
                                                     </a>
 
                                                     <x-button
@@ -81,7 +75,4 @@
             </div>
         </div>
     </div>
-    @section('script')
-    @include('sweetalert::alert')
-@endsection
 </x-app-layout>

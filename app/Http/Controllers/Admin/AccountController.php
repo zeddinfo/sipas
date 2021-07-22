@@ -7,13 +7,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AccountSettingRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AccountController extends Controller
 {
     public function edit()
     {
         $user = Auth::user();
-        return view('account.edit', compact('user'));
+        $form_action = route('admin.setting.account.update');
+
+        return view('account.edit', compact('user', 'form_action'));
     }
 
     public function update(AccountSettingRequest $request)
@@ -29,5 +32,8 @@ class AccountController extends Controller
         }
 
         $user->save();
+
+        Alert::success('Yay :D', 'Berhasil mengubah informasi akun');
+        return redirect(route('admin.setting.account.edit'));
     }
 }

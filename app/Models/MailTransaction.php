@@ -31,11 +31,6 @@ class MailTransaction extends Model
         return $this->belongsTo(MailVersion::class);
     }
 
-    public function logs()
-    {
-        return $this->hasMany(MailTransactionLog::class);
-    }
-
     public function memo()
     {
         return $this->hasOne(MailTransactionMemo::class);

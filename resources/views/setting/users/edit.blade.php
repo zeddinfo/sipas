@@ -68,14 +68,10 @@
                                             name="password_confirmation" placeholder="Konfirmasi Password"></x-input>
                                     </div>
 
-
-                                    <div class="col-md-6 col-12 d-grid">
+                                    <div class="col-12 d-grid d-md-block">
                                         <button class="btn btn-primary" type="submit">Ubah</button>
-                                    </div>
-
-                                    <div class="col-md-6 col-12 d-grid">
-                                        <a class="btn btn-secondary"
-                                            href="{{ route('admin.setting.user.index') }}">Batalkan</a>
+                                        <a class="btn btn-secondary mt-2 mt-md-0"
+                                            href="{{ route('admin.setting.user.index') }}">Kembali</a>
                                     </div>
 
                                 </form>
@@ -86,9 +82,4 @@
             </div>
         </div>
     </div>
-
-
-    @section('script')
-        @include('sweetalert::alert')
-    @endsection
 </x-app-layout>

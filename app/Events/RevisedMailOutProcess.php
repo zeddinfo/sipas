@@ -19,6 +19,7 @@ class RevisedMailOutProcess
 
     public $request;
     public $event_type;
+    public $mail;
     public $mail_transaction;
 
     /**
@@ -30,9 +31,10 @@ class RevisedMailOutProcess
 
     public function __construct(MailTransaction $mail_transaction, Request $request)
     {
-        $this->request = $request;
-        $this->mail_transaction = $mail_transaction;
         $this->event_type = "REVISED_MAIL_OUT";
+        $this->request = $request;
+        $this->mail = $mail_transaction->mailVersion->mail;
+        $this->mail_transaction = $mail_transaction;
     }
 
     /**

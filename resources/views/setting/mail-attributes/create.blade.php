@@ -42,13 +42,10 @@
                                             </x-input-color>
                                         </div>
 
-                                        <div class="col-md-6 col-12 d-grid">
-                                            <button class="btn btn-primary" type="submit">Simpan</button>
-                                        </div>
-
-                                        <div class="col-md-6 col-12 d-grid">
-                                            <a class="btn btn-secondary"
-                                                href="{{ route('admin.setting.mail.attribute.index') }}">Batalkan</a>
+                                        <div class="col-12 d-grid d-md-block">
+                                            <button class="btn btn-primary" type="submit">Tambah</button>
+                                            <a class="btn btn-secondary mt-2 mt-md-0"
+                                                href="{{ route('admin.setting.mail.attribute.index') }}">Kembali</a>
                                         </div>
                                     </form>
                                 </div>

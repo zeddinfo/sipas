@@ -16,18 +16,15 @@ class UpdatedMailMasterProcess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $mail;
     public $request;
-    public $file;
-    public $mail_version;
-    public $mail_transaction_log;
     public $event_type;
+    public $mail;
 
     public function __construct(Mail $mail, Request $request)
     {
+        $this->request = $request;
         $this->event_type = "UPDATED_MAIL_MASTER";
         $this->mail = $mail;
-        $this->request = $request;
     }
 
     /**

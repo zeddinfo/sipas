@@ -27,14 +27,15 @@ Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace
 
     // Mail
     Route::group(['prefix' => 'surat'], function () {
+        // Mail File
+        Route::get('/{mail}/lihat', 'MailFileController@show')->name('tu.mail.file.show');
+        Route::post('/{mail}/download', 'MailFileController@download')->name('tu.mail.download');
 
         // Mail In
         Route::get('/masuk', 'MailInController@index')->name('tu.mail.in.index');
         Route::get('/masuk/tambah', 'MailInController@create')->name('tu.mail.in.create');
-        Route::post('/masuk', 'MailInController@store', function () {
-            dd('masul');
-        })->name('tu.mail.in.store');
-        Route::get('/masuk/{id}', 'MailInController@show')->name('tu.mail.in.show');
+        Route::post('/masuk', 'MailInController@store')->name('tu.mail.in.store');
+        Route::get('/masuk/{mail}', 'MailInController@show')->name('tu.mail.in.show');
         Route::delete('/masuk/{id}', 'MailInController@destroy')->name('tu.mail.in.destroy');
 
         // Mail In Custom Action
@@ -95,13 +96,14 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
 
     // Mail
     Route::group(['prefix' => 'surat'], function () {
-        // Mail Download
+        // Mail File
         /** DONE ACTION */
-        Route::post('/{mail}/download', 'MailDownloadController@download')->name('user.mail.download');
+        Route::get('/{mail}/lihat', 'MailFileController@show')->name('user.mail.file.show');
+        Route::post('/{mail}/download', 'MailFileController@download')->name('user.mail.download');
 
         // Mail In
         Route::get('/masuk', 'MailInController@index')->name('user.mail.in.index');
-        Route::get('/masuk/{id}', 'MailInController@show')->name('user.mail.in.show');
+        Route::get('/masuk/{mail}', 'MailInController@show')->name('user.mail.in.show');
 
         // ??? (UNDER CONSIDERATION)
         Route::delete('/masuk/{id}', 'MailInController@destroy')->name('user.mail.in.destroy');

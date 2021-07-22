@@ -83,8 +83,4 @@
             </div>
         </div>
     </div>
-
-    @section('script')
-        @include('sweetalert::alert')
-    @endsection
 </x-app-layout>
