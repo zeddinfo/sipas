@@ -8,7 +8,7 @@
     <div class="bg-primary pt-10 pb-21"></div>
     <div class="container-fluid mt-n22 px-6">
         <div class="row">
-            <x-page-title page="Detail Surat" icon="bi-envelope"></x-page-title>
+            <x-page-title page="Diposisi Surat" icon="bi-house"></x-page-title>
             <!-- Detail Surat -->
             <div class="col-xl-12 col-lg-12 col-md-12 col-12 mt-6 mb-6">
                 <!-- card -->
@@ -113,46 +113,50 @@
                 </div>
             </div>
 
-            <!-- Mail Logs -->
+            <!-- Riwayat Surat -->
             <div class="col-xl-12 col-lg-12 col-md-12 col-12 mb-6">
                 <!-- card -->
                 <div class="card">
                     <!-- card body -->
                     <div class="card-body">
+                        <x-form action="{{ route('user.mail.in.disposition.store', $mail) }}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="card-title mb-4">Catatan/Memo</h4>
+                                    @csrf
+                                    @method('POST')
+                                    <div class="mb-3 ">
+                                        <textarea id="textareaInput" name="memo" class="form-control"
+                                            placeholder="Tulis catatan" rows="3"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="card-title mb-4">Dikirim ke</h4>
+                                    <div class="mb-3">
+                                        <select name="target_users[]" class="selectpicker" data-width="100%"
+                                            title="Pilih penerima" data-live-search="true" multiple data-selected-text
+                                            data-actions-box="true">
+                                            @foreach ($target_users as $target_user)
+                                                <option value="{{ $target_user->id }}"
+                                                    data-subtext="{{ $target_user->getLevelDepartment() }}">
+                                                    {{ $target_user->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-success" type="submit">Teruskan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </x-form>
                         <!-- card title -->
-                        <h4 class="card-title fw-bold text-primary mb-4">Riwayat Surat</h4>
-                        <hr>
-                        <table class="table">
-                            <thead>
-                                <td class="fw-bold">Aktivitas</td>
-                                <td class="fw-bold">Waktu</td>
-                            </thead>
-                            @forelse ($mail->logs as $log)
-                                <tr>
-                                    <td>{{ $log->getLogMessage() }}</td>
-                                    <td>{{ $log->created_at }}</td>
-                                </tr>
-                            @empty
-                                Belum ada aktivitas surat
-                            @endforelse
-                        </table>
                     </div>
                 </div>
             </div>
-
-            <!-- Mail Action -->
-            @if (MailServices::mailActionGate($mail, Auth::user()))
-                <div class="col-xl-12 col-lg-12 col-md-12 col-12 mb-6">
-                    <div class="row justify-content-center">
-                        @if ($mail->type == 'IN')
-                            <div class="col-4 d-grid">
-                                <a href="{{ route('user.mail.in.forward.create', $mail) }}"
-                                    class="btn btn-outline-primary rounded-pill">Teruskan Surat</a>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            @endif
         </div>
+    </div>
+    </div>
 
 </x-app-layout>

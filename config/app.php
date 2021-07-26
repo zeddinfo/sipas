@@ -230,6 +230,7 @@ return [
 
         // Custom
         'RouteHelper' => App\Utilities\RouteHelper::class,
+        'MailServices' => App\Services\MailServices::class,
     ],
 
 ];

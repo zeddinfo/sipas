@@ -24,7 +24,7 @@ class MailInForwardRequest extends FormRequest
     public function rules()
     {
         return [
-            'target_user_ids.*' => 'required|numeric',
+            'target_users.*' => 'required',
         ];
     }
 }

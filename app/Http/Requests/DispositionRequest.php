@@ -25,7 +25,7 @@ class DispositionRequest extends FormRequest
     {
         return [
             'memo' => 'required|string|max:255',
-            'target_user_ids.*' => 'required|numeric|min:1',
+            'target_users.*' => 'required|min:1',
         ];
     }
 }

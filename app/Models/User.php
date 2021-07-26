@@ -72,6 +72,16 @@ class User extends Authenticatable
 
 
     // Custom Method
+    public function getLevelDepartment()
+    {
+        $department = '';
+        if ($this->department != null) {
+            $department = ' ' . $this->department->name;
+        }
+
+        return $this->level->name . $department;
+    }
+
     public function hasRole($role)
     {
         return $this->level->getRole() == $role;

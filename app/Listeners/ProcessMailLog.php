@@ -78,9 +78,9 @@ class ProcessMailLog
         $mail_log->mail_id = $event->mail->id;
         $mail_log->log = $log;
         $mail_log->user_name = $user->name;
-        $mail_log->user_level_department = $user->level?->name . " " . $user->department?->name;
+        $mail_log->user_level_department = $user->getLevelDepartment();
         $mail_log->target_user_name = $target_user?->name;
-        $mail_log->target_user_level_department = $target_user?->level?->name . $target_user != null ? ' ' : '' . $target_user?->department?->name;
+        $mail_log->target_user_level_department = $target_user?->getLevelDepartment();
         $mail_log->save();
     }
 }

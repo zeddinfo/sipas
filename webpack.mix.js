@@ -13,28 +13,27 @@ const imageminMozjpeg = require("imagemin-mozjpeg");
  |
  */
 
-mix.js("resources/js/app.js", "public/js")
-    .sass("resources/css/app.scss", "public/css")
-    .autoload({
-        jquery: ["$", "window.jQuery", "jQuery"],
-    });
+mix.js("resources/js/app.js", "public/js").sass(
+    "resources/css/app.scss",
+    "public/css"
+);
 
 mix.webpackConfig({
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                { from: "resources/images", to: "images" }, // Laravel mix will place this in 'public/images'
-            ],
+                { from: "resources/images", to: "images" } // Laravel mix will place this in 'public/images'
+            ]
         }),
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             plugins: [
                 imageminMozjpeg({
-                    quality: 7,
-                }),
-            ],
-        }),
-    ],
+                    quality: 7
+                })
+            ]
+        })
+    ]
 });
 
 mix.version();

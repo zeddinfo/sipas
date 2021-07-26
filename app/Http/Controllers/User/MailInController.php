@@ -31,10 +31,7 @@ class MailInController extends Controller
     {
         abort_if(!MailServices::mailViewGate($mail, Auth::user()), 404);
 
-        $mail->load('attributes', 'versions.mailTransactions', 'versions.mailTransactions.logs');
-
-
-        dd($mail->versions[0]->mailTransactions[0]->logs);
+        $mail->load('attributes', 'logs');
 
         return view('mails.show')->with(compact('mail'));
     }

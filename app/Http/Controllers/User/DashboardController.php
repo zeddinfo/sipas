@@ -11,16 +11,16 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $stat['mails_count'] = Mail::whereHas('versions.mailTransactions', function($query){
-            $query->where('user_id', Auth::id())->orWhere('target_user_id', Auth::id());
+        $stat['mails_count'] = Mail::whereHas('versions.mailTransactions', function ($query) {
+            $query->where('user_id', Auth::user()->getSameUser()->id)->orWhere('target_user_id', Auth::user()->getSameUser()->id);
         })->count();
-        
-        $stat['mails_in_count'] = Mail::where('type', 'IN')->whereHas('versions.mailTransactions', function($query){
-            $query->where('user_id', Auth::id())->orWhere('target_user_id', Auth::id());
+
+        $stat['mails_in_count'] = Mail::where('type', 'IN')->whereHas('versions.mailTransactions', function ($query) {
+            $query->where('user_id', Auth::user()->getSameUser()->id)->orWhere('target_user_id', Auth::user()->getSameUser()->id);
         })->count();
-        
+
         $stat['mails_out_count'] = $stat['mails_count'] - $stat['mails_in_count'];
- 
+
         return view('dashboard.user', compact('stat'));
     }
 

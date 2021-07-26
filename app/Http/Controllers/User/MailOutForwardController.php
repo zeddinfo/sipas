@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class MailOutForwardController extends Controller
 {
+    public function create(Mail $mail)
+    {
+    }
+
     public function store(Mail $mail)
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);

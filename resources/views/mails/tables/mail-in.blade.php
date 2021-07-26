@@ -50,6 +50,10 @@
                                 <a href="{{ route('user.mail.in.forward.create', $mail) }}"
                                     class="dropdown-item">Teruskan</a>
 
+                                @if (MailServices::mailActionGate($mail, Auth::user()))
+                                    <a href="{{ route('user.mail.in.forward.create', $mail) }}"
+                                        class="dropdown-item">Teruskan Surat</a>
+                                @endif
                             </div>
                         </div>
                     </td>
@@ -59,13 +63,4 @@
             @endforelse
         </tbody>
     </table>
-</div>
-
-<div class="row">
-    <div class="col-12">
-        {{-- <iframe src="https://file-examples-com.github.io/uploads/2017/02/file-sample_1MB.doc" frameborder="0"></iframe> --}}
-        {{-- <iframe
-            src='//docs.google.com/gview?url=https://file-examples-com.github.io/uploads/2017/02/file-sample_1MB.doc&embedded=true'
-            frameborder='0'></iframe> --}}
-    </div>
 </div>

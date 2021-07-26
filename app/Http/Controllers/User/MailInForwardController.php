@@ -9,18 +9,15 @@ use App\Events\ForwardedMailIn;
 use App\Models\MailTransaction;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Events\DispositedMailInProcess;
 use App\Events\ForwardedMailInProcess;
+use App\Events\DispositedMailInProcess;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\MailInForwardRequest;
-use App\Providers\ForwardedMailIn as ProvidersForwardedMailIn;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Providers\ForwardedMailIn as ProvidersForwardedMailIn;
 
 class MailInForwardController extends Controller
 {
-    use RefreshDatabase;
-
-    protected $seed = true;
-
     public function create(Mail $mail)
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
@@ -28,13 +25,21 @@ class MailInForwardController extends Controller
         if (Auth::user()->hasDisposition()) {
             return redirect(route('user.mail.in.disposition.create', $mail));
         }
+
+        $target_users = Auth::user()->getLowerUsers('in');
+        $target_users->load('level', 'department');
+
+        return view('mails.partials.forward', compact('mail', 'target_users'));
     }
 
     public function store(MailInForwardRequest $request, Mail $mail)
     {
-        abort_if(!MailServices::mailActionGate($mail, Auth::user()) || !Auth::user()->checkLowerUserIds($request->target_user_ids), 404);
+        $target_user_ids = $request->target_users;
 
-        $target_user_ids = $request->target_user_ids;
+        abort_if(!MailServices::mailActionGate($mail, Auth::user())
+            || !Auth::user()->checkLowerUserIds($target_user_ids)
+            || Auth::user()->hasDisposition(), 404);
+
 
         foreach ($target_user_ids as $target_user_id) {
             $mail_transaction = new MailTransaction();
@@ -46,6 +51,8 @@ class MailInForwardController extends Controller
 
             event(new ForwardedMailInProcess($mail_transaction, $request));
         }
-        // event(new ForwardedMailIn($mail, request()));
+
+        Alert::success('Yay :D', 'Berhasil meneruskan surat');
+        return redirect(route('user.mail.in.index'));
     }
 }
