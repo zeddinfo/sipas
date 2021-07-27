@@ -33,16 +33,7 @@ class AdminSeeder extends Seeder
             'email' => 'tu@tu.com',
             'password' => Hash::make('123123'),
             'level_id' => Level::where('name', 'TU')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000012',
-            'name' => 'Asisten TU',
-            'phone_number' => '0818181224',
-            'email' => 'tu2@tu.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Asisten TU')->first()->id,
-        ]);
+        ]);;
 
         User::create([
             'nip' => '000002',
@@ -117,16 +108,6 @@ class AdminSeeder extends Seeder
             'email' => 'kedeplitbanga@hmti.com',
             'password' => Hash::make('123123'),
             'level_id' => Level::where('name', 'Kepala Departemen')->first()->id,
-            'department_id' => Department::where('name', 'Kastra')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000009',
-            'name' => 'Fajar Heru',
-            'phone_number' => '0818181224',
-            'email' => 'fajar@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Asisten Kepala Departemen')->first()->id,
             'department_id' => Department::where('name', 'Kastra')->first()->id,
         ]);
 
