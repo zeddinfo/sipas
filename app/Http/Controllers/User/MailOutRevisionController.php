@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\RevisedMailOutProcess;
 use App\Models\MailTransactionCorrection;
 use App\Http\Requests\MailRevisionRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MailOutRevisionController extends Controller
 {
@@ -39,6 +40,9 @@ class MailOutRevisionController extends Controller
         $mail_transaction->save();
 
         event(new RevisedMailOutProcess($mail_transaction, $request));
+
+        Alert::success('Yay :D', 'Koreksi berhasil dirikirim.');
+        return redirect(route('user.mail.out.index'));
     }
 
     public function show($id)

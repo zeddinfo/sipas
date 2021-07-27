@@ -9,6 +9,7 @@ use App\Events\ForwardedMailOut;
 use App\Http\Controllers\Controller;
 use App\Models\MailTransaction;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MailOutForwardController extends Controller
 {
@@ -30,5 +31,8 @@ class MailOutForwardController extends Controller
         $mail_transaction->save();
 
         event(new ForwardedMailOut($mail_transaction, request()));
+
+        Alert::success('Yay :D', 'Berhasil Meneruskan Surat.');
+        return redirect(route('user.mail.out.index'));
     }
 }

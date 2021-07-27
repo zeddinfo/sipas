@@ -11,7 +11,6 @@ use App\Models\MailAttribute;
 use App\Repositories\UsersMailRepository;
 use App\Services\MailServices;
 use Auth;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MailOutController extends Controller
@@ -68,6 +67,16 @@ class MailOutController extends Controller
     public function edit(Mail $mail)
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
+
+        $page = 'Koreksi Surat Keluar';
+
+        $mail = Mail::with('attributes')->where('id', $mail->id)->first();
+        $sifat = MailAttribute::get()->where('type', 'Sifat');
+        $tipe = MailAttribute::get()->where('type', 'Tipe');
+        $prioritas = MailAttribute::get()->where('type', 'Prioritas');
+        $folder = MailAttribute::get()->where('type', 'Folder');
+
+        return view('mails.partials.correction')->with(compact('page', 'sifat', 'tipe', 'prioritas', 'folder', 'mail'));
     }
 
     public function update(MailOutRequest $request, Mail $mail)

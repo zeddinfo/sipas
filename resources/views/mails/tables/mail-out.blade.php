@@ -46,15 +46,21 @@
                                 <a class="dropdown-item"
                                     href="{{ route(RouteHelper::get('mail.file.show'), ['mail' => $mail]) }}"
                                     target="_blank">Lihat Surat</a>
-
-                                <a href="{{ route('user.mail.out.forward.store', $mail) }}"
-                                    class="dropdown-item">Teruskan</a>
-
+                                
+                                    {{-- <form action="{{ route('user.mail.out.forward.store', $mail) }}" method="POST">
+                                        @csrf
+                                        <button class="dropdown-item" type="submit">Teruskan</button>
+                                    </form> --}}
+                                {{-- <a href="{{ route('user.mail.out.forward.store', $mail) }}"
+                                    class="dropdown-item">Teruskan</a> --}}
+                        
                                 @if (MailServices::mailActionGate($mail, Auth::user()))
-                                    <a href="{{ route('user.mail.out.forward.store', $mail) }}"
-                                        class="dropdown-item">Teruskan Surat</a>
-                                        <a href="{{ route('user.mail.out.revision.create', $mail) }}"
-                                        class="dropdown-item">Revisi Surat</a>
+                                <form action="{{ route('user.mail.out.forward.store', $mail) }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">Teruskan Surat</button>
+                                </form>
+                                 <a href="{{ route('user.mail.out.revision.create', $mail) }}"
+                                    class="dropdown-item">Koreksi Surat</a>
                                 @endif
                             </div>
                         </div>
