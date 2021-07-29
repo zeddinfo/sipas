@@ -23,6 +23,7 @@ class MailOutRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'title' => 'required|min:3|max:255',
             'instance' => 'required|min:3|max:255',

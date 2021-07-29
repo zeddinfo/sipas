@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\RevisedMailOutProcess;
 use App\Models\MailTransactionCorrection;
 use App\Http\Requests\MailRevisionRequest;
+use App\Models\MailAttribute;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MailOutRevisionController extends Controller
@@ -23,6 +24,16 @@ class MailOutRevisionController extends Controller
     public function create(Mail $mail)
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
+
+        $page = 'Revisi Surat';
+        $mail = Mail::with('attributes')->where('id', $mail->id)->first();
+
+        $sifat = MailAttribute::get()->where('type', 'Sifat');
+        $tipe = MailAttribute::get()->where('type', 'Tipe');
+        $prioritas = MailAttribute::get()->where('type', 'Prioritas');
+        $folder = MailAttribute::get()->where('type', 'Folder');
+
+        return view('mails.partials.correction', compact('page', 'mail', 'sifat', 'tipe', 'prioritas', 'folder'));
     }
 
 

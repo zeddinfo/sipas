@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Administration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MailOutFinalRequest;
 use App\Models\Mail;
+use App\Models\MailAttribute;
+use App\Models\MailTransaction;
+use App\Services\MailServices;
+use Auth;
 use Illuminate\Http\Request;
 
 class MailOutFinalController extends Controller
@@ -58,7 +62,23 @@ class MailOutFinalController extends Controller
      */
     public function edit(Mail $mail)
     {
-        //
+
+        abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
+
+        $page = 'Finalisasi Surat';
+
+        $mail = Mail::with('attributes')->where('id', $mail->id)->first();
+        $sifat = MailAttribute::get()->where('type', 'Sifat');
+        $tipe = MailAttribute::get()->where('type', 'Tipe');
+        $prioritas = MailAttribute::get()->where('type', 'Prioritas');
+        $folder = MailAttribute::get()->where('type', 'Folder');
+
+        $correction = MailTransaction::with('correction')->where([
+            ['type', MailTransaction::TYPE_REVISION],
+            ['target_user_id', Auth::user()->id]
+        ])->first();
+
+        return view('mails.finalitation')->with(compact('page', 'sifat', 'tipe', 'prioritas', 'folder', 'mail', 'correction'));
     }
 
     /**
@@ -74,8 +94,6 @@ class MailOutFinalController extends Controller
         $mail->update($request->validated());
 
         $mail->attributes()->detach();
-
-        // dd($request->all());
 
         foreach ($request->mail_attributes as $mail_attribute_id) {
             $mail->attributes()->attach($mail_attribute_id);

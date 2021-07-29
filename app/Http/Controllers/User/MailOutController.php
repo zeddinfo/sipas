@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MailOutRequest;
 use App\Models\Mail;
 use App\Models\MailAttribute;
+use App\Models\MailTransaction;
 use App\Repositories\UsersMailRepository;
 use App\Services\MailServices;
 use Auth;
@@ -66,7 +67,7 @@ class MailOutController extends Controller
 
     public function edit(Mail $mail)
     {
-        abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
+        // abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
         $page = 'Koreksi Surat Keluar';
 
@@ -76,12 +77,17 @@ class MailOutController extends Controller
         $prioritas = MailAttribute::get()->where('type', 'Prioritas');
         $folder = MailAttribute::get()->where('type', 'Folder');
 
-        return view('mails.partials.correction')->with(compact('page', 'sifat', 'tipe', 'prioritas', 'folder', 'mail'));
+        $correction = MailTransaction::with('correction')->where([
+            ['type', MailTransaction::TYPE_REVISION],
+            ['target_user_id', Auth::user()->id]
+        ])->first();
+
+        return view('mails.partials.revision')->with(compact('page', 'sifat', 'tipe', 'prioritas', 'folder', 'mail', 'correction'));
     }
 
     public function update(MailOutRequest $request, Mail $mail)
     {
-        abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
+        // abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
         $mail->type = Mail::TYPE_OUT;
         $mail->title = $request->title;
@@ -90,6 +96,8 @@ class MailOutController extends Controller
         $mail->save();
 
         event(new UpdatedMailOutProcess($mail, $request));
+        Alert::success('Yay :D', 'Berhasil menyimpan Department');
+        return redirect(route('user.mail.out.index'));
     }
 
     public function destroy(Mail $mail)

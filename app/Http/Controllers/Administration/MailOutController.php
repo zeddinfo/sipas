@@ -3,6 +3,13 @@
 namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MailOutFinalRequest;
+use App\Models\Mail;
+use App\Models\MailAttribute;
+use App\Models\MailTransaction;
+use App\Repositories\UsersMailRepository;
+use App\Services\MailServices;
+use Auth;
 use Illuminate\Http\Request;
 
 class MailOutController extends Controller
@@ -14,7 +21,13 @@ class MailOutController extends Controller
      */
     public function index()
     {
-        //
+        $page = "Keluar";
+        $mail_repository = new UsersMailRepository();
+
+        $mail_kind = Mail::TYPE_OUT;
+        $mails = $mail_repository->getMails($mail_kind);
+
+        return view('mails.index', compact('page', 'mail_kind', 'mails'));
     }
 
     /**
@@ -55,9 +68,8 @@ class MailOutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(MailOutFinalRequest $request, Mail $mail, $id)
     {
-        //
     }
 
     /**

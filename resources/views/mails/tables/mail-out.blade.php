@@ -43,9 +43,23 @@
                                 <i data-feather="more-vertical" class="icon-xxs"></i>
                             </button>
                             <div class="dropdown-menu">
+                                @if ($mail->status['type'] == 'corrected')
+                                <a class="dropdown-item"
+                                href="{{ route(RouteHelper::get('mail.out.edit'), ['mail' => $mail]) }}"
+                                target="_blank">Perbaiki Surat</a>                
+                                @endif
                                 <a class="dropdown-item"
                                     href="{{ route(RouteHelper::get('mail.file.show'), ['mail' => $mail]) }}"
                                     target="_blank">Lihat Surat</a>
+                                    @if (Auth::user()->level->name == 'TU')
+                                    <a class="dropdown-item"
+                                    href="{{ route(RouteHelper::get('mail.out.final.edit'), ['mail' => $mail]) }}"
+                                    target="_blank">Update Nomor Surat</a>
+                                        @if($mail->code != '' || $mail->code != null)
+                                        <a class="dropdown-item"
+                                        href="{{ route(RouteHelper::get('mail.out.action.archive'), ['mail' => $mail]) }}"
+                                        @endif
+                                    @endif
                                 
                                     {{-- <form action="{{ route('user.mail.out.forward.store', $mail) }}" method="POST">
                                         @csrf
