@@ -70,8 +70,8 @@ class MailMasterTest extends TestCase
             'file_id' => 3
         ]);
 
-        $this->assertDatabaseCount('mail_transaction_logs', 1);
-        $this->assertDatabaseHas('mail_transaction_logs', [
+        $this->assertDatabaseCount('mail_logs', 1);
+        $this->assertDatabaseHas('mail_logs', [
             'id' => 1,
             'mail_transaction_id' => 1,
             'log' => 'Diubah oleh ',
@@ -97,8 +97,8 @@ class MailMasterTest extends TestCase
             'file_id' => 1
         ]);
 
-        $this->assertDatabaseCount('mail_transaction_logs', 1);
-        $this->assertDatabaseHas('mail_transaction_logs', [
+        $this->assertDatabaseCount('mail_logs', 1);
+        $this->assertDatabaseHas('mail_logs', [
             'id' => 1,
             'mail_transaction_id' => 1,
             'log' => 'Diubah oleh ',

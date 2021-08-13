@@ -62,7 +62,6 @@ class MailOutFinalController extends Controller
      */
     public function edit(Mail $mail)
     {
-
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
         $page = 'Finalisasi Surat';
@@ -90,12 +89,13 @@ class MailOutFinalController extends Controller
      */
     public function update(MailOutFinalRequest $request, Mail $mail)
     {
-
-        $mail->update($request->validated());
+        // $mail->update($request->validated());
+        // dd($request->all());
 
         $mail->attributes()->detach();
 
         foreach ($request->mail_attributes as $mail_attribute_id) {
+            // dd('masuk');
             $mail->attributes()->attach($mail_attribute_id);
         }
     }

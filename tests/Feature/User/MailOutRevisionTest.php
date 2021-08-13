@@ -101,9 +101,9 @@ class MailOutRevisionTest extends TestCase
             'file_id' => 3,
         ]);
 
-        $this->assertDatabaseCount('mail_transaction_logs', 1);
+        $this->assertDatabaseCount('mail_logs', 1);
 
-        $this->assertDatabaseHas('mail_transaction_logs', [
+        $this->assertDatabaseHas('mail_logs', [
             'id' => 1,
             'mail_transaction_id' => 3,
             'log' => "Direvisi oleh ",

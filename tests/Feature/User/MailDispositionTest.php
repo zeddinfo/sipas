@@ -59,8 +59,8 @@ class MailDispositionTest extends TestCase
             'memo' => 'Note from sekretaris'
         ]);
 
-        $this->assertDatabaseCount('mail_transaction_logs', 1);
-        $this->assertDatabaseHas('mail_transaction_logs', [
+        $this->assertDatabaseCount('mail_logs', 1);
+        $this->assertDatabaseHas('mail_logs', [
             'mail_transaction_id' => 3,
             'log' => 'Didisposisikan oleh ',
             'user_name' => $this->sekretarisUser()->name,
@@ -103,14 +103,14 @@ class MailDispositionTest extends TestCase
             'memo' => 'Note from ketum'
         ]);
 
-        $this->assertDatabaseCount('mail_transaction_logs', 3);
-        $this->assertDatabaseHas('mail_transaction_logs', [
+        $this->assertDatabaseCount('mail_logs', 3);
+        $this->assertDatabaseHas('mail_logs', [
             'mail_transaction_id' => 4,
             'log' => 'Didisposisikan oleh ',
             'user_name' => $this->ketumUser()->name,
             'user_level_department' => "Ketua Umum ",
         ]);
-        $this->assertDatabaseHas('mail_transaction_logs', [
+        $this->assertDatabaseHas('mail_logs', [
             'mail_transaction_id' => 5,
             'log' => 'Didisposisikan oleh ',
             'user_name' => $this->ketumUser()->name,

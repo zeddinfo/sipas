@@ -4,6 +4,7 @@ namespace Tests\Feature\User;
 
 use App\Models\Department;
 use App\Models\Level;
+use App\Models\MailLog;
 use App\Models\MailTransaction;
 use App\Models\MailTransactionLog;
 use App\Models\User;
@@ -71,11 +72,11 @@ class MailInForwardTest extends TestCase
             'type' => MailTransaction::TYPE_FORWARD,
         ]);
 
-        $this->assertDatabaseCount('mail_transaction_logs', 4);
-        $this->assertDatabaseHas('mail_transaction_logs', [
+        $this->assertDatabaseCount('mail_logs', 4);
+        $this->assertDatabaseHas('mail_logs', [
             'mail_transaction_id' => 6,
             'user_name' => $this->kabidUser()->name,
-            'log' => MailTransactionLog::FORWARDED,
+            'log' => MailLog::LOG_FORWARDED,
         ]);
     }
 

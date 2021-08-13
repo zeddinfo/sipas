@@ -64,7 +64,7 @@ class MailInTest extends TestCase
         $state['files_count'] = File::count();
         $state['mail_versions_count'] = MailVersion::count();
         $state['mail_transactions_count'] = MailTransaction::count();
-        $state['mail_transaction_logs_count'] = MailTransactionLog::count();
+        $state['mail_logs_count'] = MailTransactionLog::count();
 
         $user = $this->tuUser();
         $response = $this->actingAs($user)->post(route('tu.mail.in.store'), $this->validRequestData());
@@ -114,7 +114,7 @@ class MailInTest extends TestCase
             'target_user_id' => 6,
         ]);
 
-        $this->assertDatabasehas('mail_transaction_logs', [
+        $this->assertDatabasehas('mail_logs', [
             'log' => "Dibuat oleh ",
             'user_name' => $this->tuUser()->name,
             'user_level_department' => "TU ",
