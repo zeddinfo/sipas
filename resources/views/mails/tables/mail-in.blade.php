@@ -47,12 +47,15 @@
                                     href="{{ route(RouteHelper::get('mail.file.show'), ['mail' => $mail]) }}"
                                     target="_blank">Lihat Surat</a>
 
-                                <a href="{{ route('user.mail.in.forward.create', $mail) }}"
-                                    class="dropdown-item">Teruskan</a>
-
                                 @if (MailServices::mailActionGate($mail, Auth::user()))
                                     <a href="{{ route('user.mail.in.forward.create', $mail) }}"
-                                        class="dropdown-item">Teruskan Surat</a>
+                                        class="dropdown-item">Teruskan</a>
+                                @endif
+
+                                @if (Auth::user()->hasRole('TU'))
+                                    <x-button action="{{ route('tu.mail.in.action.archive', $mail) }}"
+                                        class="dropdown-item">
+                                        Arsipkan</x-button>
                                 @endif
                             </div>
                         </div>

@@ -11,11 +11,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $stat['mails_count'] = Mail::whereHas('versions.mailTransactions', function ($query) {
+        $stat['mails_count'] = Mail::whereNull('archived_at')->whereHas('versions.mailTransactions', function ($query) {
             $query->where('user_id', Auth::user()->getSameUser()->id)->orWhere('target_user_id', Auth::user()->getSameUser()->id);
         })->count();
 
-        $stat['mails_in_count'] = Mail::where('type', 'IN')->whereHas('versions.mailTransactions', function ($query) {
+        $stat['mails_in_count'] = Mail::whereNull('archived_at')->where('type', 'IN')->whereHas('versions.mailTransactions', function ($query) {
             $query->where('user_id', Auth::user()->getSameUser()->id)->orWhere('target_user_id', Auth::user()->getSameUser()->id);
         })->count();
 

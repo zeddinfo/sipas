@@ -17,7 +17,6 @@ class MailInActionController extends Controller
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
         if (!Auth::user()->hasDisposition()) {
-            // dd('tidak punya akses');
             return redirect(route('user.mail.in.disposition.create'));
         }
 

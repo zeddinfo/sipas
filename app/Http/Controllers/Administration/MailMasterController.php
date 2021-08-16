@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Administration;
 
-use App\Events\UpdatedMailMasterProcess;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MailMasterRequest;
-use App\Models\Mail;
 use Carbon\Carbon;
+use App\Models\Mail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Events\UpdatedMailMasterProcess;
+use App\Http\Requests\MailMasterRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MailMasterController extends Controller
 {
@@ -29,6 +30,8 @@ class MailMasterController extends Controller
      */
     public function show(Mail $mail)
     {
+        $mail->load('attributes', 'logs');
+        return view('mails.show')->with(compact('mail'));
     }
 
     /**
@@ -72,6 +75,9 @@ class MailMasterController extends Controller
     public function destroy(Mail $mail)
     {
         $mail->delete();
+
+        Alert::success('Yay :D', 'Berhasil menghapus surat');
+        return redirect()->back();
     }
 
     public function archive(Mail $mail)

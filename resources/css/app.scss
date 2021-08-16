@@ -1,6 +1,8 @@
 $primary: #ebae34;
 @import "./dash-ui/theme.scss";
 @import "../../node_modules/bootstrap-select/sass/bootstrap-select.scss";
+@import "datatables.net-bs5";
+@import "datatables.net-buttons-bs5";
 
 .navbar-vertical .navbar-nav .nav-item .nav-link.active {
     background-color: $primary;

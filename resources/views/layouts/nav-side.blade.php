@@ -188,23 +188,25 @@
 
                 </li>
 
-                <li class="nav-item">
-                    <div class="navbar-heading">Master Surat</div>
-                </li>
+                @if (Auth::user()->hasAllMailAccess())
+                    <li class="nav-item">
+                        <div class="navbar-heading">Master Surat</div>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link has-arrow {{ Request::routeIs('user.mail.ongoing.index') ? 'active' : '' }}"
-                        href="{{ route('user.mail.ongoing.index') }}">
-                        <i data-feather="archive" class="nav-icon icon-xs me-2"></i> Dalam Proses
-                    </a>
+                    <li class="nav-item">
+                        <a class="nav-link has-arrow {{ Request::routeIs('user.mail.ongoing.index') ? 'active' : '' }}"
+                            href="{{ route('user.mail.ongoing.index') }}">
+                            <i data-feather="archive" class="nav-icon icon-xs me-2"></i> Dalam Proses
+                        </a>
 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-arrow {{ Request::routeIs('user.mail.archived.index') ? 'active' : '' }}"
-                        href="{{ route('user.mail.archived.index') }}">
-                        <i data-feather="archive" class="nav-icon icon-xs me-2"></i> Terarsip
-                    </a>
-                </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-arrow {{ Request::routeIs('user.mail.archived.index') ? 'active' : '' }}"
+                            href="{{ route('user.mail.archived.index') }}">
+                            <i data-feather="archive" class="nav-icon icon-xs me-2"></i> Terarsip
+                        </a>
+                    </li>
+                @endif
             @endif
         </ul>
 

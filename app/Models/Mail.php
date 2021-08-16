@@ -12,6 +12,8 @@ class Mail extends Model
 
     protected $guarded = [];
 
+    protected $dates = ['mail_created_at', 'archived_at'];
+
     const TYPE_IN = 'IN';
     const TYPE_OUT = 'OUT';
 

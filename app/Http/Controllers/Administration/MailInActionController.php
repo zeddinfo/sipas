@@ -2,43 +2,24 @@
 
 namespace App\Http\Controllers\Administration;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\Mail;
 use Illuminate\Http\Request;
+use App\Services\MailServices;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MailInActionController extends Controller
 {
-    public function index()
+    public function archive(Mail $mail)
     {
-        //
-    }
+        abort_if(!MailServices::mailViewGate($mail, Auth::user()), 404);
 
-    public function create()
-    {
-        //
-    }
+        $mail->archived_at = Carbon::now();
+        $mail->save();
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        Alert::success('Yay :D', 'Berhasil mengarsipkan surat');
+        return redirect(route('tu.mail.in.index'));
     }
 }

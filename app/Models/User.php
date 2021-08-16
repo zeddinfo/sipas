@@ -65,6 +65,11 @@ class User extends Authenticatable
         return $this->hasMany(MailTransaction::class);
     }
 
+    public function latestMailTransaction()
+    {
+        return $this->hasOne(MailTransaction::class)->latestOfMany();
+    }
+
     public function targetMailTransactions()
     {
         return $this->hasMany(MailTransaction::class, 'target_user_id');
@@ -146,6 +151,14 @@ class User extends Authenticatable
         $user_level = $this->level->getSameLevel();
 
         return in_array($user_level->name, $disposition_levels);
+    }
+
+    public function hasAllMailAccess()
+    {
+        $all_mail_access_levels = config('sipas.all_mail_access_tag');
+        $user_level = $this->level->getSameLevel();
+
+        return in_array($user_level->name, $all_mail_access_levels);
     }
 
     public function checkLowerUserIds($ids = [])

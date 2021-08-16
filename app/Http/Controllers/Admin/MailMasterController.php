@@ -8,6 +8,7 @@ use App\Http\Requests\MailMasterRequest;
 use App\Models\Mail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MailMasterController extends Controller
 {
@@ -42,6 +43,9 @@ class MailMasterController extends Controller
     public function destroy(Mail $mail)
     {
         $mail->delete();
+
+        Alert::success('Yay :D', 'Berhasil menghapus surat');
+        return redirect()->back();
     }
 
     public function archive(Mail $mail)

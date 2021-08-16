@@ -23,8 +23,12 @@ return [
         ]
     ],
 
-
     'disposition_tag' => [
+        Level::LEVEL_KETUM,
+        Level::LEVEL_SEKRETARIS,
+    ],
+
+    'all_mail_access_tag' => [
         Level::LEVEL_KETUM,
         Level::LEVEL_SEKRETARIS,
     ]

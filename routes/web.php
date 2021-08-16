@@ -39,8 +39,8 @@ Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace
         Route::delete('/masuk/{id}', 'MailInController@destroy')->name('tu.mail.in.destroy');
 
         // Mail In Custom Action
-        Route::post('/masuk/{id}/aksi/arsipkan', 'MailInActionController@archive')->name('tu.mail.in.action.archive');
-        Route::post('/masuk/{id}/aksi/teruskan', 'MailInActionController@forward')->name('tu.mail.in.action.forward');
+        Route::post('/masuk/{mail}/aksi/arsipkan', 'MailInActionController@archive')->name('tu.mail.in.action.archive');
+        Route::post('/masuk/{mail}/aksi/teruskan', 'MailInActionController@forward')->name('tu.mail.in.action.forward');
 
         // ??? Mail In Disposition (UNDER CONSIDERATION)
         Route::get('/masuk/{id}/disposisi', 'MailInDispositionController@index')->name('tu.mail.in.disposition.index');

@@ -130,7 +130,7 @@
                             @forelse ($mail->logs as $log)
                                 <tr>
                                     <td>{{ $log->getLogMessage() }}</td>
-                                    <td>{{ $log->created_at }}</td>
+                                    <td>{{ $log->created_at->isoFormat('D MMMM Y (hh:mm)') }}</td>
                                 </tr>
                             @empty
                                 Belum ada aktivitas surat
@@ -141,17 +141,19 @@
             </div>
 
             <!-- Mail Action -->
-            @if (MailServices::mailActionGate($mail, Auth::user()))
-                <div class="col-xl-12 col-lg-12 col-md-12 col-12 mb-6">
-                    <div class="row justify-content-center">
-                        @if ($mail->type == 'IN')
-                            <div class="col-4 d-grid">
-                                <a href="{{ route('user.mail.in.forward.create', $mail) }}"
-                                    class="btn btn-outline-primary rounded-pill">Teruskan Surat</a>
-                            </div>
-                        @endif
+            @if ($mail->archived_at == null)
+                @if (MailServices::mailActionGate($mail, Auth::user()))
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 mb-6">
+                        <div class="row justify-content-center">
+                            @if ($mail->type == 'IN')
+                                <div class="col-4 d-grid">
+                                    <a href="{{ route('user.mail.in.forward.create', $mail) }}"
+                                        class="btn btn-outline-primary rounded-pill">Teruskan Surat</a>
+                                </div>
+                            @endif
+                        </div>
                     </div>
-                </div>
+                @endif
             @endif
         </div>
 
