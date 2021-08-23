@@ -62,7 +62,7 @@
                     </td>
                 </tr>
             @empty
-                <h4>Tidak ada surat.</h4>
+                <h5>Tidak ada surat.</h5>
             @endforelse
         </tbody>
     </table>

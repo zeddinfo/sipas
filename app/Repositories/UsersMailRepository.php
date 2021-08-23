@@ -26,12 +26,12 @@ class UsersMailRepository
         return $transactions;
     }
 
-    public static function getMails($mail_kind)
+    public static function getMails($mail_type)
     {
         $user = Auth::user();
         $user_ids = $user->getSameUsers()->pluck('id');
 
-        $mails = UsersMailRepository::getMailTransactions($mail_kind, $user_ids)
+        $mails = UsersMailRepository::getMailTransactions($mail_type, $user_ids)
             ->with([
                 'mailVersion',
                 'mailVersion.mail',
@@ -56,7 +56,7 @@ class UsersMailRepository
                     ],
 
                     MailTransaction::TYPE_REVISION => [
-                        'type' => 'corrected',
+                        'type' => 'correction',
                         'status' => 'Perlu Dikoreksi',
                         'color' => 'danger',
                         'action' => 'buat-koreksi',

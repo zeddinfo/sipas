@@ -149,6 +149,11 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
 
         // Mail Archived 
         Route::get('/terarsip', 'ArchivedMailController@index')->name('user.mail.archived.index');
+
+        // Mail Master Action
+        /** DONE ACTION */
+        Route::get('/semua/{mail}', 'MailMasterController@show')->name('user.mail.master.show');
+        Route::post('/semua/{mail}/download', 'MailMasterController@download')->name('user.mail.master.download');
     });
 });
 

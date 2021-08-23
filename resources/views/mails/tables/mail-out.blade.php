@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table">
+    <table class="table {{ count($mails) == 1 ? 'mb-20' : '' }}">
         <thead>
             <tr>
                 <th scope="col" class="fw-bold">Surat</th>
@@ -12,7 +12,7 @@
             @forelse($mails as $mail)
                 <tr>
                     <td>
-                        <a href="{{ route(RouteHelper::get('mail.in.show'), $mail) }}" class="text-dark">
+                        <a href="{{ route(RouteHelper::get('mail.out.show'), $mail) }}" class="text-dark">
                             <h4>{{ Str::limit($mail->title, 40) }}</h4>
                             <p class="fw-light mb-1">{{ $mail->code == '' ? 'No belum tersedia' : $mail->code }}</p>
                         </a>
@@ -23,7 +23,9 @@
                             Belum ada attribute.
                         @endforelse
                     </td>
+
                     <td class="text-center align-middle">{{ Str::limit($mail->instance, 40) }}</td>
+
                     <td class="text-center align-middle">
                         <label
                             class="badge bg-{{ $mail->status['color'] }}">{{ Str::upper($mail->status['status']) }}</label><br>
@@ -43,38 +45,32 @@
                                 <i data-feather="more-vertical" class="icon-xxs"></i>
                             </button>
                             <div class="dropdown-menu">
-                                @if ($mail->status['type'] == 'corrected')
-                                <a class="dropdown-item"
-                                href="{{ route(RouteHelper::get('mail.out.edit'), ['mail' => $mail]) }}"
-                                target="_blank">Perbaiki Surat</a>                
-                                @endif
+
                                 <a class="dropdown-item"
                                     href="{{ route(RouteHelper::get('mail.file.show'), ['mail' => $mail]) }}"
                                     target="_blank">Lihat Surat</a>
-                                    @if (Auth::user()->level->name == 'TU')
+
+                                @if (Auth::user()->level->name == 'TU')
                                     <a class="dropdown-item"
-                                    href="{{ route(RouteHelper::get('mail.out.final.edit'), ['mail' => $mail]) }}"
-                                    target="_blank">Update Nomor Surat</a>
-                                        @if($mail->code != '' || $mail->code != null)
+                                        href="{{ route(RouteHelper::get('mail.out.final.edit'), ['mail' => $mail]) }}"
+                                        target="_blank">Update Nomor Surat</a>
+                                    @if ($mail->code != '' || $mail->code != null)
                                         <a class="dropdown-item"
-                                        href="{{ route(RouteHelper::get('mail.out.action.archive'), ['mail' => $mail]) }}"
-                                        @endif
+                                            href="{{ route(RouteHelper::get('mail.out.action.archive'), ['mail' => $mail]) }}">
                                     @endif
-                                
-                                    {{-- <form action="{{ route('user.mail.out.forward.store', $mail) }}" method="POST">
-                                        @csrf
-                                        <button class="dropdown-item" type="submit">Teruskan</button>
-                                    </form> --}}
-                                {{-- <a href="{{ route('user.mail.out.forward.store', $mail) }}"
-                                    class="dropdown-item">Teruskan</a> --}}
-                        
+                                @endif
+
                                 @if (MailServices::mailActionGate($mail, Auth::user()))
-                                <form action="{{ route('user.mail.out.forward.store', $mail) }}" method="POST">
-                                    @csrf
-                                    <button class="dropdown-item" type="submit">Teruskan Surat</button>
-                                </form>
-                                 <a href="{{ route('user.mail.out.revision.create', $mail) }}"
-                                    class="dropdown-item">Koreksi Surat</a>
+                                    <a href="{{ route('user.mail.out.revision.create', $mail) }}"
+                                        class="dropdown-item">Revisi</a>
+
+                                    <a class="dropdown-item"
+                                        href="{{ route(RouteHelper::get('mail.out.edit'), ['mail' => $mail]) }}">{{ $mail->status['type'] == 'correction' ? 'Koreksi' : 'Ubah' }}</a>
+
+                                    <x-button method="post"
+                                        action="{{ route('user.mail.out.forward.store', $mail) }}"
+                                        class="dropdown-item">
+                                        Teruskan</x-button>
                                 @endif
                             </div>
                         </div>

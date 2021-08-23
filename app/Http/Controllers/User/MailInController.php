@@ -21,10 +21,10 @@ class MailInController extends Controller
         $page = "Masuk";
         $mail_repository = new UsersMailRepository();
 
-        $mail_kind = Mail::TYPE_IN;
-        $mails = $mail_repository->getMails($mail_kind);
+        $mail_type = Mail::TYPE_IN;
+        $mails = $mail_repository->getMails($mail_type);
 
-        return view('mails.index', compact('page', 'mail_kind', 'mails'));
+        return view('mails.index', compact('page', 'mail_type', 'mails'));
     }
 
     public function show(Mail $mail)

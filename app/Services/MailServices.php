@@ -19,6 +19,10 @@ class MailServices
         $latest_mail_version = $mail->versions()->latest()->first();
         $latest_mail_version_transactions = MailTransaction::where('mail_version_id', $latest_mail_version->id)->get();
 
+        if ($mail->type == 'OUT') {
+            return $latest_mail_version_transactions->last()->target_user_id == $user->getSameUser()->id;
+        }
+
         $receive_tag = false;
         $forward_tag = false;
 
@@ -31,6 +35,7 @@ class MailServices
                 $forward_tag = true;
             }
         }
+
 
         return $receive_tag && !$forward_tag;
     }

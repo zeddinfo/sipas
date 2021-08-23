@@ -18,7 +18,8 @@
                             <div class="tab-content p-4" id="pills-tabContent-basic-forms">
                                 <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design"
                                     role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
-                                    <form class="row g-3" method="POST" action="{{isset($mail_kind) && $mail_kind == 'OUT' && Auth::User()->level->name == 'Anggota' ? route('user.mail.out.store') : route('tu.mail.in.store')}}"
+                                    <form class="row g-3" method="POST"
+                                        action="{{ $mail_type == 'OUT' && Auth::User()->level->name == 'Anggota' ? route('user.mail.out.store') : route('tu.mail.in.store') }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @method('POST')
@@ -33,16 +34,19 @@
                                                 value="{{ old('instance') }}" placeholder="Instansi"></x-input>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <x-input type="text" label="Kode Surat" name="code"
-                                                value="{{ old('code') }}" placeholder="Kode Surat"></x-input>
-                                        </div>
+                                        @if ($mail_type == 'IN')
+                                            <div class="col-md-6">
+                                                <x-input type="text" label="Kode Surat" name="code"
+                                                    value="{{ old('code') }}" placeholder="Kode Surat"></x-input>
+                                            </div>
 
-                                        <div class="col-md-6">
-                                            <x-input type="text" label="Kode Arsip" name="directory_code"
-                                                value="{{ old('directory_code') }}" placeholder="Kode Arsip">
-                                            </x-input>
-                                        </div>
+                                            <div class="col-md-6">
+                                                <x-input type="text" label="Kode Arsip" name="directory_code"
+                                                    value="{{ old('directory_code') }}" placeholder="Kode Arsip">
+                                                </x-input>
+                                            </div>
+                                        @endif
+
 
                                         <div class="col-md-3">
                                             <x-select label="Sifat Surat" name="mail_attributes[]"

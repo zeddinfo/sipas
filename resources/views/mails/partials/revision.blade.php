@@ -8,75 +8,148 @@
     <div class="bg-primary pt-10 pb-21"></div>
     <div class="container-fluid mt-n22 px-6">
         <div class="row">
-            <x-page-title page="Koreksi Surat" icon="bi-house"></x-page-title>
+            <x-page-title page="Revisi Surat" icon="bi-file-earmark-excel"></x-page-title>
             <!-- Detail Surat -->
-            <div class="col-md-12">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-12 mt-6 mb-6">
                 <!-- card -->
                 <div class="card">
-                    <div class="tab-content p-4" id="pills-tabContent-basic-forms">
-                        <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design" role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
-                            <form class="row g-3" method="POST" action="{{ route('user.mail.out.update', ['mail' => $mail->id]) }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('PATCH')
-                                <div class="col-md-6">
-                                    <x-input type="text" label="Judul Surat" value="{{$mail->title}}" name="title" placeholder="Judul Surat"></x-input>
-                                </div>
-                                <div class="col-md-6">
-                                    <x-input type="text" label="Instansi" value="{{$mail->instance}}" name="instance" placeholder="Instansi"></x-input>
-                                </div>
-                                <div class="col-md-6">
-                                    <x-input type="text" label="Kode Surat" name="code" value="{{$mail->code}}" placeholder="Kode Surat"></x-input>
-                                </div>
-                                <div class="col-md-6">
-                                    <x-input type="text" label="Kode Arsip" name="code_archive" placeholder="Kode Arsip"></x-input>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <x-select label="Tipe Surat" name="mail_attributes[]" value="{{isset($mail) && $mail->attributes ? $mail->attributes[0]->id : ''}}" :options="$tipe">
+                    <!-- card body -->
+                    <div class="card-body">
+                        <!-- card title -->
+                        <h4 class="card-title fw-bold text-primary mb-4">Informasi Surat</h4>
+                        <hr>
+                        <!-- row -->
+                        <table>
+                            <tr>
+                                <td class="align-top">
+                                    <p>Judul Surat</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="fw-bold">{{ $mail->title }}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="">Nomor Surat</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="fw-bold">{{ $mail->code }}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="">Instansi</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="fw-bold">{{ $mail->instance }}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="">Jenis Surat</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    @php
+                                        $mail_attribute = $mail->attributes->where('type', 'Tipe')->first();
+                                    @endphp
+                                    <x-badge name="{{ $mail_attribute->name }}"
+                                        color="{{ $mail_attribute->color }}">
+                                    </x-badge>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="">Sifat Surat</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    @php
+                                        $mail_attribute = $mail->attributes->where('type', 'Sifat')->first();
+                                    @endphp
+                                    <x-badge name="{{ $mail_attribute->name }}"
+                                        color="{{ $mail_attribute->color }}">
+                                    </x-badge>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="">Prioritas Surat</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    @php
+                                        $mail_attribute = $mail->attributes->where('type', 'Prioritas')->first();
+                                    @endphp
+                                    <x-badge name="{{ $mail_attribute->name }}"
+                                        color="{{ $mail_attribute->color }}">
+                                    </x-badge>
+                                </td>
+                            </tr>
+                        </table>
 
-                                    </x-select>
-                                </div>
-                                <div class="col-md-3">
-                                    <x-select label="Sifat Surat" name="mail_attributes[]"  value="{{isset($mail) && $mail->attributes ? $mail->attributes[1]->id : ''}}" :options="$sifat">
-
-                                    </x-select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <x-select label="Prioritas Surat" name="mail_attributes[]" value="{{isset($mail) && $mail->attributes ? $mail->attributes[2]->id : ''}}" :options="$prioritas">
-
-                                    </x-select>
-                                </div>
-                                {{-- <div class="form-group col-md-3">
-                                    <x-select label="Folder Surat" name="folder" value="{{isset($mail) && $mail->attributes ? $mail->attributes[3]->id : ''}}" :options="$folder">
-
-                                    </x-select>
-                                </div> --}}
-                                <div class="col-md-6">
-                                    <x-input type="date" label="Waktu Surat" value="{{Carbon\Carbon::parse($mail->mail_created_at)->format('Y-m-d')}}" name="mail_created_at"></x-input>
-                                </div>
-                                <div class="col-md-6">
-                                    <x-input type="file" label="Upload" name="file" placeholder="Upload File"></x-input>
-                                </div>
-                                          <!-- Riwayat Surat -->
-                                    <div class="col-md-12">
-                                                <h4 class="card-title mb-4">Catatan</h4>
-                                                <div class="d-md-flex justify-content-between
-                                        align-items-center mb-4">
-                                                    <textarea class="form-control" {{isset($correction->correction) ? 'disabled' : ''}} name="note">{{isset($correction->correction) ? $correction->correction->note : ''}}</textarea>
-                                                </div>
-                                           
-                                        </div>
-                                    </div>
-                                <div class="col-12">
-                                    <button class="btn btn-warning" type="submit">Perbaiki Surat</button>
-                                    <button class="btn btn-secondary" type="reset">Batal</button>
-                                </div>
-                            </form>
+                        <div class="row">
+                            <div class="col-12 d-grid">
+                                <a target="__blank" href="{{ route(RouteHelper::get('mail.file.show'), $mail) }}"
+                                    class="btn btn-secondary">Lihat Surat</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-  
+
+            <!-- Riwayat Surat -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-12 mb-6">
+                <!-- card -->
+                <div class="card">
+                    <!-- card body -->
+                    <div class="card-body">
+                        <form action="{{ route('user.mail.out.revision.store', $mail) }}"
+                            enctype="multipart/form-data" method="POST">
+                            @csrf
+                            @method('POST')
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label" for="textareaInput">Catatan Revisi</label>
+                                    <div class="mb-3 ">
+                                        <textarea id="textareaInput" name="note" class="form-control"
+                                            placeholder="Tulis catatan" rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <x-input type="file" label="Upload File Coretan Revisi (Bila diperlukan)"
+                                        name="file" placeholder="Upload File Revisi (Bila diperlukan)">
+                                    </x-input>
+                                </div>
+
+                                <div class="mt-5 d-grid gap-2">
+                                    <button class="btn btn-primary" type="submit">Kirim Revisi Surat</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- card title -->
+                </div>
+            </div>
         </div>
+    </div>
     </div>
     </div>
 

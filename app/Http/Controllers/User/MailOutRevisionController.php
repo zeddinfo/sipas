@@ -22,7 +22,7 @@ class MailOutRevisionController extends Controller
     }
 
     public function create(Mail $mail)
-    {
+    {        
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
         $page = 'Revisi Surat';
@@ -33,7 +33,7 @@ class MailOutRevisionController extends Controller
         $prioritas = MailAttribute::get()->where('type', 'Prioritas');
         $folder = MailAttribute::get()->where('type', 'Folder');
 
-        return view('mails.partials.correction', compact('page', 'mail', 'sifat', 'tipe', 'prioritas', 'folder'));
+        return view('mails.partials.revision', compact('page', 'mail', 'sifat', 'tipe', 'prioritas', 'folder'));
     }
 
 

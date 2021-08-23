@@ -123,7 +123,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link has-arrow {{ Request::routeIs('tu.nail.in.index') ? 'active' : '' }}"
+                    <a class="nav-link has-arrow {{ Request::routeIs('tu.mail.in.index') ? 'active' : '' }}"
                         href="{{ route('tu.mail.in.index') }}">
                         <i data-feather="mail" class="nav-icon icon-xs me-2"></i> Surat Masuk
                     </a>
@@ -173,6 +173,16 @@
                 <li class="nav-item">
                     <div class="navbar-heading">Seluruh Surat</div>
                 </li>
+                
+                <li class="nav-item">
+                    <div class="nav-link text-center">
+                        <a class="btn btn-block btn-primary" href="{{ route('user.mail.out.create') }}">
+                            <i data-feather="plus" class="nav-icon icon-xs me-2"></i>
+                            Tambah Surat
+                        </a>
+                    </div>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('user.mail.in.index') ? 'active' : '' }}"
                         href="{{ route('user.mail.in.index') }}">

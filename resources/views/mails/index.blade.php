@@ -4,7 +4,7 @@ if ($page == 'On Going') {
 } elseif ($page == 'Terarsip') {
     $table_view = 'mails/tables/archived';
 } elseif ($page == 'Masuk') {
-    $icon = 'bi-box-arrow-left';
+    $icon = 'bi-box-arrow-in-left';
     $table_view = 'mails/tables/mail-in';
 } elseif ($page == 'Keluar') {
     $icon = 'bi-box-arrow-left';

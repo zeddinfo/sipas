@@ -13,10 +13,12 @@
         <a class="dropdown-item" href="{{ route(RouteHelper::get('mail.file.show'), ['mail' => $mail]) }}"
             target="_blank">Lihat Surat</a>
 
-        <a class="dropdown-item" href="{{ route(RouteHelper::get('mail.master.edit'), ['mail' => $mail]) }}">Ubah
-            Surat</a>
+        @if (Auth::user()->hasRole('Admin') || Auth::user()->hasRole('TU'))
+            <a class="dropdown-item" href="{{ route(RouteHelper::get('mail.master.edit'), ['mail' => $mail]) }}">Ubah
+                Surat</a>
 
-        <x-button method="delete" action="{{ route('tu.mail.master.destroy', $mail) }}" class="dropdown-item">
-            Hapus</x-button>
+            <x-button method="delete" action="{{ route('tu.mail.master.destroy', $mail) }}" class="dropdown-item">
+                Hapus</x-button>
+        @endif
     </div>
 </div>
