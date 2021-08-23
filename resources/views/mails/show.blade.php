@@ -28,7 +28,7 @@
                                     <p class="px-2">:</p>
                                 </td>
                                 <td class="align-top">
-                                    <p class="fw-bold">{{ $mail->title }} Pada Tahapan Konstruksi Kimia</p>
+                                    <p class="fw-bold">{{ $mail->title }}</p>
                                 </td>
                             </tr>
                             <tr>

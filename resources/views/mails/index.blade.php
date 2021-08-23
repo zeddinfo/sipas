@@ -1,17 +1,3 @@
-@php
-if ($page == 'On Going') {
-    $table_view = 'mails/tables/on-going';
-} elseif ($page == 'Terarsip') {
-    $table_view = 'mails/tables/archived';
-} elseif ($page == 'Masuk') {
-    $icon = 'bi-box-arrow-in-left';
-    $table_view = 'mails/tables/mail-in';
-} elseif ($page == 'Keluar') {
-    $icon = 'bi-box-arrow-left';
-    $table_view = 'mails/tables/mail-out';
-}
-@endphp
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -24,7 +10,7 @@ if ($page == 'On Going') {
             <!-- Responsive tables -->
             <div cass="row mb-6">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <x-page-title page="Surat {{ $page }}" icon="{{ $icon }}"></x-page-title>
+                    <x-page-title page="{{ $title }}" icon="{{ $icon }}"></x-page-title>
                     <!-- Card -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-12 mt-6">
                         <div class="card">

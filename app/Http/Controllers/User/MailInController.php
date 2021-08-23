@@ -18,13 +18,14 @@ class MailInController extends Controller
 {
     public function index()
     {
-        $page = "Masuk";
+        $title = "Surat Masuk";
+        $icon = "bi-box-arrow-in-left";
+        $table_view = "mails/tables/mail-in";
+
         $mail_repository = new UsersMailRepository();
+        $mails = $mail_repository->getMails(Mail::TYPE_IN);
 
-        $mail_type = Mail::TYPE_IN;
-        $mails = $mail_repository->getMails($mail_type);
-
-        return view('mails.index', compact('page', 'mail_type', 'mails'));
+        return view('mails.index', compact('title', 'icon', 'table_view', 'mails'));
     }
 
     public function show(Mail $mail)

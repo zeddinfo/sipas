@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table">
+    <table class="table {{ count($mails) == 1 ? 'mb-20' : '' }}">
         <thead>
             <tr>
                 <th scope="col" class="fw-bold">Surat</th>

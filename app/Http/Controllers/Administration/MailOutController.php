@@ -16,18 +16,23 @@ class MailOutController extends Controller
 {
     public function index()
     {
-        $page = "Keluar";
+        $title = "Surat Keluar";
+        $icon = "bi-box-arrow-left";
+        $table_view = "mails/tables/mail-out";
+
         $mail_repository = new UsersMailRepository();
+        $mails = $mail_repository->getMails(Mail::TYPE_OUT);
 
-        $mail_type = Mail::TYPE_OUT;
-        $mails = $mail_repository->getMails($mail_type);
-
-        return view('mails.index', compact('page', 'mail_type', 'mails'));
+        return view('mails.index', compact('title', 'icon', 'table_view', 'mails'));
     }
 
-    public function show($id)
+    public function show(Mail $mail)
     {
-        //
+        abort_if(!MailServices::mailViewGate($mail, Auth::user()), 404);
+
+        $mail->load('attributes', 'logs');
+
+        return view('mails.show')->with(compact('mail'));
     }
 
     public function edit(MailOutFinalRequest $request, Mail $mail, $id)

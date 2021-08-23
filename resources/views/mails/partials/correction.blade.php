@@ -24,11 +24,13 @@
                                                 <label class="form-label">Catatan Revisi</label>
                                                 <p>{{ $correction->note }}</p>
                                             </div>
+
                                             <div class="col-md-6">
                                                 <label class="form-label">File Revisi</label>
-                                                <p>{{ $correction->note }}</p>
+                                                <br>
+                                                <a href="{{ route('user.mail.out.revision.show', $correction) }}"
+                                                    target="_blank" class="btn btn-warning">Lihat File Revisi</a>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -43,9 +45,10 @@
                                 <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design"
                                     role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
                                     <form class="row g-3" method="POST"
-                                        action="{{ route('user.mail.out.revision.store', ['mail' => $mail->id]) }}">
+                                        action="{{ route('user.mail.out.update', $mail) }}"
+                                        enctype="multipart/form-data">
                                         @csrf
-                                        @method('POST')
+                                        @method('PATCH')
                                         <div class="col-md-6">
                                             <x-input type="text" label="Judul Surat" value="{{ $mail->title }}"
                                                 name="title" placeholder="Judul Surat"></x-input>
@@ -56,21 +59,21 @@
                                         </div>
 
                                         <div class="form-group col-md-3">
-                                            <x-select label="Tipe Surat" name="tipe"
+                                            <x-select label="Tipe Surat" name="mail_attributes[]"
                                                 value="{{ isset($mail) && $mail->attributes ? $mail->attributes[0]->id : '' }}"
                                                 :options="$tipe">
 
                                             </x-select>
                                         </div>
                                         <div class="col-md-3">
-                                            <x-select label="Sifat Surat" name="sifat"
+                                            <x-select label="Sifat Surat" name="mail_attributes[]"
                                                 value="{{ isset($mail) && $mail->attributes ? $mail->attributes[1]->id : '' }}"
                                                 :options="$sifat">
 
                                             </x-select>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <x-select label="Prioritas Surat" name="tipe"
+                                            <x-select label="Prioritas Surat" name="mail_attributes[]"
                                                 value="{{ isset($mail) && $mail->attributes ? $mail->attributes[2]->id : '' }}"
                                                 :options="$prioritas">
 
@@ -84,7 +87,7 @@
                                         <div class="col-md-6">
                                             <x-input type="date" label="Waktu Surat"
                                                 value="{{ Carbon\Carbon::parse($mail->mail_created_at)->format('Y-m-d') }}"
-                                                name="date"></x-input>
+                                                name="mail_created_at"></x-input>
                                         </div>
                                         <div class="col-md-6">
                                             <x-input type="file" label="Upload" name="file" placeholder="Upload File">

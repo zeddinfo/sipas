@@ -141,6 +141,8 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         /** DONE ACTION */
         Route::get('/keluar/{mail}/revisi/tambah', 'MailOutRevisionController@create')->name('user.mail.out.revision.create');
         Route::post('/keluar/{mail}/revisi', 'MailOutRevisionController@store')->name('user.mail.out.revision.store');
+        Route::get('/keluar/revisi/{mail_transaction_correction}', 'MailOutRevisionController@show')->name('user.mail.out.revision.show');
+
         Route::post('/semua/{mail}/download', 'MailMasterController@download')->name('user.mail.master.download');
 
         //!!! ONLY USER WITH ALL MAIL ACCESS !!!

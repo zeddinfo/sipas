@@ -4,25 +4,21 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Mail;
 use Illuminate\Http\Request;
+use App\Models\MailAttribute;
+use App\Services\FileServices;
 use App\Services\MailServices;
 use App\Models\MailTransaction;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Events\RevisedMailOutProcess;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\MailTransactionCorrection;
 use App\Http\Requests\MailRevisionRequest;
-use App\Models\MailAttribute;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class MailOutRevisionController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
     public function create(Mail $mail)
-    {        
+    {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
         $page = 'Revisi Surat';
@@ -45,34 +41,19 @@ class MailOutRevisionController extends Controller
 
         $mail_transaction = new MailTransaction();
         $mail_transaction->user_id = $user->id;
-        $mail_transaction->target_user_id = $user->getSameUser()->targetMailTransactions()->where('mail_version_id', $mail->id)->first()->user_id;
+        $mail_transaction->target_user_id = $user->getSameUser()->targetMailTransactions()->where('mail_version_id', $mail->versions()->get()->last()->id)->first()->user_id;
         $mail_transaction->mail_version_id = $mail->versions()->orderBy('id', 'DESC')->first()->id;
         $mail_transaction->type = MailTransaction::TYPE_REVISION;
         $mail_transaction->save();
 
         event(new RevisedMailOutProcess($mail_transaction, $request));
 
-        Alert::success('Yay :D', 'Koreksi berhasil dirikirim.');
+        Alert::success('Yay :D', 'Revisi berhasil dirikirim.');
         return redirect(route('user.mail.out.index'));
     }
 
-    public function show($id)
+    public function show(MailTransactionCorrection $mail_transaction_correction)
     {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        return redirect(FileServices::extensionAdapter($mail_transaction_correction->file));
     }
 }
