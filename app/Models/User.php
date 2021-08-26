@@ -173,17 +173,4 @@ class User extends Authenticatable
 
         return true;
     }
-
-    // public function hasDispositionAccess()
-    // {
-    //     $order = config('sipas.disposition_tag');
-    //     $level = $this->getSameLevel();
-    //     $index = array_search($level->name, $order);
-
-    //     if ($index == 0) {
-    //         return null;
-    //     }
-
-    //     return Level::where('name', $order[$index - 1])->first();
-    // }
 }

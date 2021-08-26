@@ -35,9 +35,6 @@ class MailOutFinalController extends Controller
     public function edit(Mail $mail)
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
-
-        $page = 'Finalisasi Surat';
-
         $mail = Mail::with('attributes')->where('id', $mail->id)->first();
         $sifat = MailAttribute::get()->where('type', 'Sifat');
         $tipe = MailAttribute::get()->where('type', 'Tipe');
@@ -49,7 +46,16 @@ class MailOutFinalController extends Controller
             ['target_user_id', Auth::user()->id]
         ])->first();
 
-        return view('mails.finalitation')->with(compact('page', 'sifat', 'tipe', 'prioritas', 'folder', 'mail', 'correction'));
+        // Asign Mail Code if null based on mail indexes
+        if ($mail->code == null) {
+            $mail->code = 'Testing 123';
+        }
+
+        if ($mail->directory_code == null) {
+            $mail->directory_code = 'Testing ABC';
+        }
+
+        return view('mails.finalitation')->with(compact('sifat', 'tipe', 'prioritas', 'folder', 'mail', 'correction'));
     }
 
     public function update(MailOutFinalRequest $request, Mail $mail)

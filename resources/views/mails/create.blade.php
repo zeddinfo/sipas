@@ -10,7 +10,7 @@
             <!-- Responsive tables -->
             <div cass="row mb-6">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <x-page-title page="{{ $page }}" icon="bi-house"></x-page-title>
+                    <x-page-title page="{{ $title }}" icon="bi-house"></x-page-title>
                     <!-- Card -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-12 mt-6">
                         <!-- Card -->
@@ -47,20 +47,21 @@
                                             </div>
                                         @endif
 
+                                        @foreach ($mail_attributes as $key => $mail_attribute)
+                                            <div class="col-md-3">
+                                                <x-select label="{{ $mail_attribute->first()->type }} Surat"
+                                                    name="mail_attributes[]"
+                                                    value="{{ old('mail_attributes')[$key] ?? '' }}"
+                                                    :options="$mail_attribute"
+                                                    errorName="mail_attributes.{{ $key }}">
+                                                </x-select>
+                                            </div>
+                                        @endforeach
 
-                                        <div class="col-md-3">
-                                            <x-select label="Sifat Surat" name="mail_attributes[]"
-                                                value="{{ old('mail_attributes')[0] ?? '' }}" :options="$sifat"
-                                                errorName="mail_attributes.0">
-
-                                            </x-select>
-                                        </div>
-
-                                        <div class="form-group col-md-3">
+                                        {{-- <div class="form-group col-md-3">
                                             <x-select label="Tipe Surat" name="mail_attributes[]"
                                                 value="{{ old('mail_attributes')[1] ?? '' }}" :options="$tipe"
                                                 errorName="mail_attributes.1">
-
                                             </x-select>
                                         </div>
 
@@ -68,9 +69,8 @@
                                             <x-select label="Prioritas Surat" name="mail_attributes[]"
                                                 value="{{ old('mail_attributes')[2] ?? '' }}" :options="$prioritas"
                                                 errorName="mail_attributes.2">
-
                                             </x-select>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="form-group col-md-3">
                                             <x-select label="Folder Surat" name="mail_attributes[]"

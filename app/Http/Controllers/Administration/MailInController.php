@@ -31,15 +31,20 @@ class MailInController extends Controller
 
     public function create()
     {
-        $page = 'Tambah Surat Masuk';
+        $title = 'Tambah Surat Masuk';
 
-        $sifat = MailAttribute::get()->where('type', 'Sifat');
-        $tipe = MailAttribute::get()->where('type', 'Tipe');
-        $prioritas = MailAttribute::get()->where('type', 'Prioritas');
-        $folder = MailAttribute::get()->where('type', 'Folder');
-        $mail_type = "IN";
+        $mail_attribute_types = MailAttribute::select('type')->distinct()->get();
+        $all_mail_attributes = MailAttribute::all();
+        $mail_attributes = [];
 
-        return view('mails.create')->with(compact('page', 'sifat', 'tipe', 'prioritas', 'folder', 'mail_type'));
+        foreach ($mail_attribute_types as $mail_attribute_type) {
+            $mail_attributes[] =
+                $all_mail_attributes->where('type', $mail_attribute_type->type);
+        }
+
+        $mail_type = Mail::TYPE_IN;
+
+        return view('mails.create')->with(compact('title', 'mail_attributes', 'mail_type'));
     }
 
     public function store(MailInRequest $request)

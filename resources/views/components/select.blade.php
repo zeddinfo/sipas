@@ -3,7 +3,7 @@
 <select class="form-control selectpicker show-tick" name="{{ $name }}" data-live-search="true"
     title="Pilih {{ $label }}">
     @forelse($options as $option)
-        <option value="{{ $option->{$field ?? 'id'} }}"
+        <option value="{{ $option->{$field ?? 'id'} }}" data-subtext="{{ $option?->code }}"
             {{ isset($value) && $option->{$field ?? 'id'} == $value ? 'selected' : '' }}>
             {{ $option->{$field ?? 'name'} }}
         </option>

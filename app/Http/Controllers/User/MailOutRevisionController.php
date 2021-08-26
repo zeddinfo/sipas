@@ -39,9 +39,20 @@ class MailOutRevisionController extends Controller
 
         $user = Auth::user();
 
+        $mail_transactions = $user->getSameUser()->targetMailTransactions()->whereIn('mail_version_id', $mail->versions->pluck('id'))->orderBy('id', 'DESC')->get();
+
+        $target_user_id = null;
+
+        foreach ($mail_transactions as $mail_transaction) {
+            if (in_array($mail_transaction->user_id, $user->getLowerUsers('out')->pluck('id')->toArray())) {
+                $target_user_id = $mail_transaction->user_id;
+                break;
+            }
+        }
+
         $mail_transaction = new MailTransaction();
         $mail_transaction->user_id = $user->id;
-        $mail_transaction->target_user_id = $user->getSameUser()->targetMailTransactions()->where('mail_version_id', $mail->versions()->get()->last()->id)->first()->user_id;
+        $mail_transaction->target_user_id = $target_user_id;
         $mail_transaction->mail_version_id = $mail->versions()->orderBy('id', 'DESC')->first()->id;
         $mail_transaction->type = MailTransaction::TYPE_REVISION;
         $mail_transaction->save();

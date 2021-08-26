@@ -12,8 +12,9 @@ class ArchivedMailController extends Controller
 {
     public function index(ArchivedMailDataTable $dataTable)
     {
-        $page = 'Terarsip';
+        $title = 'Terarsip';
         $icon = 'bi-pen';
-        return $dataTable->render('mails.index', compact('page', 'icon'));
+        $table_view = "mails.tables.archived";
+        return $dataTable->render('mails.index', compact('title', 'icon', 'table_view'));
     }
 }

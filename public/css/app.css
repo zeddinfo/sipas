@@ -27668,3 +27668,7 @@ div.dt-buttons a.btn.processing:after {
 .navbar-vertical .navbar-nav .nav-item .nav-link.active {
   background-color: #4727fa;
 }
+
+.bootstrap-select .dropdown-menu {
+  max-width: 100%;
+}

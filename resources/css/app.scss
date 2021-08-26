@@ -7,3 +7,7 @@ $primary: #ebae34;
 .navbar-vertical .navbar-nav .nav-item .nav-link.active {
     background-color: $primary;
 }
+
+.bootstrap-select .dropdown-menu {
+    max-width: 100%;
+}

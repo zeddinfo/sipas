@@ -32,16 +32,19 @@ class MailOutController extends Controller
 
     public function create()
     {
-        $page = 'Tambah Surat Keluar';
+        $title = 'Tambah Surat Keluar';
 
         $sifat = MailAttribute::get()->where('type', 'Sifat');
+
+        $mail_attribute_types = MailAttribute::select('type')->distinct()->get();
+
         $tipe = MailAttribute::get()->where('type', 'Tipe');
         $prioritas = MailAttribute::get()->where('type', 'Prioritas');
         $folder = MailAttribute::get()->where('type', 'Folder');
 
         $mail_type = Mail::TYPE_OUT;
 
-        return view('mails.create')->with(compact('page', 'sifat', 'tipe', 'prioritas', 'folder', 'mail_type'));
+        return view('mails.create')->with(compact('title', 'sifat', 'tipe', 'prioritas', 'folder', 'mail_type'));
     }
 
     public function store(MailOutRequest $request)
