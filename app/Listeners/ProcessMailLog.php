@@ -49,6 +49,11 @@ class ProcessMailLog
                 $this->createLog(MailLog::LOG_REVISED, $event, $user, User::find($event->mail_transaction->target_user_id));
                 break;
 
+            case 'FINALIZED_MAIL_OUT':
+                $this->createLog(MailLog::LOG_UPDATED, $event, $user);
+                $this->createLog(MailLog::LOG_FINALIZED, $event, $user);
+                break;
+
             case 'DISPOSITED_MAIL_IN':
                 $this->createLog(MailLog::LOG_DISPOSITED, $event, $user, User::find($event->mail_transaction->target_user_id));
                 break;

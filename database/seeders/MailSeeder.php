@@ -19,7 +19,6 @@ class MailSeeder extends Seeder
         $faker = Factory::create('id_ID');
         Mail::create([
             'type' => 'OUT',
-            'directory_code' => "",
             'code' => "",
             'title' => 'Surat Undangan Alumni',
             'instance' => "Pemerintah Out",
@@ -28,7 +27,6 @@ class MailSeeder extends Seeder
 
         Mail::create([
             'type' => 'IN',
-            'directory_code' => $faker->bothify('???/???/####/##/##'),
             'code' => $faker->bothify('???/???/####/##/##'),
             'title' => 'Surat Undangan Rapat PCP',
             'instance' => "Pemerintah In",

@@ -60,7 +60,7 @@ class MailInController extends Controller
 
         event(new CreatedMailInProcess($mail, $request));
 
-        Alert::success('Yay :D', 'Berhasil menyimpan Department');
+        Alert::success('Yay :D', 'Berhasil menyimpan surat');
         return redirect(route('tu.mail.in.index'));
     }
 

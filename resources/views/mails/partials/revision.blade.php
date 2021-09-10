@@ -31,6 +31,7 @@
                                     <p class="fw-bold">{{ $mail->title }}</p>
                                 </td>
                             </tr>
+
                             <tr>
                                 <td>
                                     <p class="">Nomor Surat</p>
@@ -42,6 +43,7 @@
                                     <p class="fw-bold">{{ $mail->code }}</p>
                                 </td>
                             </tr>
+
                             <tr>
                                 <td>
                                     <p class="">Instansi</p>
@@ -53,54 +55,22 @@
                                     <p class="fw-bold">{{ $mail->instance }}</p>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <p class="">Jenis Surat</p>
-                                </td>
-                                <td class="align-top">
-                                    <p class="px-2">:</p>
-                                </td>
-                                <td class="align-top">
-                                    @php
-                                        $mail_attribute = $mail->attributes->where('type', 'Tipe')->first();
-                                    @endphp
-                                    <x-badge name="{{ $mail_attribute->name }}"
-                                        color="{{ $mail_attribute->color }}">
-                                    </x-badge>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="">Sifat Surat</p>
-                                </td>
-                                <td class="align-top">
-                                    <p class="px-2">:</p>
-                                </td>
-                                <td class="align-top">
-                                    @php
-                                        $mail_attribute = $mail->attributes->where('type', 'Sifat')->first();
-                                    @endphp
-                                    <x-badge name="{{ $mail_attribute->name }}"
-                                        color="{{ $mail_attribute->color }}">
-                                    </x-badge>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="">Prioritas Surat</p>
-                                </td>
-                                <td class="align-top">
-                                    <p class="px-2">:</p>
-                                </td>
-                                <td class="align-top">
-                                    @php
-                                        $mail_attribute = $mail->attributes->where('type', 'Prioritas')->first();
-                                    @endphp
-                                    <x-badge name="{{ $mail_attribute->name }}"
-                                        color="{{ $mail_attribute->color }}">
-                                    </x-badge>
-                                </td>
-                            </tr>
+
+                            @foreach ($mail->attributes as $attribute)
+                                <tr>
+                                    <td>
+                                        <p class="">{{ $attribute->type }} Surat</p>
+                                    </td>
+                                    <td class="align-top">
+                                        <p class="px-2">:</p>
+                                    </td>
+                                    <td class="align-top">
+                                        <x-badge name="{{ $attribute->name }}" color="{{ $attribute->color }}">
+                                        </x-badge>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </table>
 
                         <div class="row">

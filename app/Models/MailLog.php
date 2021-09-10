@@ -16,6 +16,8 @@ class MailLog extends Model
     const LOG_REVISED = 'Direvisi';
     const LOG_FORWARDED = 'Diteruskan';
     const LOG_DISPOSITED = 'Didisposisikan';
+    const LOG_FINALIZED = 'Diarsipkan';
+    const LOG_FINISHED = 'Diselesaikan';
 
     protected $guarded = [];
 

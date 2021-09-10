@@ -21,10 +21,19 @@ class MailInDispositionController extends Controller
 {
     public function create(Mail $mail)
     {
-        abort_if(!MailServices::mailActionGate($mail, Auth::user()) || !Auth::user()->hasDisposition(), 404);
+        // abort_if(!MailServices::mailActionGate($mail, Auth::user()) || !Auth::user()->hasDisposition(), 404);
+        abort_if(!MailServices::mailActionGate($mail, Auth::user()), 400);
 
         $target_users = Auth::user()->getLowerUsers('in');
         $target_users->load('level', 'department');
+
+        // Additional can bypass head
+        if (Auth::user()->getSameUser()->level->name == 'Sekretaris') {
+            $additional_target_users = $target_users->first()->getLowerUsers('in');
+            $additional_target_users->each(function ($user) use ($target_users) {
+                $target_users->push($user);
+            });
+        }
 
         return view('mails.partials.disposition', compact('mail', 'target_users'));
     }
@@ -33,9 +42,13 @@ class MailInDispositionController extends Controller
     {
         $target_user_ids = $request->target_users;
 
-        abort_if(!MailServices::mailActionGate($mail, Auth::user())
-            || !Auth::user()->hasDisposition()
-            || !Auth::user()->checkLowerUserIds($target_user_ids), 404);
+        abort_if(
+            !MailServices::mailActionGate($mail, Auth::user())
+            // || !Auth::user()->hasDisposition()
+            // || !Auth::user()->checkLowerUserIds($target_user_ids)
+            ,
+            404
+        );
 
 
         foreach ($target_user_ids as $target_user_id) {

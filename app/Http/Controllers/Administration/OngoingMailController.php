@@ -2,43 +2,18 @@
 
 namespace App\Http\Controllers\Administration;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\DataTables\ArchivedMailDataTable;
+use App\DataTables\OngoingMailDataTable;
 
 class OngoingMailController extends Controller
 {
-    public function index()
+    public function index(OngoingMailDataTable $dataTable)
     {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        $title = 'Sedang Berlangsung';
+        $icon = 'bi-arrow-clockwise';
+        $table_view = "mails.tables.on-going";
+        return $dataTable->render('mails.index', compact('title', 'icon', 'table_view'));
     }
 }

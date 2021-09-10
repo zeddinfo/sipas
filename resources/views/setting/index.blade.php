@@ -14,7 +14,7 @@
                     <!-- Card -->
                     <div class="card mt-6">
                         <!-- Content -->
-                        <div class="tab-content px-4" id="pills-tabContent-responsive-tables">
+                        <div class="tab-content p-4" id="pills-tabContent-responsive-tables">
                             <div class="tab-pane tab-example-design fade show active"
                                 id="pills-responsive-tables-design" role="tabpanel"
                                 aria-labelledby="pills-responsive-tables-design-tab">

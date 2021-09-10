@@ -18,14 +18,14 @@ class MailLogSeeder extends Seeder
             'mail_id' => 1,
             'log' => 'Dibuat',
             'user_name' => 'Apria Nur Huda',
-            'user_level_department' => 'Anggota Software',
+            'user_level_department' => 'Anggota-Software',
         ]);
 
         MailLog::create([
             'mail_id' => 1,
             'log' => 'Diteruskan',
             'user_name' => 'Apria Nur Huda',
-            'user_level_department' => 'Anggota Software',
+            'user_level_department' => 'Anggota-Software',
             'target_user_name' => 'Adis Wing Kasenda',
             'target_user_level_department' => 'Kepala Departemen Software',
         ]);

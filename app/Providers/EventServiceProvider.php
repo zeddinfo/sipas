@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Events\CreatedMailInProcess;
 use App\Events\CreatedMailOutProcess;
 use App\Events\DispositedMailInProcess;
+use App\Events\FinalizedMailOutProcess;
 use App\Events\ForwardedMailOut;
 use App\Events\RevisedMailOutProcess;
 use App\Events\UpdatedMailMasterProcess;
@@ -51,6 +52,14 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailFile::class,
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
+            ProcessMailLog::class,
+            // SendNotification::class,
+        ],
+
+        FinalizedMailOutProcess::class => [
+            ProcessMailAttributeTransaction::class,
+            ProcessMailFile::class,
+            ProcessMailVersion::class,
             ProcessMailLog::class,
             // SendNotification::class,
         ],

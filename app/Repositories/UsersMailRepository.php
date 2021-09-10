@@ -68,6 +68,13 @@ class UsersMailRepository
                         'color' => 'danger',
                         'action' => '',
                     ],
+
+                    MailTransaction::TYPE_FINISHED => [
+                        'type' => 'finished',
+                        'status' => 'Menunggu Selesai',
+                        'color' => 'success',
+                        'action' => '',
+                    ],
                 ],
                 'outcome' => [
                     MailTransaction::TYPE_FORWARD => [
@@ -87,7 +94,12 @@ class UsersMailRepository
                         'status' => 'Telah Didisposisikan',
                         'color' => 'success',
                     ],
-
+                    MailTransaction::TYPE_FINISHED => [
+                        'type' => 'finished',
+                        'status' => 'Menunggu Selesai',
+                        'color' => 'success',
+                        'action' => '',
+                    ],
                 ]
             ];
 

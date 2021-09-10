@@ -34,17 +34,18 @@ class MailOutController extends Controller
     {
         $title = 'Tambah Surat Keluar';
 
-        $sifat = MailAttribute::get()->where('type', 'Sifat');
-
         $mail_attribute_types = MailAttribute::select('type')->distinct()->get();
+        $all_mail_attributes = MailAttribute::all();
+        $mail_attributes = [];
 
-        $tipe = MailAttribute::get()->where('type', 'Tipe');
-        $prioritas = MailAttribute::get()->where('type', 'Prioritas');
-        $folder = MailAttribute::get()->where('type', 'Folder');
+        foreach ($mail_attribute_types as $mail_attribute_type) {
+            $mail_attributes[] =
+                $all_mail_attributes->where('type', $mail_attribute_type->type);
+        }
 
         $mail_type = Mail::TYPE_OUT;
 
-        return view('mails.create')->with(compact('title', 'sifat', 'tipe', 'prioritas', 'folder', 'mail_type'));
+        return view('mails.create')->with(compact('title', 'mail_attributes', 'mail_type'));
     }
 
     public function store(MailOutRequest $request)
@@ -77,14 +78,18 @@ class MailOutController extends Controller
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
-        $page = 'Koreksi Surat Keluar';
+        $title = 'Ubah';
 
         $mail = Mail::with('attributes')->where('id', $mail->id)->first();
 
-        $sifat = MailAttribute::get()->where('type', 'Sifat');
-        $tipe = MailAttribute::get()->where('type', 'Tipe');
-        $prioritas = MailAttribute::get()->where('type', 'Prioritas');
-        $folder = MailAttribute::get()->where('type', 'Folder');
+        $mail_attribute_types = MailAttribute::select('type')->distinct()->get();
+        $all_mail_attributes = MailAttribute::all();
+        $mail_attributes = [];
+
+        foreach ($mail_attribute_types as $mail_attribute_type) {
+            $mail_attributes[] =
+                $all_mail_attributes->where('type', $mail_attribute_type->type);
+        }
 
         $mail_transaction = Auth::user()->targetMailTransactions()->whereHas('mailVersion.mail', function ($query) use ($mail) {
             $query->where('id', $mail->id);
@@ -92,7 +97,7 @@ class MailOutController extends Controller
 
         $correction = $mail_transaction->last()?->correction;
 
-        return view('mails.partials.correction')->with(compact('page', 'sifat', 'tipe', 'prioritas', 'folder', 'mail', 'correction'));
+        return view('mails.partials.correction')->with(compact('title', 'mail', 'mail_attributes', 'correction'));
     }
 
     public function update(MailOutRequest $request, Mail $mail)
@@ -107,7 +112,7 @@ class MailOutController extends Controller
 
         event(new UpdatedMailOutProcess($mail, $request));
 
-        Alert::success('Yay :D', 'Berhasil menyimpan Department');
+        Alert::success('Yay :D', 'Berhasil menyimpan surat');
         return redirect(route('user.mail.out.index'));
     }
 

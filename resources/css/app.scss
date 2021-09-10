@@ -11,3 +11,12 @@ $primary: #ebae34;
 .bootstrap-select .dropdown-menu {
     max-width: 100%;
 }
+
+.dt-buttons,.btn-group,.flex-wrap{
+    float: left;
+    margin-bottom: 0.5rem;
+}
+
+.dataTables_info{
+    float: left;
+}

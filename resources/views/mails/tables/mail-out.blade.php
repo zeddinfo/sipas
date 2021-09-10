@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive mt-4">
     <table class="table {{ count($mails) == 1 ? 'mb-20' : '' }}">
         <thead>
             <tr>
@@ -18,7 +18,7 @@
                         </a>
                         @forelse ($mail->attributes as $attribute)
                             <label class="badge"
-                                style="background: {{ $attribute->color }};">{{ Str::upper($attribute->name) }}</label>
+                                style="background: {{ $attribute->color }};">{{ Str::limit(Str::upper($attribute->name), 20) }}</label>
                         @empty
                             Belum ada attribute.
                         @endforelse
@@ -77,7 +77,6 @@
                     </td>
                 </tr>
             @empty
-                <h4>Tidak ada surat.</h4>
             @endforelse
         </tbody>
     </table>

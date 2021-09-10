@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\UserDataTable;
 use Hash;
 use App\Models\User;
 use App\Models\Level;
@@ -15,11 +16,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserSettingController extends Controller
 {
-    public function index()
+    public function index(UserDataTable $dataTable)
     {
-        $page = 'Data Pengguna';
-        $users = User::with('level', 'department')->get();
-        return view('setting.users.index', compact('users', 'page'));
+        $title = 'Data Pengguna';
+        $icon = 'bi-people';
+        $table_view = "setting.users.index";
+        return $dataTable->render('setting.index', compact('title', 'icon', 'table_view'));
     }
 
     public function create()
@@ -62,7 +64,6 @@ class UserSettingController extends Controller
 
     public function edit(User $user)
     {
-        $user = $user->with('level', 'department')->where('id', $user->id)->first();
         $level = Level::select('id', 'name')->get();
         $department = Department::select('id', 'name')->get();
 

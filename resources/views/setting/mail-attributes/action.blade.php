@@ -10,15 +10,10 @@
         </svg>
     </button>
     <div class="dropdown-menu">
-        <a class="dropdown-item" href="{{ route(RouteHelper::get('mail.file.show'), ['mail' => $mail]) }}"
-            target="_blank">Lihat Surat</a>
+        <a class="dropdown-item" href="{{ route('admin.setting.mail.attribute.edit', $mail_attribute) }}">Ubah</a>
 
-        @if (Auth::user()->hasRole('Admin') || Auth::user()->hasRole('TU'))
-            <a class="dropdown-item" href="{{ route(RouteHelper::get('mail.master.edit'), ['mail' => $mail]) }}">Ubah
-                Surat</a>
-
-            <x-button method="delete" action="{{ route('tu.mail.master.destroy', $mail) }}" class="dropdown-item">
-                Hapus</x-button>
-        @endif
+        <x-button method="delete" action="{{ route('admin.setting.mail.attribute.destroy', $mail_attribute) }}"
+            class="dropdown-item">
+            Hapus</x-button>
     </div>
 </div>

@@ -31,9 +31,10 @@
                                     <p class="fw-bold">{{ $mail->title }}</p>
                                 </td>
                             </tr>
+
                             <tr>
-                                <td>
-                                    <p class="">Nomor Surat</p>
+                                <td class="align-top">
+                                    <p>Nomor Surat</p>
                                 </td>
                                 <td class="align-top">
                                     <p class="px-2">:</p>
@@ -42,9 +43,48 @@
                                     <p class="fw-bold">{{ $mail->code }}</p>
                                 </td>
                             </tr>
+
                             <tr>
-                                <td>
-                                    <p class="">Instansi</p>
+                                <td class="align-top">
+                                    <p>Tanggal Surat</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="fw-bold">{{ $mail->mail_created_at->isoFormat('D MMMM Y') }}</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-top">
+                                    <p>Tanggal Dibuat</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="fw-bold">{{ $mail->created_at->isoFormat('D MMMM Y') }}</p>
+                                </td>
+                            </tr>
+
+                            @if ($mail->archived_at != null)
+                                <tr>
+                                    <td class="align-top">
+                                        <p>Tanggal Arsip</p>
+                                    </td>
+                                    <td class="align-top">
+                                        <p class="px-2">:</p>
+                                    </td>
+                                    <td class="align-top">
+                                        <p class="fw-bold">{{ $mail->archived_at->isoFormat('D MMMM Y') }}</p>
+                                    </td>
+                                </tr>
+                            @endif
+
+                            <tr>
+                                <td class="align-top">
+                                    <p>Instansi</p>
                                 </td>
                                 <td class="align-top">
                                     <p class="px-2">:</p>
@@ -53,17 +93,17 @@
                                     <p class="fw-bold">{{ $mail->instance }}</p>
                                 </td>
                             </tr>
+
                             @foreach ($mail->attributes as $attribute)
                                 <tr>
-                                    <td>
+                                    <td class="align-top">
                                         <p class="">{{ $attribute->type }} Surat</p>
                                     </td>
                                     <td class="align-top">
                                         <p class="px-2">:</p>
                                     </td>
                                     <td class="align-top">
-                                        <x-badge name="{{ $attribute->name }}" color="{{ $attribute->color }}">
-                                        </x-badge>
+                                        <p class="fw-bold">{{ $attribute->name }}</p>
                                     </td>
                                 </tr>
                             @endforeach

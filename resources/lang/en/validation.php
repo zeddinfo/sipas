@@ -155,7 +155,7 @@ return [
         'name' => 'Nama',
         'title' => 'Judul',
         'instance' => 'Instansi',
-        'code' => 'Kode',
+        'code' => 'Nomor Surat',
         'mail_created_at' => 'Tanggal surat',
     ],
 

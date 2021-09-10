@@ -17,7 +17,7 @@ class MailTransactions extends Migration
             $table->bigIncrements('id');
             $table->foreignId('mail_version_id')->constrained('mail_versions');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('target_user_id')->constrained('users');
+            $table->foreignId('target_user_id')->nullable()->constrained('users');
             $table->string('type');
             $table->softDeletes();
             $table->timestamps();

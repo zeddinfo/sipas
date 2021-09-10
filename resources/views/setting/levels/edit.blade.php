@@ -4,16 +4,15 @@
             Dashboard
         </h2>
     </x-slot>
-    <div class="container-fluid px-6 py-4">
+
+    <div class="bg-primary pt-10 pb-21"></div>
+    <div class="container-fluid mt-n22 px-6">
         <div class="py-6">
-            <!-- Responsive tables -->
-            <div cass="row mb-6">
+            <div class="row mb-6">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div id="responsive-tables" class="mb-4">
-                        <h2>Edit Jabatan</h2>
-                    </div>
+                    <x-page-title page="Ubah Jabatan" icon="bi-award"></x-page-title>
                     <!-- Card -->
-                    <div class="card">
+                    <div class="card mt-6">
                         <div class="tab-content p-4" id="pills-tabContent-basic-forms">
                             <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design"
                                 role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
@@ -26,7 +25,7 @@
                                             placeholder="Jabatan"></x-input>
                                     </div>
                                     <div class="col-md-6">
-                                        <x-select label="Privelege Akses" class="form-control"
+                                        <x-select label="Setara Dengan" class="form-control"
                                             :value="isset($level->sameLevel) ? $level->sameLevel->id : ''"
                                             name="same_as_id" :options="$levels">
 

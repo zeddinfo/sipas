@@ -28,7 +28,7 @@ class ProcessMailTransaction
     {
 
         switch (true) {
-            case in_array($event->event_type, ['CREATED_MAIL_OUT', 'UPDATED_MAIL_OUT']):
+            case in_array($event->event_type, ['CREATED_MAIL_OUT', 'UPDATED_MAIL_OUT', 'FINALIZED_MAIL_OUT']):
                 $this->handleCreatedUpdatedMailOut($event);
                 break;
 
@@ -40,8 +40,7 @@ class ProcessMailTransaction
                 $this->handleCreatedMailIn($event);
                 break;
 
-
-            case $event->event_type = 'DISPOSITION_MAIL_IN':
+            case $event->event_type = 'DISPOSITED_MAIL_IN':
                 $this->handleDispositionMailIn($event);
                 break;
         }

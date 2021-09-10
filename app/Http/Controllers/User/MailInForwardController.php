@@ -22,14 +22,14 @@ class MailInForwardController extends Controller
     {
         abort_if(!MailServices::mailActionGate($mail, Auth::user()), 404);
 
-        if (Auth::user()->hasDisposition()) {
-            return redirect(route('user.mail.in.disposition.create', $mail));
-        }
+        // if (Auth::user()->hasDisposition()) {
+        // }
 
-        $target_users = Auth::user()->getLowerUsers('in');
-        $target_users->load('level', 'department');
+        // $target_users = Auth::user()->getLowerUsers('in');
+        // $target_users->load('level', 'department');
 
-        return view('mails.partials.forward', compact('mail', 'target_users'));
+        // return view('mails.partials.forward', compact('mail', 'target_users'));
+        return redirect(route('user.mail.in.disposition.create', $mail));
     }
 
     public function store(MailInForwardRequest $request, Mail $mail)

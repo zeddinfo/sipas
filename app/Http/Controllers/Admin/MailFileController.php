@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Administration;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Mail;
 use Illuminate\Http\Request;
+use App\Services\FileServices;
 use App\Services\MailServices;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\UsersMailVersionRepository;
-use App\Services\FileServices;
 
 class MailFileController extends Controller
 {

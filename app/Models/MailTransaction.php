@@ -13,6 +13,7 @@ class MailTransaction extends Model
     const TYPE_FORWARD = "FORWARD";
     const TYPE_REVISION = "REVISION";
     const TYPE_DISPOSITION = "DISPOSITION";
+    const TYPE_FINISHED = "FINISHED";
 
     protected $guarded = [];
 

@@ -50,10 +50,10 @@ Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace
 
         // Mail Out
         Route::get('/keluar', 'MailOutController@index')->name('tu.mail.out.index');
-        Route::get('/keluar/{id}', 'MailOutController@show')->name('tu.mail.out.show');
-        Route::get('/keluar/{id}/koreksi', 'MailOutController@edit')->name('tu.mail.out.edit');
-        Route::patch('/keluar/{id}', 'MailOutController@update')->name('tu.mail.out.update');
-        Route::delete('/keluar/{id}', 'MailOutController@destroy')->name('tu.mail.out.destroy');
+        Route::get('/keluar/{mail}', 'MailOutController@show')->name('tu.mail.out.show');
+        Route::get('/keluar/{mail}/koreksi', 'MailOutController@edit')->name('tu.mail.out.edit');
+        Route::patch('/keluar/{mail}', 'MailOutController@update')->name('tu.mail.out.update');
+        Route::delete('/keluar/{mail}', 'MailOutController@destroy')->name('tu.mail.out.destroy');
 
         // Mail Out Custom Action
         Route::post('/masuk/{id}/aksi/arsipkan', 'MailOutActionController@archive')->name('tu.mail.out.action.archive');
@@ -123,6 +123,10 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:User'], 'na
         Route::get('/masuk/{mail}/teruskan/disposisi/tambah', 'MailInDispositionController@create')->name('user.mail.in.disposition.create');
         Route::post('/masuk/{mail}/teruskan/disposisi', 'MailInDispositionController@store')->name('user.mail.in.disposition.store');
 
+        // Mail In Finishing
+        Route::post('/masuk/{mail}/selesai', 'MailInFinishingController@store')->name('user.mail.in.finishing.store');
+
+
         // Mail Out
         /** DONE ACTION */
         Route::get('/keluar', 'MailOutController@index')->name('user.mail.out.index');
@@ -171,7 +175,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
 
     // Mail
     Route::group(['prefix' => 'surat'], function () {
-        // Mail Download
+        // Mail File
+        Route::get('/{mail}/lihat', 'MailFileController@show')->name('admin.mail.file.show');
 
         // Mail Master Action
         /** DONE ACTION */

@@ -14,6 +14,11 @@ class MailFileController extends Controller
 {
     public function show(Mail $mail)
     {
+        if (Auth::user()->hasAllMailAccess()) {
+            $latest_mail_version = $mail->versions()->orderBy('id', 'DESC')->first();
+            return redirect(FileServices::extensionAdapter($latest_mail_version->file));
+        }
+
         abort_if(!MailServices::mailViewGate($mail, Auth::user()), 404);
 
         $users_mail_version = (new UsersMailVersionRepository(Auth::user()))->findMail($mail);

@@ -28,6 +28,7 @@ class UsersMailVersionRepository
     public function findMail(Mail $mail)
     {
         $mails = $this->all();
+
         foreach ($mails as $key => $value) {
             if ($mail->id == $value->mail_id) {
                 return $value;

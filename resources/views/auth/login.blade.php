@@ -15,7 +15,7 @@
                         <div class="mb-4">
                             {{-- <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2"
                                     alt=""></a> --}}
-                            <h2 class="mb-6 text-primary text-center">Sistem Pengarsipan Surat Online DPRD Melawi</p>
+                            <h2 class="mb-6 text-primary text-center">Sistem Pengarsipan Surat Online Dinkes Melawi</p>
                         </div>
                         <!-- Form -->
                         <form method="post" action="{{ route('login') }}">
@@ -43,15 +43,6 @@
                                     <button type="submit" class="btn btn-primary">{{ __('Log in') }}</button>
                                 </div>
 
-                                <div class="d-md-flex justify-content-between mt-4">
-                                    @if (Route::has('password.request'))
-                                        <div>
-                                            <a href="{{ route('password.request') }}" class="text-inherit fs-5">
-                                                {{ __('Forgot your password?') }}
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                             </div>
                         </form>
                     </div>

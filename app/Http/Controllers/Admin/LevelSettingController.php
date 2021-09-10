@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\LevelRequest;
 use App\Models\Level;
 use Illuminate\Http\Request;
+use App\DataTables\LevelDataTable;
+use App\Http\Requests\LevelRequest;
+use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LevelSettingController extends Controller
 {
-    public function index()
+    public function index(LevelDataTable $dataTable)
     {
-        $page = 'Data Jabatan';
-        $levels = Level::with('sameLevel')->get();
-
-        return view('setting.levels.index', compact('levels', 'page'));
+        $title = 'Data Jabatan';
+        $icon = 'bi-award';
+        $table_view = "setting.levels.index";
+        return $dataTable->render('setting.index', compact('title', 'icon', 'table_view'));
     }
 
     public function create()
@@ -39,9 +40,7 @@ class LevelSettingController extends Controller
 
     public function edit(Level $level)
     {
-        $level = $level->get()->where('id', $level->id)->first();
         $levels = Level::get();
-
         return view('setting.levels.edit')->with(compact('level', 'levels'));
     }
 

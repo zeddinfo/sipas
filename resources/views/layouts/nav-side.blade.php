@@ -20,19 +20,19 @@
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('admin.setting.account.edit') ? 'active' : '' }}"
                         href="{{ route('admin.setting.account.edit') }}">
-                        <i data-feather="user" class="nav-icon icon-xs me-2"></i> Pengaturan Akun
+                        <i data-feather="settings" class="nav-icon icon-xs me-2"></i> Pengaturan Akun
                     </a>
                 </li>
 
                 <!-- Nav item -->
                 <li class="nav-item">
-                    <div class="navbar-heading">Akses Surat</div>
+                    <div class="navbar-heading">Akses Seluruh Surat</div>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('admin.mail.ongoing.index') ? 'active' : '' }}"
                         href="{{ route('admin.mail.ongoing.index') }}">
-                        <i data-feather="archive" class="nav-icon icon-xs me-2"></i> Dalam Proses
+                        <i data-feather="rotate-cw" class="nav-icon icon-xs me-2"></i> Sedang Berlangsung
                     </a>
 
                 </li>
@@ -125,14 +125,14 @@
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('tu.mail.in.index') ? 'active' : '' }}"
                         href="{{ route('tu.mail.in.index') }}">
-                        <i data-feather="mail" class="nav-icon icon-xs me-2"></i> Surat Masuk
+                        <i data-feather="log-in" class="nav-icon icon-xs me-2"></i> Surat Masuk
                     </a>
 
                 </li>
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('tu.mail.out.index') ? 'active' : '' }}"
                         href="{{ route('tu.mail.out.index') }}">
-                        <i data-feather="inbox" class="nav-icon icon-xs me-2"></i> Surat Keluar
+                        <i data-feather="log-out" class="nav-icon icon-xs me-2"></i> Surat Keluar
                     </a>
 
                 </li>
@@ -145,7 +145,7 @@
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('tu.mail.ongoing.index') ? 'active' : '' }}"
                         href="{{ route('tu.mail.ongoing.index') }}">
-                        <i data-feather="archive" class="nav-icon icon-xs me-2"></i> Dalam Proses
+                        <i data-feather="rotate-cw" class="nav-icon icon-xs me-2"></i> Sedang Berlangsung
                     </a>
 
                 </li>
@@ -167,13 +167,13 @@
                 {{-- <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('user.setting.account.edit') ? 'active' : '' }}"
                         href="{{ route('user.setting.account.edit') }}">
-                        <i data-feather="user" class="nav-icon icon-xs me-2"></i> Pengaturan Akun
+                        <i data-feather="settings" class="nav-icon icon-xs me-2"></i> Pengaturan Akun
                     </a>
                 </li> --}}
                 <li class="nav-item">
                     <div class="navbar-heading">Seluruh Surat</div>
                 </li>
-                
+
                 <li class="nav-item">
                     <div class="nav-link text-center">
                         <a class="btn btn-block btn-primary" href="{{ route('user.mail.out.create') }}">
@@ -186,14 +186,14 @@
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('user.mail.in.index') ? 'active' : '' }}"
                         href="{{ route('user.mail.in.index') }}">
-                        <i data-feather="mail" class="nav-icon icon-xs me-2"></i> Surat Masuk
+                        <i data-feather="log-in" class="nav-icon icon-xs me-2"></i> Surat Masuk
                     </a>
 
                 </li>
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('user.mail.out.index') ? 'active' : '' }}"
                         href="{{ route('user.mail.out.index') }}">
-                        <i data-feather="inbox" class="nav-icon icon-xs me-2"></i> Surat Keluar
+                        <i data-feather="log-out" class="nav-icon icon-xs me-2"></i> Surat Keluar
                     </a>
 
                 </li>
@@ -206,7 +206,7 @@
                     <li class="nav-item">
                         <a class="nav-link has-arrow {{ Request::routeIs('user.mail.ongoing.index') ? 'active' : '' }}"
                             href="{{ route('user.mail.ongoing.index') }}">
-                            <i data-feather="archive" class="nav-icon icon-xs me-2"></i> Dalam Proses
+                            <i data-feather="rotate-cw" class="nav-icon icon-xs me-2"></i> Sedang Berlangsung
                         </a>
 
                     </li>

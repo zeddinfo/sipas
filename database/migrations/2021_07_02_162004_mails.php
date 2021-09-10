@@ -17,11 +17,11 @@ class Mails extends Migration
             $table->bigIncrements('id');
             $table->enum('type', ['IN', 'OUT']);
             $table->string('code')->nullable();
-            $table->string('directory_code')->nullable();
             $table->string('title');
             $table->string('instance');
-            $table->string('note')->nullable();
+            $table->text('note')->nullable();
             $table->dateTime('mail_created_at')->nullable();
+            $table->dateTime('mail_received_at')->nullable();
             $table->dateTime('archived_at')->nullable();
             $table->softDeletes();
             $table->timestamps();

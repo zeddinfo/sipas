@@ -10,15 +10,14 @@
         <div class="py-6">
             <div class="row mb-6">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <x-page-title page="Finalisasi Surat" icon="bi-house"></x-page-title>
-
+                    <x-page-title page="Ubah Surat" icon="bi-house"></x-page-title>
                     <!-- card -->
                     <div class="card mt-6">
                         <div class="tab-content p-4" id="pills-tabContent-basic-forms">
                             <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design"
                                 role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
                                 <form class="row g-3" method="POST"
-                                    action="{{ route('tu.mail.out.final.update', $mail) }}"
+                                    action="{{ route(RouteHelper::get('mail.master.update'), $mail) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PATCH')
@@ -48,8 +47,8 @@
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <x-input type="text" label="Catatan (opsional)" name="note"
-                                            value="{{ $mail->note }}" placeholder="Catatan"></x-input>
+                                        <x-input type="text" label="Catatan" name="note" value="{{ $mail->note }}"
+                                            placeholder="Catatan"></x-input>
                                     </div>
 
                                     <div class="col-md-6">
@@ -66,9 +65,9 @@
                             </div>
 
                             <div class="col-12 mt-5">
-                                <button class="btn btn-warning" type="submit">Arsipkan</button>
-                                <a href="{{ route('tu.mail.out.index') }}" class="btn btn-secondary"
-                                    type="reset">Batal</a>
+                                <button class="btn btn-warning" type="submit">Ubah</button>
+                                {{-- <a href="{{ route(RouteHelper::get('dashboard.index')) }}"
+                                        class="btn btn-secondary" type="reset">Batal</a> --}}
                             </div>
                             </form>
                         </div>

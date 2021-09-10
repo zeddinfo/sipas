@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\MailAttributeDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MailAttributeRequest;
 use App\Models\MailAttribute;
@@ -10,12 +11,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class MailAtrributeSettingController extends Controller
 {
-    public function index()
+    public function index(MailAttributeDataTable $dataTable)
     {
-        $page = 'Atribut Surat';
-        $mail_attributes = MailAttribute::all();
-
-        return view('setting.mail-attributes.index', compact('mail_attributes', 'page'));
+        $title = 'Data Atribut Surat';
+        $icon = 'bi-file-earmark-medical';
+        $table_view = "setting.mail-attributes.index";
+        return $dataTable->render('setting.index', compact('title', 'icon', 'table_view'));
     }
 
     public function create()
@@ -40,7 +41,6 @@ class MailAtrributeSettingController extends Controller
     public function edit(MailAttribute $mail_attribute)
     {
         $mail_attribute_types = MailAttribute::select('type')->distinct()->get();
-
         return view('setting.mail-attributes.edit', compact('mail_attribute', 'mail_attribute_types'));
     }
 

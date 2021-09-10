@@ -81,7 +81,7 @@ class User extends Authenticatable
     {
         $department = '';
         if ($this->department != null) {
-            $department = ' ' . $this->department->name;
+            $department = '-' . $this->department->name;
         }
 
         return $this->level->name . $department;

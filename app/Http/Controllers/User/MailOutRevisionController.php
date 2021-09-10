@@ -24,12 +24,7 @@ class MailOutRevisionController extends Controller
         $page = 'Revisi Surat';
         $mail = Mail::with('attributes')->where('id', $mail->id)->first();
 
-        $sifat = MailAttribute::get()->where('type', 'Sifat');
-        $tipe = MailAttribute::get()->where('type', 'Tipe');
-        $prioritas = MailAttribute::get()->where('type', 'Prioritas');
-        $folder = MailAttribute::get()->where('type', 'Folder');
-
-        return view('mails.partials.revision', compact('page', 'mail', 'sifat', 'tipe', 'prioritas', 'folder'));
+        return view('mails.partials.revision', compact('page', 'mail'));
     }
 
 

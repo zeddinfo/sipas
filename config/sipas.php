@@ -31,5 +31,9 @@ return [
     'all_mail_access_tag' => [
         Level::LEVEL_KETUM,
         Level::LEVEL_SEKRETARIS,
-    ]
+    ],
+
+    'department_mail_code' => [
+        'Ilmu Pengetahuan' => 'A',
+    ],
 ];

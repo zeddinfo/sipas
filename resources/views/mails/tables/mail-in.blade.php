@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive mt-4">
     <table class="table {{ count($mails) == 1 ? 'mb-20' : '' }}">
         <thead>
             <tr>
@@ -18,7 +18,7 @@
                         </a>
                         @forelse ($mail->attributes as $attribute)
                             <label class="badge"
-                                style="background: {{ $attribute->color }};">{{ Str::upper($attribute->name) }}</label>
+                                style="background: {{ $attribute->color }};">{{ Str::limit(Str::upper($attribute->name), 20) }}</label>
                         @empty
                             Belum ada attribute.
                         @endforelse
@@ -50,19 +50,21 @@
                                 @if (MailServices::mailActionGate($mail, Auth::user()))
                                     <a href="{{ route('user.mail.in.forward.create', $mail) }}"
                                         class="dropdown-item">Teruskan</a>
-                                @endif
 
-                                @if (Auth::user()->hasRole('TU'))
+                                    <x-button action="{{ route('user.mail.in.finishing.store', $mail) }}"
+                                        class="dropdown-item">
+                                        Selesai</x-button>
+                                @endif
+                                {{-- @if (Auth::user()->hasRole('TU'))
                                     <x-button action="{{ route('tu.mail.in.action.archive', $mail) }}"
                                         class="dropdown-item">
                                         Arsipkan</x-button>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                     </td>
                 </tr>
             @empty
-                <h5>Tidak ada surat.</h5>
             @endforelse
         </tbody>
     </table>

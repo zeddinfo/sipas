@@ -3,16 +3,15 @@
 namespace App\DataTables;
 
 use App\Models\Mail;
-use App\Models\User;
-use App\Utilities\RouteHelper;
 use Illuminate\Support\Str;
+use App\Utilities\RouteHelper;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ArchivedMailDataTable extends DataTable
+class OngoingMailDataTable extends DataTable
 {
     public function dataTable($query)
     {
@@ -33,9 +32,6 @@ class ArchivedMailDataTable extends DataTable
             ->editColumn('mail_created_at', function ($mail) {
                 return $mail->mail_created_at->isoFormat('D MMMM Y');
             })
-            ->editColumn('archived_at', function ($mail) {
-                return $mail->archived_at->isoFormat('D MMMM Y (hh:mm)');
-            })
             ->addColumn('action', function ($mail) {
                 return view('partials.archived-mail-action', compact('mail'));
             })
@@ -50,7 +46,7 @@ class ArchivedMailDataTable extends DataTable
      */
     public function query()
     {
-        $mail = Mail::whereNotNull('archived_at')->with('attributes')
+        $mail = Mail::whereNull('archived_at')->with('attributes')
             ->select('mails.*');
         return $mail->newQuery();
     }
@@ -153,6 +149,6 @@ class ArchivedMailDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'AllMail_' . date('YmdHis');
+        return 'OngoingMail_' . date('YmdHis');
     }
 }
