@@ -242,6 +242,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin'], 'name
     });
 });
 
+Route::get('/kirim_email', [App\Http\Controllers\EmailNotificationsController::class, 'sendEmail']);
+
 Route::get('/', function () {
     return redirect('/login');
 })->middleware('guest');
