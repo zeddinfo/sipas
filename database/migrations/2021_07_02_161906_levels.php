@@ -15,7 +15,6 @@ class Levels extends Migration
     {
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
-            $table->integer('order');
             $table->string('name');
             $table->foreignId('same_as_id')->nullable()->constrained('levels');
             $table->softDeletes();

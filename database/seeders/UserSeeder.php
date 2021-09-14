@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Department;
 use App\Models\Level;
 use App\Models\User;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,158 +18,111 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create('id_ID');
+
+        //!! ADMIN
         User::create([
-            'nip' => '000001',
+            'nip' => $faker->creditCardNumber,
             'name' => 'Admin',
-            'phone_number' => '0818181221',
+            'phone_number' => '082358969611',
             'email' => 'admin@dinkesmelawi.com',
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Admin')->first()->id,
+            'level_id' => Level::where('name', Level::LEVEL_ADMIN)->first()->id,
         ]);
 
+        //!! TU
         User::create([
-            'nip' => '000012',
-            'name' => 'TU',
-            'phone_number' => '0818181224',
-            'email' => 'tu@tu.com',
+            'nip' => $faker->creditCardNumber,
+            'name' => $faker->name,
+            'phone_number' => $faker->phoneNumber,
+            'email' => $faker->email,
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'TU')->first()->id,
+            'level_id' => Level::where('name', Level::LEVEL_TU)->first()->id,
         ]);
 
+        //!! KADIS
         User::create([
-            'nip' => '000002',
-            'name' => 'Najib Ibrahim',
-            'phone_number' => '0818181222',
-            'email' => 'ketuaumum@hmti.com',
+            'nip' => $faker->creditCardNumber,
+            'name' => $faker->name,
+            'phone_number' => $faker->phoneNumber,
+            'email' => $faker->email,
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Ketua Umum')->first()->id,
+            'level_id' => Level::where('name', Level::LEVEL_KADIS)->first()->id,
         ]);
 
+        //!! SEKRETARIS
         User::create([
-            'nip' => '000003',
-            'name' => 'Heru Agus',
-            'phone_number' => '0818181223',
-            'email' => 'asistenketum@tsel.com',
+            'nip' => $faker->creditCardNumber,
+            'name' => $faker->name,
+            'phone_number' => $faker->phoneNumber,
+            'email' => $faker->email,
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Asisten Ketua Umum')->first()->id,
+            'level_id' => Level::where('name', Level::LEVEL_SEKRETARIS)->first()->id,
         ]);
 
-        User::create([
-            'nip' => '000004',
-            'name' => 'Auliyail Maknun',
-            'phone_number' => '0818181223',
-            'email' => 'sekretaris@tsel.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Sekretaris')->first()->id,
-        ]);
+        //!! KASUBBAG, KABID, KASIE, STAFF SUBBAG, STAFF SEKSIE
+        $subbag_department_ids = [1, 2];
+        $bidang_department_ids = [3, 4, 5];
+        $seksie_department_ids = [6, 7, 8, 9, 10, 11, 12, 13, 14];
 
-        User::create([
-            'nip' => '000005',
-            'name' => 'Kepala TU',
-            'phone_number' => '0818181224',
-            'email' => 'kepalatu@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'TU')->first()->id,
-        ]);
+        $departments = Department::all();
 
-        User::create([
-            'nip' => '000006',
-            'name' => 'Adi Siswoyo',
-            'phone_number' => '0818181224',
-            'email' => 'kebidiptek@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Kepala Bidang')->first()->id,
-            'department_id' => Department::where('name', 'Ilmu Pengetahuan dan Teknologi')->first()->id,
-        ]);
+        foreach ($departments as $department) {
+            if (in_array($department->id, $subbag_department_ids)) {
+                User::create([
+                    'nip' => $faker->creditCardNumber,
+                    'name' => $faker->name,
+                    'phone_number' => $faker->phoneNumber,
+                    'email' => $faker->email,
+                    'password' => Hash::make('123123'),
+                    'level_id' => Level::where('name', Level::LEVEL_KASUBBAG)->first()->id,
+                    'department_id' => Department::where('name', $department->name)->first()->id,
+                ]);
+            } elseif (in_array($department->id, $bidang_department_ids)) {
+                User::create([
+                    'nip' => $faker->creditCardNumber,
+                    'name' => $faker->name,
+                    'phone_number' => $faker->phoneNumber,
+                    'email' => $faker->email,
+                    'password' => Hash::make('123123'),
+                    'level_id' => Level::where('name', Level::LEVEL_KABID)->first()->id,
+                    'department_id' => Department::where('name', $department->name)->first()->id,
+                ]);
+            } elseif (in_array($department->id, $seksie_department_ids)) {
+                User::create([
+                    'nip' => $faker->creditCardNumber,
+                    'name' => $faker->name,
+                    'phone_number' => $faker->phoneNumber,
+                    'email' => $faker->email,
+                    'password' => Hash::make('123123'),
+                    'level_id' => Level::where('name', Level::LEVEL_KASIE)->first()->id,
+                    'department_id' => Department::where('name', $department->name)->first()->id,
+                ]);
+            }
+        }
 
-        User::create([
-            'nip' => '000007',
-            'name' => 'Chelvin',
-            'phone_number' => '0818181224',
-            'email' => 'kebidlitbang@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Kepala Bidang')->first()->id,
-            'department_id' => Department::where('name', 'Penelitian dan Pengembangan SDM')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000008',
-            'name' => 'Adis Wing Kasenda',
-            'phone_number' => '0818181224',
-            'email' => 'kedepipteka@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Kepala Departemen')->first()->id,
-            'department_id' => Department::where('name', 'Software')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000009',
-            'name' => 'Chelvin Reksa Nanda',
-            'phone_number' => '0818181224',
-            'email' => 'kedeplitbanga@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Kepala Departemen')->first()->id,
-            'department_id' => Department::where('name', 'Kastra')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000010',
-            'name' => 'Jonathan Purnama',
-            'phone_number' => '0818181224',
-            'email' => 'kedepiptekb@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Kepala Departemen')->first()->id,
-            'department_id' => Department::where('name', 'Hardware')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000011',
-            'name' => 'Hanif Faiz',
-            'phone_number' => '0818181224',
-            'email' => 'kedeplitbangb@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Kepala Departemen')->first()->id,
-            'department_id' => Department::where('name', 'Pengkaderan')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '0000123',
-            'name' => 'apria Nurhuda',
-            'phone_number' => '0818181224',
-            'email' => 'anggotaipteka@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Anggota')->first()->id,
-            'department_id' => Department::where('name', 'Software')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000013',
-            'name' => 'Abdul Muin Jazuli',
-            'phone_number' => '0818181224',
-            'email' => 'anggotalitbanga@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Anggota')->first()->id,
-            'department_id' => Department::where('name', 'Kastra')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000014',
-            'name' => 'Adityo Akbar',
-            'phone_number' => '0818181224',
-            'email' => 'anggotaiptekb@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Anggota')->first()->id,
-            'department_id' => Department::where('name', 'Hardware')->first()->id,
-        ]);
-
-        User::create([
-            'nip' => '000011',
-            'name' => 'Azzahra',
-            'phone_number' => '0818181224',
-            'email' => 'anggotalitbangb@hmti.com',
-            'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', 'Anggota')->first()->id,
-            'department_id' => Department::where('name', 'Pengkaderan')->first()->id,
-        ]);
+        foreach ($departments as $department) {
+            if (in_array($department->id, $subbag_department_ids)) {
+                User::create([
+                    'nip' => $faker->creditCardNumber,
+                    'name' => $faker->name,
+                    'phone_number' => $faker->phoneNumber,
+                    'email' => $faker->email,
+                    'password' => Hash::make('123123'),
+                    'level_id' => Level::where('name', Level::LEVEL_STAF_SUBBAG)->first()->id,
+                    'department_id' => Department::where('name', $department->name)->first()->id,
+                ]);
+            } elseif (in_array($department->id, $seksie_department_ids)) {
+                User::create([
+                    'nip' => $faker->creditCardNumber,
+                    'name' => $faker->name,
+                    'phone_number' => $faker->phoneNumber,
+                    'email' => $faker->email,
+                    'password' => Hash::make('123123'),
+                    'level_id' => Level::where('name', Level::LEVEL_STAF_SEKSIE)->first()->id,
+                    'department_id' => Department::where('name', $department->name)->first()->id,
+                ]);
+            }
+        }
     }
 }
