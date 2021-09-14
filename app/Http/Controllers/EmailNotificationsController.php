@@ -9,12 +9,13 @@ class EmailNotificationsController extends Controller
 {
     public function sendEmail(Request $request)
     {
-        $data = "Hello";
-        $action = SendEmailHelper::sendEmail($data);
-        if ($action) {
-            return 'Berhasil kirim email';
-        } else {
-            abort(404);
-        }
+        // $data = "Hello";
+        // $title =
+        //     $action = SendEmailHelper::sendEmail($data);
+        // if ($action) {
+        //     return 'Berhasil kirim email';
+        // } else {
+        //     abort(404);
+        // }
     }
 }

@@ -15,6 +15,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\MailInForwardRequest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Providers\ForwardedMailIn as ProvidersForwardedMailIn;
+use App\Utilities\SendEmailHelper;
 
 class MailInForwardController extends Controller
 {
@@ -50,6 +51,9 @@ class MailInForwardController extends Controller
             $mail_transaction->save();
 
             event(new ForwardedMailInProcess($mail_transaction, $request));
+
+            $MailNotification = new SendEmailHelper();
+            $MailNotification::sendEmail($target_user_id, "Pemberitahuan", "Surat Masuk", "Teruskan");
         }
 
         Alert::success('Yay :D', 'Berhasil meneruskan surat');

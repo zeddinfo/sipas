@@ -16,6 +16,7 @@ use App\Events\DispositedMailInProcess;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\DispositionRequest;
 use App\Http\Requests\MailInForwardRequest;
+use App\Utilities\SendEmailHelper;
 
 class MailInDispositionController extends Controller
 {
@@ -60,6 +61,9 @@ class MailInDispositionController extends Controller
             $mail_transaction->save();
 
             event(new DispositedMailInProcess($mail_transaction, $request));
+
+            $MailNotification = new SendEmailHelper();
+            $MailNotification::sendEmail($target_user_id, "Pemberitahuan", "Surat Masuk", "Disposisi");
         }
 
         Alert::success('Yay :D', 'Berhasil mendisposisikan surat');
