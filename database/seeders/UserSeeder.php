@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class AdminSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
             'nip' => '000001',
             'name' => 'Admin',
             'phone_number' => '0818181221',
-            'email' => 'admin@hmti.com',
+            'email' => 'admin@dinkesmelawi.com',
             'password' => Hash::make('123123'),
             'level_id' => Level::where('name', 'Admin')->first()->id,
         ]);
@@ -33,7 +33,7 @@ class AdminSeeder extends Seeder
             'email' => 'tu@tu.com',
             'password' => Hash::make('123123'),
             'level_id' => Level::where('name', 'TU')->first()->id,
-        ]);;
+        ]);
 
         User::create([
             'nip' => '000002',

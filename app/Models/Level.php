@@ -14,11 +14,13 @@ class Level extends Model
 
     const LEVEL_ADMIN = "Admin";
     const LEVEL_TU = "TU";
-    const LEVEL_KETUM = "Ketua Umum";
+    const LEVEL_KADIS = "Kepala Dinas";
     const LEVEL_SEKRETARIS = "Sekretaris";
+    const LEVEL_KASUBBAG = "Kepala Sub Bagian";
     const LEVEL_KABID = "Kepala Bidang";
-    const LEVEL_KADEP = "Kepala Departemen";
-    const LEVEL_ANGGOTA = "Anggota";
+    const LEVEL_KASIE = "Kepala Seksie";
+    const LEVEL_STAF_SUBBAG = "Staf Sub Bagian";
+    const LEVEL_STAF_SEKSIE = "Staf Seksie";
 
     // Relation Function
     public function sameLevel()
@@ -56,26 +58,34 @@ class Level extends Model
     public function getUpperLevel($mail_type = 'out')
     {
         $order = config('sipas.mail_order.' . $mail_type);
-        $level = $this->getSameLevel();
-        $index = array_search($level->name, $order);
 
-
-        if ($index == 0) {
-            return null;
+        foreach ($order as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $val) {
+                    if ($val == $this->name) {
+                        return Level::where('name', $key)->first();
+                    }
+                }
+            } else {
+                if ($value == $this->name) {
+                    return Level::where('name', $key)->first();
+                }
+            }
         }
 
-        return Level::where('name', $order[$index - 1])->first();
+        return null;
     }
 
     public function getLowerLevel($mail_type = 'out')
     {
         $order = config('sipas.mail_order.' . $mail_type);
-        $level = $this->getSameLevel();
-        $index = array_search($level->name, $order);
 
-        if ($index == count($order) - 1) {
+        $level = $this->getSameLevel();
+
+        if (!array_key_exists($level->name, $order)) {
             return null;
         }
-        return Level::where('name', $order[$index + 1])->first();
+
+        return Level::where('name', $order[$level->name])->first();
     }
 }

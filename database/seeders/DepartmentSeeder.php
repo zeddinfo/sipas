@@ -14,44 +14,78 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
+        // 1
         Department::create([
-            'name' => 'Ilmu Pengetahuan dan Teknologi',
+            'name' => 'Umum, Kepegawaian Dan Informasi',
         ]);
 
+        // 2
         Department::create([
-            'name' => 'Penelitian dan Pengembangan SDM',
+            'name' => 'Perencanaan Dan Keuangan',
         ]);
 
+        // 3
         Department::create([
-            'name' => 'Informasi dan Komunikasi',
+            'name' => 'Pencegahan Dan Pengendalian Penyakit',
         ]);
 
+        // 4
         Department::create([
-            'name' => 'Software',
-            'depends_on_id' => 1,
+            'name' => 'Kesehatan Masyarakat',
         ]);
 
+        // 5
         Department::create([
-            'name' => 'Hardware',
-            'depends_on_id' => 1,
-        ]);
-        Department::create([
-            'name' => 'Kastra',
-            'depends_on_id' => 2,
+            'name' => 'Pelayanan Dan Sumber Daya Kesehatan',
         ]);
 
+        // Seksie P2
         Department::create([
-            'name' => 'Pengkaderan',
-            'depends_on_id' => 2,
-        ]);
-
-        Department::create([
-            'name' => 'Humas',
+            'name' => 'Pencegahan & Pengendalian Penyakit Menular',
             'depends_on_id' => 3,
         ]);
+
         Department::create([
-            'name' => 'BC',
+            'name' => 'Surveilans dan Imunisasi',
             'depends_on_id' => 3,
+        ]);
+
+        Department::create([
+            'name' => 'Pencegahan & Pengendalian PTM',
+            'depends_on_id' => 3,
+        ]);
+
+        // Seksie KESMAS
+        Department::create([
+            'name' => 'Kesling, Kesehatan Kerja dan Kesehatan Olahraga',
+            'depends_on_id' => 4,
+        ]);
+
+        Department::create([
+            'name' => 'Promosi & Pemberdayaan Masyarakat',
+            'depends_on_id' => 4,
+        ]);
+
+        Department::create([
+            'name' => 'Kesehatan Keluarga KIA & Gizi',
+            'depends_on_id' => 4,
+        ]);
+
+
+        // Seksie YANKES
+        Department::create([
+            'name' => 'Kefarmasian Dan Alkes',
+            'depends_on_id' => 5,
+        ]);
+
+        Department::create([
+            'name' => 'SDM Kesehatan',
+            'depends_on_id' => 5,
+        ]);
+
+        Department::create([
+            'name' => 'Pelayanan Kesehatan',
+            'depends_on_id' => 5,
         ]);
     }
 }

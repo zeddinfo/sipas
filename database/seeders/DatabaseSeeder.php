@@ -21,14 +21,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DepartmentSeeder::class,
             LevelSeeder::class,
-            AdminSeeder::class,
-            MailSeeder::class,
-            FileSeeder::class,
+            UserSeeder::class,
+            // MailSeeder::class,
+            // FileSeeder::class,
             MailAttributeSeeder::class,
-            MailAttributeTransactionSeeder::class,
-            MailVersionSeeder::class,
-            MailTransactionSeeder::class,
-            MailLogSeeder::class,
+            // MailAttributeTransactionSeeder::class,
+            // MailVersionSeeder::class,
+            // MailTransactionSeeder::class,
+            // MailLogSeeder::class,
         ]);
     }
 }
