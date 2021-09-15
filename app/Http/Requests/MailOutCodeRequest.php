@@ -25,7 +25,6 @@ class MailOutCodeRequest extends FormRequest
     {
         return [
             'code' => 'required|min:3|max:100',
-            'directory_code' => 'nullable|min:3|max:100',
         ];
     }
 }

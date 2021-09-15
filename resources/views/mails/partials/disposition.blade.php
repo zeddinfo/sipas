@@ -8,11 +8,11 @@
     <div class="bg-primary pt-10 pb-21"></div>
     <div class="container-fluid mt-n22 px-6">
         <div class="row">
-            <x-page-title page="Diposisi Surat" icon="bi-house"></x-page-title>
+            <x-page-title page="Diposisi Surat" icon="bi-share"></x-page-title>
             <!-- Detail Surat -->
-            <div class="col-xl-12 col-lg-12 col-md-12 col-12 mt-6 mb-6">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                 <!-- card -->
-                <div class="card">
+                <div class="card mt-6 mb-6">
                     <!-- card body -->
                     <div class="card-body">
                         <!-- card title -->
@@ -28,12 +28,13 @@
                                     <p class="px-2">:</p>
                                 </td>
                                 <td class="align-top">
-                                    <p class="fw-bold">{{ $mail->title }} Pada Tahapan Konstruksi Kimia</p>
+                                    <p class="fw-bold">{{ $mail->title }}</p>
                                 </td>
                             </tr>
+
                             <tr>
-                                <td>
-                                    <p class="">Nomor Surat</p>
+                                <td class="align-top">
+                                    <p>Nomor Surat</p>
                                 </td>
                                 <td class="align-top">
                                     <p class="px-2">:</p>
@@ -42,9 +43,60 @@
                                     <p class="fw-bold">{{ $mail->code }}</p>
                                 </td>
                             </tr>
+
                             <tr>
-                                <td>
-                                    <p class="">Instansi</p>
+                                <td class="align-top">
+                                    <p>Tanggal Surat</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="fw-bold">{{ $mail->mail_created_at->isoFormat('D MMMM Y') }}</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-top">
+                                    <p>Tanggal Surat Diterima</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="fw-bold">{{ $mail->mail_received_at->isoFormat('D MMMM Y') }}</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-top">
+                                    <p>Tanggal Input</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="px-2">:</p>
+                                </td>
+                                <td class="align-top">
+                                    <p class="fw-bold">{{ $mail->created_at->isoFormat('D MMMM Y') }}</p>
+                                </td>
+                            </tr>
+
+                            @if ($mail->archived_at != null)
+                                <tr>
+                                    <td class="align-top">
+                                        <p>Tanggal Arsip</p>
+                                    </td>
+                                    <td class="align-top">
+                                        <p class="px-2">:</p>
+                                    </td>
+                                    <td class="align-top">
+                                        <p class="fw-bold">{{ $mail->archived_at->isoFormat('D MMMM Y') }}</p>
+                                    </td>
+                                </tr>
+                            @endif
+
+                            <tr>
+                                <td class="align-top">
+                                    <p>Instansi</p>
                                 </td>
                                 <td class="align-top">
                                     <p class="px-2">:</p>
@@ -63,7 +115,7 @@
                                         <p class="px-2">:</p>
                                     </td>
                                     <td class="align-top">
-                                        <p>{{ $attribute->name }}</p>
+                                        <p class="fw-bold">{{ $attribute->name }}</p>
                                     </td>
                                 </tr>
                             @endforeach
@@ -101,8 +153,7 @@
                                     <h4 class="card-title mb-4">Dikirim ke</h4>
                                     <div class="mb-3">
                                         <select name="target_users[]" class="selectpicker" data-width="100%"
-                                            title="Pilih penerima" data-live-search="true" multiple data-selected-text
-                                            data-actions-box="true">
+                                            title="Pilih penerima" data-live-search="true" multiple data-selected-text>
                                             @foreach ($target_users as $target_user)
                                                 <option value="{{ $target_user->id }}"
                                                     data-subtext="{{ $target_user->getLevelDepartment() }}">

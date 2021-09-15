@@ -118,7 +118,7 @@ class User extends Authenticatable
         if ($upper_level == null) return throw new Exception("Current user has highest level");
 
         // If Anggota, the upper Department still same
-        if ($this->level->name == Level::LEVEL_ANGGOTA) {
+        if ($this->level->name == Level::LEVEL_STAF_SEKSIE || $this->level->name == Level::LEVEL_STAF_SUBBAG) {
             $department = $this->department;
         } else {
             $department = $this->department?->upperDepartment;
@@ -134,14 +134,14 @@ class User extends Authenticatable
         if ($lower_level == null) return throw new Exception("Current user has lower level");
 
         if ($this->department == null) {
-            return User::where('level_id', $lower_level->id)->get();
+            return User::whereIn('level_id', $lower_level->pluck('id')->toArray())->get();
         } else {
             if ($this->department->hasDepartments->count() > 0) {
                 $department_ids = $this->department->hasDepartments->pluck('id')->toArray();
             } else {
                 $department_ids = [$this->department_id];
             }
-            return User::where('level_id', $lower_level->id)->whereIn('department_id', $department_ids)->get();
+            return User::whereIn('level_id', $lower_level->pluck('id')->toArray())->whereIn('department_id', $department_ids)->get();
         }
     }
 

@@ -6,21 +6,18 @@
     </x-slot>
     <div class="bg-primary pt-10 pb-21"></div>
     <div class="container-fluid mt-n22 px-6">
-        <div class="py-6">
-            <!-- Responsive tables -->
-            <div cass="row mb-6">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <x-page-title page="{{ $title }}" icon="{{ $icon }}"></x-page-title>
-                    <!-- Card -->
-                    <div class="card mt-6">
-                        <!-- Content -->
-                        <div class="tab-content p-4" id="pills-tabContent-responsive-tables">
-                            <div class="tab-pane tab-example-design fade show active"
-                                id="pills-responsive-tables-design" role="tabpanel"
-                                aria-labelledby="pills-responsive-tables-design-tab">
-                                <div class="">
-                                    @include($table_view)
-                                </div>
+        <!-- Responsive tables -->
+        <div cass="row mb-6">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <x-page-title page="{{ $title }}" icon="{{ $icon }}"></x-page-title>
+                <!-- Card -->
+                <div class="card mt-6 mb-6">
+                    <!-- Content -->
+                    <div class="tab-content p-4" id="pills-tabContent-responsive-tables">
+                        <div class="tab-pane tab-example-design fade show active" id="pills-responsive-tables-design"
+                            role="tabpanel" aria-labelledby="pills-responsive-tables-design-tab">
+                            <div class="">
+                                @include($table_view)
                             </div>
                         </div>
                     </div>

@@ -54,7 +54,6 @@ class MailOutController extends Controller
         $mail->type = Mail::TYPE_OUT;
         $mail->title = $request->title;
         $mail->code = $request->code;
-        $mail->directory_code = $request->directory_code;
         $mail->instance = $request->instance;
         $mail->mail_created_at = $request->mail_created_at;
         $mail->save();

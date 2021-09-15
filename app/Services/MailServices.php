@@ -36,7 +36,6 @@ class MailServices
             }
         }
 
-
         return $receive_tag && !$forward_tag;
     }
 

@@ -86,6 +86,10 @@ class Level extends Model
             return null;
         }
 
-        return Level::where('name', $order[$level->name])->first();
+        if (is_array($order[$level->name])) {
+            return Level::whereIn('name', $order[$level->name])->get();
+        } else {
+            return Level::where('name', $order[$level->name])->get();
+        }
     }
 }

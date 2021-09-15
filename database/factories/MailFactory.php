@@ -23,7 +23,6 @@ class MailFactory extends Factory
     {
         return [
             'kind' => $this->faker->name(),
-            'directory_code' => $this->faker->bothify('???/???/####/##/##'),
             'code' => $this->faker->bothify('???/???/####/##/##'),
             'title' => $this->faker->name(),
             'instance' => $this->faker->name(),

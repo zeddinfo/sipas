@@ -6,39 +6,37 @@
     </x-slot>
     <div class="bg-primary pt-10 pb-21"></div>
     <div class="container-fluid mt-n22 px-6">
-        <div class="py-6">
-            <!-- Responsive tables -->
-            <div cass="row mb-6">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <x-page-title page="Tambah Departemen" icon="bi-bookmark"></x-page-title>
+        <!-- Responsive tables -->
+        <div cass="row mb-6">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <x-page-title page="Tambah Departemen" icon="bi-bookmark"></x-page-title>
 
-                    <!-- Card -->
-                    <div class="card mt-6">
-                        <div class="tab-content p-4" id="pills-tabContent-basic-forms">
-                            <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design"
-                                role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
-                                <form class="row g-3" method="POST"
-                                    action="{{ route('admin.setting.department.store') }}">
-                                    @csrf
-                                    @method('POST')
-                                    <div class="col-md-6">
-                                        <x-input label="Departmen" name="name" placeholder="Departmen"></x-input>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <x-select label="Sub Department" class="form-control"
-                                            :value="isset($department->upperDepartment) ? $department->upperDepartment->id : ''"
-                                            name="depends_on_id" :options="$departments">
+                <!-- Card -->
+                <div class="card mt-6 mb-6">
+                    <div class="tab-content p-4" id="pills-tabContent-basic-forms">
+                        <div class="tab-pane tab-example-design fade show active" id="pills-basic-forms-design"
+                            role="tabpanel" aria-labelledby="pills-basic-forms-design-tab">
+                            <form class="row g-3" method="POST"
+                                action="{{ route('admin.setting.department.store') }}">
+                                @csrf
+                                @method('POST')
+                                <div class="col-md-6">
+                                    <x-input label="Departmen" name="name" placeholder="Departmen"></x-input>
+                                </div>
+                                <div class="col-md-6">
+                                    <x-select label="Sub Department" class="form-control"
+                                        :value="isset($department->upperDepartment) ? $department->upperDepartment->id : ''"
+                                        name="depends_on_id" :options="$departments">
 
-                                        </x-select>
-                                    </div>
+                                    </x-select>
+                                </div>
 
-                                    <div class="col-12 d-grid d-md-block">
-                                        <button class="btn btn-primary" type="submit">Tambah</button>
-                                        <a class="btn btn-secondary mt-2 mt-md-0"
-                                            href="{{ route('admin.setting.level.index') }}">Kembali</a>
-                                    </div>
-                                </form>
-                            </div>
+                                <div class="col-12 d-grid d-md-block">
+                                    <button class="btn btn-primary" type="submit">Tambah</button>
+                                    <a class="btn btn-secondary mt-2 mt-md-0"
+                                        href="{{ route('admin.setting.level.index') }}">Kembali</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

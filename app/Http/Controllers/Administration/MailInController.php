@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\MailAttributeTransaction;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Repositories\UsersMailRepository;
+use Carbon\Carbon;
 
 class MailInController extends Controller
 {
@@ -53,9 +54,9 @@ class MailInController extends Controller
         $mail->type = Mail::TYPE_IN;
         $mail->title = $request->title;
         $mail->code = $request->code;
-        $mail->directory_code = $request->directory_code;
         $mail->instance = $request->instance;
         $mail->mail_created_at = $request->mail_created_at;
+        $mail->mail_received_at = $request->mail_received_at != null ? $request->mail_received_at : Carbon::now();
         $mail->save();
 
         event(new CreatedMailInProcess($mail, $request));

@@ -9,20 +9,18 @@ use App\Models\User;
 class SendEmailHelper
 {
     public static function sendEmail($id_user, $title, $mail_type, $type)
-    // { $email = $data->email;
     {
-        $email_to = 'nurmanfiqri@gmail.com';
 
-        $user = User::where('id', $id_user)->first();
+        // $user = User::where('id', $id_user)->first();
 
-        $subject = [
-            'title' => $title,
-            'url' => "{{url('/login'}}",
-            'mail_type' => $mail_type,
-            'type' => $type,
-            'name' => "Nurman Fiqri S"
-        ];
-        Mail::to($user->email)->send(new EmailNotifications($subject));
+        // $subject = [
+        //     'title' => $title,
+        //     'url' => "{{url('/login'}}",
+        //     'mail_type' => $mail_type,
+        //     'type' => $type,
+        //     'name' => "Nurman Fiqri S"
+        // ];
+        // Mail::to($user->email)->send(new EmailNotifications($subject));
         return true;
 
         // if (!empty($user)) {

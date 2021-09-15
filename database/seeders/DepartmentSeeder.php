@@ -46,7 +46,7 @@ class DepartmentSeeder extends Seeder
         ]);
 
         Department::create([
-            'name' => 'Surveilans dan Imunisasi',
+            'name' => 'Surveilans Dan Imunisasi',
             'depends_on_id' => 3,
         ]);
 

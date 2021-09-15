@@ -4,6 +4,7 @@
             <tr>
                 <th scope="col" class="fw-bold">Surat</th>
                 <th scope="col" class="fw-bold text-center">Instansi</th>
+                <th scope="col" class="fw-bold text-center">Memo</th>
                 <th scope="col" class="fw-bold text-center">Status Surat</th>
                 <th scope="col" class="fw-bold text-center">Aksi</th>
             </tr>
@@ -24,6 +25,7 @@
                         @endforelse
                     </td>
                     <td class="text-center align-middle">{{ Str::limit($mail->instance, 40) }}</td>
+                    <td class="text-center align-middle">{{ $mail->memo ?? '', 40 }}</td>
                     <td class="text-center align-middle">
                         <label
                             class="badge bg-{{ $mail->status['color'] }}">{{ Str::upper($mail->status['status']) }}</label><br>

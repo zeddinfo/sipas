@@ -50,12 +50,15 @@ class MailMasterController extends Controller
         $mail->note = $request->note;
         $mail->code = $request->code;
         $mail->mail_created_at = $request->mail_created_at;
+        if ($mail->type == Mail::TYPE_IN) {
+            $mail->mail_received_at = $request->mail_received_at;
+        }
         $mail->save();
 
         event(new UpdatedMailMasterProcess($mail, $request));
 
         Alert::success('Yay :D', 'Berhasil mengubah surat');
-        return redirect()->back();
+        return redirect(request()->cookie('page'));
     }
 
     public function destroy(Mail $mail)
