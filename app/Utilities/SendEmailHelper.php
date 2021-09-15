@@ -15,14 +15,18 @@ class SendEmailHelper
 
         $user = User::where('id', $id_user)->first();
 
-        $subject = [
-            'title' => $title,
-            'url' => "{{url('/login'}}",
-            'mail_type' => $mail_type,
-            'type' => $type,
-            'name' => "Nurman Fiqri S"
-        ];
-        Mail::to($user->email)->send(new EmailNotifications($subject));
+        if (!empty($user) && !empty($user->email)) {
+            $subject = [
+                'title' => $title,
+                'url' => "{{url('/login'}}",
+                'mail_type' => $mail_type,
+                'type' => $type,
+                'name' => "Nurman Fiqri S"
+            ];
+            Mail::to($user->email)->send(new EmailNotifications($subject));
+        } else {
+        }
+
         return true;
 
         // if (!empty($user)) {
