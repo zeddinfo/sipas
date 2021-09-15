@@ -4,6 +4,7 @@ namespace App\Events;
 
 use Illuminate\Http\Request;
 use App\Models\MailTransaction;
+use App\Utilities\SendEmailHelper;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -31,6 +32,9 @@ class ForwardedMailInProcess
         $this->event_type = "FORWARDED_MAIL_IN";
         $this->mail = $mail_transaction->mailVersion->mail;
         $this->mail_transaction = $mail_transaction;
+
+        $MailNotification = new SendEmailHelper();
+        $MailNotification::sendEmail($mail_transaction->target_user_id, "Pemberitahuan", "Surat Masuk", "Teruskan");
     }
 
     /**

@@ -33,9 +33,6 @@ class MailOutForwardController extends Controller
 
         event(new ForwardedMailOut($mail_transaction, request()));
 
-        $MailNotification = new SendEmailHelper();
-        $MailNotification::sendEmail($user->getUpperUser('out')->id, "Pemberitahuan", "Surat Keluar", "Teruskan");
-
         Alert::success('Yay :D', 'Berhasil Meneruskan Surat.');
         return redirect(route('user.mail.out.index'));
     }

@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Models\Mail;
 use App\Models\MailTransaction;
+use App\Utilities\SendEmailHelper;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -33,6 +34,9 @@ class ForwardedMailOut
         $this->event_type = "FORWARDED_MAIL_OUT";
         $this->mail = $mail_transaction->mailVersion->mail;
         $this->mail_transaction = $mail_transaction;
+
+        $MailNotification = new SendEmailHelper();
+        $MailNotification::sendEmail($mail_transaction->target_user_id, "Pemberitahuan", "Surat Keluar", "Teruskan");
     }
 
     /**

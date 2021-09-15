@@ -51,9 +51,6 @@ class MailInForwardController extends Controller
             $mail_transaction->save();
 
             event(new ForwardedMailInProcess($mail_transaction, $request));
-
-            $MailNotification = new SendEmailHelper();
-            $MailNotification::sendEmail($target_user_id, "Pemberitahuan", "Surat Masuk", "Teruskan");
         }
 
         Alert::success('Yay :D', 'Berhasil meneruskan surat');

@@ -61,9 +61,6 @@ class MailInDispositionController extends Controller
             $mail_transaction->save();
 
             event(new DispositedMailInProcess($mail_transaction, $request));
-
-            $MailNotification = new SendEmailHelper();
-            $MailNotification::sendEmail($target_user_id, "Pemberitahuan", "Surat Masuk", "Disposisi");
         }
 
         Alert::success('Yay :D', 'Berhasil mendisposisikan surat');

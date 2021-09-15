@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Models\Mail;
 use App\Models\MailTransaction;
+use App\Utilities\SendEmailHelper;
 use Illuminate\Http\Request;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -32,6 +33,9 @@ class DispositedMailInProcess
         $this->event_type = "DISPOSITED_MAIL_IN";
         $this->mail = $mail_transaction->mailVersion->mail;
         $this->mail_transaction = $mail_transaction;
+
+        $MailNotification = new SendEmailHelper();
+        $MailNotification::sendEmail($mail_transaction->target_user_id, "Pemberitahuan", "Surat Masuk", "Disposisi");
     }
 
     /**
