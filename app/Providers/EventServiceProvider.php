@@ -61,7 +61,6 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailFile::class,
             ProcessMailVersion::class,
             ProcessMailLog::class,
-            // SendNotification::class,
         ],
 
         ForwardedMailOut::class => [
