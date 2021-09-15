@@ -17,18 +17,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
         $this->call([
             DepartmentSeeder::class,
             LevelSeeder::class,
-            AdminSeeder::class,
-            MailSeeder::class,
-            FileSeeder::class,
+            UserSeeder::class,
+            // MailSeeder::class,
+            // FileSeeder::class,
             MailAttributeSeeder::class,
-            MailAttributeTransactionSeeder::class,
-            MailVersionSeeder::class,
-            MailTransactionSeeder::class,
-            MailLogSeeder::class,
+            // MailAttributeTransactionSeeder::class,
+            // MailVersionSeeder::class,
+            // MailTransactionSeeder::class,
+            // MailLogSeeder::class,
         ]);
     }
 }

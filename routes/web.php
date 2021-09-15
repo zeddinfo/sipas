@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestingController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// !! Feature Testing
+Route::get('/testing/1', [TestingController::class, 'testingOne']);
+
 
 // Administration
 Route::group(['prefix' => 'tu',  'middleware' => ['auth', 'role:TU'], 'namespace' => 'App\Http\Controllers\Administration'], function () {

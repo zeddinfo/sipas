@@ -24,17 +24,7 @@ class LevelSeeder extends Seeder
         ]);
 
         Level::create([
-            'name' => Level::LEVEL_KETUM,
-        ]);
-
-        Level::create([
-            'name' => 'Asisten ' . Level::LEVEL_TU,
-            'same_as_id' => 2
-        ]);
-
-        Level::create([
-            'name' => 'Asisten ' . Level::LEVEL_KETUM,
-            'same_as_id' => 3
+            'name' => Level::LEVEL_KADIS,
         ]);
 
         Level::create([
@@ -46,16 +36,19 @@ class LevelSeeder extends Seeder
         ]);
 
         Level::create([
-            'name' => Level::LEVEL_KADEP,
+            'name' => Level::LEVEL_KASUBBAG,
         ]);
 
         Level::create([
-            'name' => 'Asisten ' . Level::LEVEL_KADEP,
-            'same_as_id' => 8
+            'name' => Level::LEVEL_KASIE,
         ]);
 
         Level::create([
-            'name' => Level::LEVEL_ANGGOTA,
+            'name' => Level::LEVEL_STAF_SUBBAG,
+        ]);
+
+        Level::create([
+            'name' => Level::LEVEL_STAF_SEKSIE,
         ]);
     }
 }
