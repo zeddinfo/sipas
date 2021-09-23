@@ -27681,3 +27681,7 @@ div.dt-buttons a.btn.processing:after {
 .dataTables_info {
   float: left;
 }
+
+.ml-n3 {
+  margin-left: -1rem !important;
+}
