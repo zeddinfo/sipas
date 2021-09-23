@@ -22,13 +22,16 @@
                                 @method('POST')
 
                                 <div class="col-md-6">
-                                    <x-input type="text" label="Judul Surat" name="title" value="{{ old('title') }}"
-                                        placeholder="Judul Surat"></x-input>
+                                    <x-input type="text" label="Perihal Surat" name="title" value="{{ old('title') }}"
+                                        placeholder="Perihal Surat"></x-input>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <x-input type="text" label="Instansi" name="instance"
-                                        value="{{ old('instance') }}" placeholder="Instansi"></x-input>
+                                    <x-input type="text"
+                                        label="{{ $mail_type == 'IN' ? 'Asal Surat' : 'Tujuan Surat' }}"
+                                        name="instance" value="{{ old('instance') }}"
+                                        placeholder="{{ $mail_type == 'IN' ? 'Asal Surat' : 'Tujuan Surat' }}">
+                                    </x-input>
                                 </div>
 
                                 @if ($mail_type == 'IN')

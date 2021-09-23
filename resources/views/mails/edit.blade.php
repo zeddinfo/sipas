@@ -21,12 +21,15 @@
                                 @csrf
                                 @method('PATCH')
                                 <div class="col-md-6">
-                                    <x-input type="text" label="Judul Surat" value="{{ $mail->title }}" name="title"
-                                        placeholder="Judul Surat"></x-input>
+                                    <x-input type="text" label="Perihal Surat" value="{{ $mail->title }}" name="title"
+                                        placeholder="Perihal Surat"></x-input>
                                 </div>
                                 <div class="col-md-6">
-                                    <x-input type="text" label="Instansi" value="{{ $mail->instance }}"
-                                        name="instance" placeholder="Instansi"></x-input>
+                                    <x-input type="text"
+                                        label="{{ $mail_type == 'IN' ? 'Asal Surat' : 'Tujuan Surat' }}"
+                                        value="{{ $mail->instance }}" name="instance"
+                                        placeholder="{{ $mail_type == 'IN' ? 'Asal Surat' : 'Tujuan Surat' }}">
+                                    </x-input>
                                 </div>
 
                                 <div class="form-group col-md-6">

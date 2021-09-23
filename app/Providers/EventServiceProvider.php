@@ -44,7 +44,7 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
             ProcessMailLog::class,
-            SendNotification::class,
+            // SendNotification::class,
         ],
 
         UpdatedMailOutProcess::class => [
@@ -53,7 +53,7 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
             ProcessMailLog::class,
-            SendNotification::class,
+            // SendNotification::class,
         ],
 
         FinalizedMailOutProcess::class => [
@@ -65,14 +65,14 @@ class EventServiceProvider extends ServiceProvider
 
         ForwardedMailOut::class => [
             ProcessMailLog::class,
-            SendNotification::class,
+            // SendNotification::class,
         ],
 
         RevisedMailOutProcess::class => [
             ProcessRevisionFile::class,
             ProcessMailCorrection::class,
             ProcessMailLog::class,
-            SendNotification::class,
+            // SendNotification::class,
         ],
 
         CreatedMailInProcess::class => [
@@ -81,19 +81,19 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
             ProcessMailLog::class,
-            SendNotification::class,
+            // SendNotification::class,
         ],
 
         DispositedMailInProcess::class => [
             ProcessMailTransactionMemo::class,
             ProcessMailLog::class,
-            SendNotification::class,
+            // SendNotification::class,
 
         ],
 
         ForwardedMailInProcess::class => [
             ProcessMailLog::class,
-            SendNotification::class,
+            // SendNotification::class,
         ],
 
         UpdatedMailInProcess::class => [
@@ -102,7 +102,7 @@ class EventServiceProvider extends ServiceProvider
             ProcessMailVersion::class,
             ProcessMailTransaction::class,
             ProcessMailLog::class,
-            SendNotification::class,
+            // SendNotification::class,
         ],
 
         UpdatedMailMasterProcess::class => [
