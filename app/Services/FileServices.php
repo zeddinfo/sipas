@@ -7,10 +7,12 @@ use App\Models\File;
 class FileServices
 {
     const TYPE_IMAGE = "IMAGE";
-    const TYPE_DOCUMENT = "DOCUMENT";
+    const TYPE_PDF = "PDF";
+    const TYPE_DOC = "DOC";
 
     static $image_extensions = ['img', 'jpg', 'jpeg', 'png'];
-    static $document_extensions = ['pdf', 'doc', 'docx'];
+    static $pdf_extensions = ['pdf'];
+    static $doc_extensions = ['doc', 'docx'];
 
     public static function extensionAdapter(File $file)
     {
@@ -20,8 +22,12 @@ class FileServices
                 return $file_url;
                 break;
 
-            case FileServices::TYPE_DOCUMENT:
+            case FileServices::TYPE_PDF:
                 return "https://docs.google.com/viewer?url=" . $file_url;
+                break;
+
+            case FileServices::TYPE_DOC:
+                return "https://docs.google.com/gview?url=" . $file_url;
                 break;
 
             default:
@@ -37,9 +43,15 @@ class FileServices
             }
         }
 
-        foreach (FileServices::$document_extensions as $document_extension) {
-            if (str_contains($filename, $document_extension)) {
-                return FileServices::TYPE_DOCUMENT;
+        foreach (FileServices::$pdf_extensions as $pdf_extension) {
+            if (str_contains($filename, $pdf_extension)) {
+                return FileServices::TYPE_PDF;
+            }
+        }
+
+        foreach (FileServices::$doc_extensions as $doc_extension) {
+            if (str_contains($filename, $doc_extension)) {
+                return FileServices::TYPE_DOC;
             }
         }
     }

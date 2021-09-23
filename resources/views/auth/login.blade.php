@@ -22,7 +22,7 @@
                             @csrf
                             <!-- Username -->
                             <div class="mb-3">
-                                <x-input type="email" id="email" :value="old('email')" label="Username"
+                                <x-input type="email" id="email" :value="old('email')" label="Email"
                                     class="form-control" name="email" placeholder="Email" required autofocus />
                             </div>
                             <!-- Password -->

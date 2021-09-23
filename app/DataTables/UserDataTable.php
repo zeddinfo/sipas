@@ -54,10 +54,33 @@ class UserDataTable extends DataTable
             ->setTableId('allmaildatatable-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->buttons(
+                Button::make('export'),
+                Button::make('pageLength'),
+            )
             ->parameters([
+                'buttons' => [
+                    'buttons' => [
+                        [
+                            'extend' => 'export',
+                            'className' => 'btn-warning'
+                        ],
+                        [
+                            'extend' => 'pageLength',
+                            'className' => 'btn-warning'
+                        ],
+                    ]
+                ],
                 'language' => [
                     'emptyTable' => 'Tidak ada data',
+                    'infoEmpty' => 'Tidak ada data',
                     'info' => 'Menampilkan data dari _START_ sampai _END_ dari _TOTAL_ data',
+                    'buttons' => [
+                        'pageLength' => [
+                            '_' => 'Lihat %d data',
+                        ]
+                    ],
                     'processing' => 'Sedang memproses ...',
                     'loadingRecords' => 'Sedang memproses ...',
                     'zeroRecords' => 'Data tidak ditemukan',
@@ -67,10 +90,10 @@ class UserDataTable extends DataTable
                         'last' => 'Terakhir',
                         'next' => 'Selanjutnya',
                         'previous' => 'Sebelumnya',
-                    ]
+                    ],
+
                 ]
-            ])
-            ->dom('Blfrtip');
+            ]);
     }
 
     /**

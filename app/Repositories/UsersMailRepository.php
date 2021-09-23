@@ -42,7 +42,7 @@ class UsersMailRepository
             ->map(function ($transaction) {
                 $transaction->mail_id = $transaction->mailVersion->mail_id;
                 return $transaction;
-            })->unique('mail_id');
+            })->unique('mail_id')->sortBy('mail_id');
 
         $mails = $mails->map(function ($transaction) use ($user_ids) {
 

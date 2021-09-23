@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Utilities\RouteHelper;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use App\DataTables\OngoingMailDataTable;
 
 class OngoingMailController extends Controller

@@ -23,19 +23,19 @@ class MailTransactionSeeder extends Seeder
 
             'user_id' =>  User::query()
                 ->whereHas('level', function ($query) {
-                    $query->where('name', Level::LEVEL_ANGGOTA);
+                    $query->where('name', Level::LEVEL_STAF_SEKSIE);
                 })
                 ->whereHas('department', function ($query) {
-                    $query->where('name', "Software");
+                    $query->where('name', "SDM Kesehatan");
                 })
                 ->first()->id,
 
             'target_user_id' => User::query()
                 ->whereHas('level', function ($query) {
-                    $query->where('name', Level::LEVEL_KADEP);
+                    $query->where('name', Level::LEVEL_KASIE);
                 })
                 ->whereHas('department', function ($query) {
-                    $query->where('name', "Software");
+                    $query->where('name', "SDM Kesehatan");
                 })
                 ->first()->id,
 

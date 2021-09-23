@@ -2,12 +2,7 @@
     <!-- navbar -->
     <nav class="navbar-classic navbar navbar-expand-lg">
         <a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-xs"></i></a>
-        <div class="ms-lg-3 d-none d-md-none d-lg-block">
-            <!-- Form -->
-            <form class="d-flex align-items-center">
-                <input type="search" class="form-control" placeholder="Search" />
-            </form>
-        </div>
+
         <!--Navbar nav -->
         <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
             <li class="dropdown stopevent">

@@ -35,17 +35,11 @@
                                 </div>
 
                                 @if ($mail_type == 'IN')
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <x-input type="text" label="Nomor Surat" name="code" value="{{ old('code') }}"
                                             placeholder="Nomor Surat"></x-input>
                                     </div>
                                 @endif
-
-                                <div class="col-md-6">
-                                    <x-input type="file" label="Upload File Surat" name="file"
-                                        placeholder="Upload File Surat">
-                                    </x-input>
-                                </div>
 
                                 @foreach ($mail_attributes as $key => $mail_attribute)
                                     <div class="col-md-{{ 12 / count($mail_attributes) }}">
@@ -68,7 +62,13 @@
                                     </div>
                                 @endif
 
-                                <div class="col-12 d-grid d-md-block">
+                                <div class="col-md-6">
+                                    <x-input type="file" label="Upload File Surat" name="file"
+                                        placeholder="Upload File Surat">
+                                    </x-input>
+                                </div>
+
+                                <div class="col-12 col-md-12 mt-3 d-grid d-md-block">
                                     <button class="btn btn-primary" type="submit">Tambah</button>
                                     <a href="/" class="btn btn-secondary mt-2 mt-md-0" type="reset">Kembali</a>
                                 </div>

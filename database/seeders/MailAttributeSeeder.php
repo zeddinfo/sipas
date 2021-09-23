@@ -3442,15 +3442,15 @@ class MailAttributeSeeder extends Seeder
         // Mail Reference
         MailAttribute::create([
             "type" => 'Sifat',
-            'name' => 'Umum',
-            "code" => 'UM',
-            "color" => '#fe5678',
+            'name' => 'Biasa',
+            "code" => 'BS',
+            "color" => '#1bcfb4',
         ]);
 
         MailAttribute::create([
             "type" => 'Sifat',
-            'name' => 'Tertutup',
-            "code" => 'TRTP',
+            'name' => 'Segera/Penting',
+            "code" => 'SGR/PTG',
             "color" => '#ffd500',
         ]);
 
@@ -3458,28 +3458,6 @@ class MailAttributeSeeder extends Seeder
             "type" => 'Sifat',
             'name' => 'Rahasia',
             "code" => 'RHS',
-            "color" => '#1bcfb4',
-        ]);
-
-        // Mail Priority
-        MailAttribute::create([
-            "type" => 'Prioritas',
-            'name' => 'Biasa',
-            "code" => 'BS',
-            "color" => '#1bcfb4',
-        ]);
-
-        MailAttribute::create([
-            "type" => 'Prioritas',
-            'name' => 'Segera',
-            "code" => 'SGR',
-            "color" => '#ffd500',
-        ]);
-
-        MailAttribute::create([
-            "type" => 'Prioritas',
-            'name' => 'Mendesak',
-            "code" => 'MNDSK',
             "color" => '#fe5678',
         ]);
     }

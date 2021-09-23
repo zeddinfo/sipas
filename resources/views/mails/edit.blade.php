@@ -26,22 +26,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <x-input type="text"
-                                        label="{{ $mail_type == 'IN' ? 'Asal Surat' : 'Tujuan Surat' }}"
+                                        label="{{ $mail->type == 'IN' ? 'Asal Surat' : 'Tujuan Surat' }}"
                                         value="{{ $mail->instance }}" name="instance"
-                                        placeholder="{{ $mail_type == 'IN' ? 'Asal Surat' : 'Tujuan Surat' }}">
+                                        placeholder="{{ $mail->type == 'IN' ? 'Asal Surat' : 'Tujuan Surat' }}">
                                     </x-input>
                                 </div>
 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <x-input type="text" label="Nomor Surat" name="code" value="{{ $mail->code }}"
                                         placeholder="Nomor Surat"></x-input>
-                                </div>
-
-
-                                <div class="col-md-6">
-                                    <x-input type="file" label="Upload File Surat (bila ingin mengganti file)"
-                                        name="file" placeholder="Upload File">
-                                    </x-input>
                                 </div>
 
                                 @foreach ($mail_attributes as $key => $mail_attribute)
@@ -53,7 +46,6 @@
                                         </x-select>
                                     </div>
                                 @endforeach
-
 
                                 <div class="col-md-6">
                                     <x-input type="date" label="Tanggal Surat"
@@ -69,20 +61,21 @@
                                     </div>
                                 @endif
 
-                                <div class="form-group col">
+                                <div class="col-md-6">
+                                    <x-input type="file" label="Upload File Surat (bila ingin mengganti file)"
+                                        name="file" placeholder="Upload File">
+                                    </x-input>
+                                </div>
+
+                                <div class="form-group col-md-6">
                                     <x-input type="text" label="Catatan" name="note" value="{{ $mail->note }}"
                                         placeholder="Catatan"></x-input>
                                 </div>
-
-
-
-
                         </div>
 
                         <div class="col-12 mt-5">
-                            <button class="btn btn-warning" type="submit">Ubah</button>
-                            {{-- <a href="{{ route(RouteHelper::get('dashboard.index')) }}"
-                                        class="btn btn-secondary" type="reset">Batal</a> --}}
+                            <button class="btn btn-primary" type="submit">Ubah</button>
+                            <a href="{{ Session::get('page') }}" class="btn btn-secondary" type="reset">Kembali</a>
                         </div>
                         </form>
                     </div>

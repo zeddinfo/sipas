@@ -65,10 +65,11 @@
                                 @endforeach
 
                                 <div class="col-md-6">
-                                    <x-input type="date" label="Waktu Surat"
+                                    <x-input type="date" label="Tanggal Surat"
                                         value="{{ Carbon\Carbon::parse($mail->mail_created_at)->format('Y-m-d') }}"
                                         name="mail_created_at"></x-input>
                                 </div>
+
                                 <div class="col-md-6">
                                     <x-input type="file" label="Upload" name="file" placeholder="Upload File">
                                     </x-input>
