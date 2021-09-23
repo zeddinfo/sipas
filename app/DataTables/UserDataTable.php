@@ -70,7 +70,7 @@ class UserDataTable extends DataTable
                     ]
                 ]
             ])
-            ->dom('lfrtip');
+            ->dom('Blfrtip');
     }
 
     /**
