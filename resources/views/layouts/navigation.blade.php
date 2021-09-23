@@ -16,6 +16,11 @@
                     aria-haspopup="true" aria-expanded="false">
                     <i class="icon-xs" data-feather="bell"></i>
                 </a>
+
+                {{-- <div class="bg-danger ml-n3 spinner-grow spinner-grow-sm mb-n3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div> --}}
+
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end" aria-labelledby="dropdownNotification">
                     <div class="">
                         <div class="border-bottom px-3 pt-2 pb-3 d-flex
@@ -128,7 +133,8 @@
                     <ul class="list-unstyled">
                         <li>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="activity"></i>Riwayat Aktivitas
+                                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="activity"></i>Riwayat
+                                Aktivitas
                             </a>
                         </li>
 
@@ -137,7 +143,7 @@
                                 <i class="me-2 icon-xxs dropdown-item-icon" data-feather="settings"></i>Pengaturan Akun
                             </a>
                         </li>
-                        
+
                         <li>
                             <x-button action="{{ route('logout') }}" class="dropdown-item">
                                 <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>Sign Out

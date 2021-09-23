@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\MailAttribute;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Events\UpdatedMailMasterProcess;
 use App\Http\Requests\MailMasterRequest;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -58,7 +59,7 @@ class MailMasterController extends Controller
         event(new UpdatedMailMasterProcess($mail, $request));
 
         Alert::success('Yay :D', 'Berhasil mengubah surat');
-        return redirect(request()->cookie('page'));
+        return redirect(Session::get('page'));
     }
 
     public function destroy(Mail $mail)
