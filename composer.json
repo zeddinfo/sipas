@@ -10,11 +10,16 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
         "realrashid/sweet-alert": "^4.0",
-        "yajra/laravel-datatables": "^1.5"
+        "yajra/laravel-datatables": "^1.5",
+        "dompdf/dompdf": "~0.6.1", 
+        "mpdf/mpdf": "~5.7.3",
+        "tecnick.com/tcpdf": "~6.0.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
