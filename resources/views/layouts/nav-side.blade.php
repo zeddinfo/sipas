@@ -3,8 +3,9 @@
     <div class="nav-scroller">
 
         <!-- Brand logo -->
-        <a class="navbar-brand" href="@@webRoot/index.html">
-            <img src="@@webRoot/assets/images/brand/logo/logo.svg" alt="" />
+        <a class="navbar-brand" href="/">
+            <h2 class="text-light text-center fw-bold">Dinkes Melawi</h2>
+            {{-- <img src="@@webRoot/assets/images/brand/logo/logo.svg" alt="" /> --}}
         </a>
         <!-- Admin nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">

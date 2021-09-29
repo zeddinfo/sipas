@@ -25,7 +25,7 @@ class MailOutFinalRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:255',
-            'code' => 'required|min:3|max:255',
+            'code' => 'required|min:3|max:100',
             'instance' => 'required|min:3|max:255',
             'mail_attributes.*' => 'required|numeric|min:1|max:2000|exists:mail_attributes,id',
             'mail_created_at' => 'required|date',
