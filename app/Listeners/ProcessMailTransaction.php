@@ -80,6 +80,7 @@ class ProcessMailTransaction
         $user = $event->request->user();
         $lower_users = $user->getLowerUsers('in')->first();
 
+
         $mail_transaction = new MailTransaction();
         $mail_transaction->user_id = $user->id;
         $mail_transaction->target_user_id = $lower_users->id;
