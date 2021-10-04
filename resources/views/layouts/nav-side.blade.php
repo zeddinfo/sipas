@@ -61,42 +61,29 @@
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('admin.setting.user.index') ? 'active' : '' }}"
                         href="{{ route('admin.setting.user.index') }}">
-                        <i data-feather="users" class="nav-icon icon-xs me-2"></i> Pengaturan Pengguna
+                        <i data-feather="users" class="nav-icon icon-xs me-2"></i> Data Pengguna
                     </a>
-
                 </li>
 
-                <!-- Nav item -->
                 <li class="nav-item">
-                    <a class="nav-link has-arrow {{ Request::routeIs('admin.setting.*') ? 'collapsed' : '' }}"
-                        href="#setting" data-bs-toggle="collapse" data-bs-target="#navUtilities" aria-expanded="false"
-                        aria-controls="navUtilities">
-                        <i data-feather="user-check" class="nav-icon icon-xs me-2">
-                        </i> Pengaturan Admin
+                    <a class="nav-link has-arrow {{ Request::routeIs('admin.setting.level.index') ? 'active' : '' }}"
+                        href="{{ route('admin.setting.level.index') }}">
+                        <i data-feather="award" class="nav-icon icon-xs me-2"></i> Data Jabatan
                     </a>
-                    <div id="navUtilities" class="collapse {{ Request::routeIs('admin.setting.*') ? 'show' : '' }}"
-                        data-bs-parent="#sideNavbar">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::routeIs('admin.setting.level.index') ? 'active' : '' }}"
-                                    href="{{ route('admin.setting.level.index') }}" aria-expanded="false">
-                                    Jabatan
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::routeIs('admin.setting.department.index') ? 'active' : '' }}"
-                                    href="{{ route('admin.setting.department.index') }}" aria-expanded="false">
-                                    Departemen
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::routeIs('admin.setting.mail.attribute.index') ? 'active' : '' }}"
-                                    href="{{ route('admin.setting.mail.attribute.index') }}" aria-expanded="false">
-                                    Atribut Surat
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link has-arrow {{ Request::routeIs('admin.setting.department.index') ? 'active' : '' }}"
+                        href="{{ route('admin.setting.department.index') }}">
+                        <i data-feather="bookmark" class="nav-icon icon-xs me-2"></i> Data Bid/SubBag
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link has-arrow {{ Request::routeIs('admin.setting.mail.attribute.index') ? 'active' : '' }}"
+                        href="{{ route('admin.setting.mail.attribute.index') }}">
+                        <i data-feather="file-text" class="nav-icon icon-xs me-2"></i> Data Atribut Surat
+                    </a>
                 </li>
 
             @endif

@@ -38,8 +38,7 @@ class UserDataTable extends DataTable
      */
     public function query()
     {
-        $users = User::with('level', 'department')
-            ->select('users.*');
+        $users = User::select('users.*');
         return $users->newQuery();
     }
 
@@ -110,15 +109,15 @@ class UserDataTable extends DataTable
             Column::make('name')
                 ->name('users.name')
                 ->title('Nama'),
+            Column::make('nip')
+                ->name('users.nip')
+                ->title('NIP'),
             Column::make('email')
                 ->name('users.email')
                 ->title('Email'),
-            Column::make('level.name')
-                ->name('level.name')
-                ->title('Jabatan'),
-            Column::make('department.name')
-                ->name('department.name')
-                ->title('Sub-Bagian/Bidang/Seksie'),
+            Column::make('phone_number')
+                ->name('user.phone_number')
+                ->title('Nomor HP'),
             Column::make('action')
                 ->title('Aksi')
                 ->orderable(false)

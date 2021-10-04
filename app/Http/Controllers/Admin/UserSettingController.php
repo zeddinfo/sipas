@@ -12,6 +12,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\UserRole;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserSettingController extends Controller
@@ -37,20 +38,27 @@ class UserSettingController extends Controller
 
     public function store(CreateUserRequest $request)
     {
+        // Create User instance
         $user = new User();
 
         $user->nip = $request->nip;
         $user->name = $request->name;
         $user->phone_number = $request->phone_number;
         $user->email = $request->email;
-        $user->level_id = $request->level_id;
-        $user->department_id = $request->department_id;
 
         if ($request->password != null) {
             $user->password = Hash::make($request->password);
         }
 
         $user->save();
+
+        // Create UserRole instance
+        $userRole = new UserRole();
+        $userRole->user_id = $user->id;
+        $userRole->level_id = $request->level_id;
+        $userRole->department_id = $request->department_id;
+        $userRole->active = true;
+        $userRole->save();
 
         Alert::success('Yay :D', 'Berhasil menambahkan pengguna');
         return redirect(route('admin.setting.user.index'));
@@ -76,8 +84,6 @@ class UserSettingController extends Controller
         $user->name = $request->name;
         $user->phone_number = $request->phone_number;
         $user->email = $request->email;
-        $user->level_id = $request->level_id;
-        $user->department_id = $request->department_id;
 
         if ($request->password != null) {
             $user->password = Hash::make($request->password);

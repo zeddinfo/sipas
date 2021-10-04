@@ -30,7 +30,7 @@
                                         placeholder="NIP"></x-input>
                                 </div>
 
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <x-select label="Level" class="form-control" :value="$user->level->id"
                                         name="level_id" :options="$level">
 
@@ -43,7 +43,7 @@
                                         name="department_id" :options="$department">
 
                                     </x-select>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-md-6">
                                     <x-input type="text" class="form-control" value="{{ $user->email }}" label="Email"

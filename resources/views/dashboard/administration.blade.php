@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-xl-6 col-lg-6 col-md-12 col-12 mt-6">
                 <!-- card -->
                 <div class="card rounded-3">
@@ -118,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-xl-6 col-lg-6 col-md-12 col-12 mt-6">
                 <!-- card -->
                 <div class="card rounded-3">
@@ -142,7 +142,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </x-app-layout>

@@ -27,7 +27,6 @@ class UserSeeder extends Seeder
             'phone_number' => '082358969611',
             'email' => 'admin@dinkesmelawi.com',
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', Level::LEVEL_ADMIN)->first()->id,
         ]);
 
         //!! TU
@@ -37,7 +36,6 @@ class UserSeeder extends Seeder
             'phone_number' => $faker->phoneNumber,
             'email' => $faker->email,
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', Level::LEVEL_TU)->first()->id,
         ]);
 
         //!! KADIS
@@ -47,17 +45,15 @@ class UserSeeder extends Seeder
             'phone_number' => $faker->phoneNumber,
             'email' => $faker->email,
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', Level::LEVEL_KADIS)->first()->id,
         ]);
 
         //!! SEKRETARIS
         User::create([
-            'nip' => $faker->creditCardNumber,
+            'nip' => 'Sekretaris',
             'name' => $faker->name,
             'phone_number' => $faker->phoneNumber,
             'email' => $faker->email,
             'password' => Hash::make('123123'),
-            'level_id' => Level::where('name', Level::LEVEL_SEKRETARIS)->first()->id,
         ]);
 
         //!! KASUBBAG, KABID, KASIE, STAFF SUBBAG, STAFF SEKSIE
@@ -75,8 +71,6 @@ class UserSeeder extends Seeder
                     'phone_number' => $faker->phoneNumber,
                     'email' => $faker->email,
                     'password' => Hash::make('123123'),
-                    'level_id' => Level::where('name', Level::LEVEL_KASUBBAG)->first()->id,
-                    'department_id' => Department::where('name', $department->name)->first()->id,
                 ]);
             } elseif (in_array($department->id, $bidang_department_ids)) {
                 User::create([
@@ -85,8 +79,6 @@ class UserSeeder extends Seeder
                     'phone_number' => $faker->phoneNumber,
                     'email' => $faker->email,
                     'password' => Hash::make('123123'),
-                    'level_id' => Level::where('name', Level::LEVEL_KABID)->first()->id,
-                    'department_id' => Department::where('name', $department->name)->first()->id,
                 ]);
             } elseif (in_array($department->id, $seksie_department_ids)) {
                 User::create([
@@ -95,8 +87,6 @@ class UserSeeder extends Seeder
                     'phone_number' => $faker->phoneNumber,
                     'email' => $faker->email,
                     'password' => Hash::make('123123'),
-                    'level_id' => Level::where('name', Level::LEVEL_KASIE)->first()->id,
-                    'department_id' => Department::where('name', $department->name)->first()->id,
                 ]);
             }
         }
@@ -109,8 +99,6 @@ class UserSeeder extends Seeder
                     'phone_number' => $faker->phoneNumber,
                     'email' => $faker->email,
                     'password' => Hash::make('123123'),
-                    'level_id' => Level::where('name', Level::LEVEL_STAF_SUBBAG)->first()->id,
-                    'department_id' => Department::where('name', $department->name)->first()->id,
                 ]);
             } elseif (in_array($department->id, $seksie_department_ids)) {
                 User::create([
@@ -119,8 +107,6 @@ class UserSeeder extends Seeder
                     'phone_number' => $faker->phoneNumber,
                     'email' => $faker->email,
                     'password' => Hash::make('123123'),
-                    'level_id' => Level::where('name', Level::LEVEL_STAF_SEKSIE)->first()->id,
-                    'department_id' => Department::where('name', $department->name)->first()->id,
                 ]);
             }
         }

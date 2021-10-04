@@ -4,7 +4,7 @@
 </div>
 
 <div class="mt-5 table-responsive-sm">
-    {!! $dataTable->table([]) !!}
+    {!! $dataTable->table(['border']) !!}
 </div>
 
 @section('script')

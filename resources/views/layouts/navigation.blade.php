@@ -3,9 +3,28 @@
     <nav class="navbar-classic navbar navbar-expand-lg">
         <a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-xs"></i></a>
 
+
         <!--Navbar nav -->
         <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
-            <li class="dropdown stopevent">
+            @if (auth()->user()->userRoles->count() > 1)
+                <li class="dropdown">
+                    <button class="btn btn-outline-primary" href="#" id="dropdownRole" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Pilih Akses
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownNotification">
+                        <h6 class="dropdown-header">Akses yang Tersedia</h6>
+                        @foreach (auth()->user()->userRoles as $userRole)
+                            <a href="{{ route('global.account.access.edit', $userRole->id) }}"
+                                class="dropdown-item {{ $userRole->active ? 'active' : '' }}">{{ $userRole->level->name }}{{ ' ' . $userRole->department?->name }}</a>
+                        @endforeach
+                    </div>
+                </li>
+
+            @endif
+
+            <li class="dropdown stopevent ms-2">
                 <a class="btn btn-light btn-icon rounded-circle indicator
           indicator-primary text-muted" href="#" role="button" id="dropdownNotification" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -31,22 +50,15 @@
                         <ul class="list-group list-group-flush notification-list-scroll">
                             <!-- List group item -->
                             <li class="list-group-item bg-light">
-
-
                                 <a href="#" class="text-muted">
                                     <h5 class="fw-bold mb-1">Rishi Chopra</h5>
                                     <p class="mb-0">
                                         Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
                                     </p>
                                 </a>
-
-
-
                             </li>
                             <!-- List group item -->
                             <li class="list-group-item">
-
-
                                 <a href="#" class="text-muted">
                                     <h5 class="fw-bold mb-1">Neha Kannned</h5>
                                     <p class="mb-0">
@@ -54,37 +66,24 @@
                                         metus.
                                     </p>
                                 </a>
-
-
-
                             </li>
                             <!-- List group item -->
                             <li class="list-group-item">
-
-
                                 <a href="#" class="text-muted">
                                     <h5 class="fw-bold mb-1">Nirmala Chauhan</h5>
                                     <p class="mb-0">
                                         Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
                                     </p>
                                 </a>
-
-
-
                             </li>
                             <!-- List group item -->
                             <li class="list-group-item">
-
-
                                 <a href="#" class="text-muted">
                                     <h5 class="fw-bold mb-1">Sina Ray</h5>
                                     <p class="mb-0">
                                         Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
                                     </p>
                                 </a>
-
-
-
                             </li>
                         </ul>
                         <div class="border-top px-3 py-2 text-center">
@@ -120,7 +119,7 @@
                         <div class="lh-1 ">
                             <h5 class="mb-1">{{ Str::limit(Auth::user()->name, 20) }}</h5>
                             <a href="#"
-                                class="text-inherit fs-6">{{ Auth::user()->level->name . Auth::user()->department?->name }}</a>
+                                class="text-inherit fs-6">{{ Auth::user()->level->name . ' ' . Auth::user()->department?->name }}</a>
                         </div>
                         <div class=" dropdown-divider mt-3 mb-2"></div>
                     </div>

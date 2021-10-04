@@ -50,14 +50,29 @@ class User extends Authenticatable
 
 
     // Relation Method
-    public function level()
+    public function userRoles()
     {
-        return $this->belongsTo(Level::class);
+        return $this->hasMany(UserRole::class);
     }
 
-    public function department()
+    public function levels()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsToMany(Level::class, UserRole::class);
+    }
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, UserRole::class);
+    }
+
+    public function getLevelAttribute()
+    {
+        return $this->levels()->where('active', true)->first();
+    }
+
+    public function getDepartmentAttribute()
+    {
+        return $this->departments()->where('active', true)->first();
     }
 
     public function mailTransactions()
@@ -97,7 +112,9 @@ class User extends Authenticatable
         $level = $this->level->getSameLevel();
         $department = $this->department;
 
-        return User::where([['level_id', $level->id], ['department_id', $department?->id]])->first();
+        return User::whereHas('userRoles', function ($query) use ($level, $department) {
+            $query->where([['level_id', $level->id], ['department_id', $department?->id], ['active', true]]);
+        })->first();
     }
 
     public function getSameUsers()
@@ -108,7 +125,9 @@ class User extends Authenticatable
 
         $department = $this->department;
 
-        return User::whereIn('level_id', $same_levels)->where('department_id', $department?->id)->get();
+        return User::whereHas('userRoles', function ($query) use ($same_levels, $department) {
+            $query->where([['level_id', $same_levels], ['department_id', $department?->id], ['active', true]]);
+        })->get();
     }
 
     public function getUpperUser($mail_type = 'out')
@@ -124,7 +143,9 @@ class User extends Authenticatable
             $department = $this->department?->upperDepartment;
         }
 
-        return User::where([['level_id', $upper_level->id], ['department_id', $department?->id]])->first();
+        return User::whereHas('userRoles', function ($query) use ($upper_level, $department) {
+            $query->where([['level_id', $upper_level->id], ['department_id', $department?->id], ['active', true]]);
+        })->first();
     }
 
     public function getLowerUsers($mail_type = 'out')
@@ -134,14 +155,18 @@ class User extends Authenticatable
         if ($lower_level == null) return throw new Exception("Current user has lower level");
 
         if ($this->department == null) {
-            return User::whereIn('level_id', $lower_level->pluck('id')->toArray())->get();
+            return User::whereHas('userRoles', function ($query) use ($lower_level) {
+                $query->whereIn('level_id', $lower_level->pluck('id')->where('active', true)->toArray());
+            })->get();
         } else {
             if ($this->department->hasDepartments->count() > 0) {
                 $department_ids = $this->department->hasDepartments->pluck('id')->toArray();
             } else {
                 $department_ids = [$this->department_id];
             }
-            return User::whereIn('level_id', $lower_level->pluck('id')->toArray())->whereIn('department_id', $department_ids)->get();
+            return User::whereHas('userRoles', function ($query) use ($lower_level, $department_ids) {
+                $query->whereIn('level_id', $lower_level->pluck('id')->whereIn('department_id', $department_ids)->where('active', true)->toArray());
+            })->get();
         }
     }
 

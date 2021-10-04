@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChangeAccountAccessController;
 use App\Http\Controllers\TestingController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Storage;
 */
 // !! Feature Testing
 Route::get('/testing/1', [TestingController::class, 'testingOne']);
+
+Route::get('/akun/akses/ubah/{switchUserRole}', [ChangeAccountAccessController::class, 'update'])->name('global.account.access.edit');
 
 
 // Administration

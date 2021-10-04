@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('level_id')->constrained('levels');
-            $table->foreignId('department_id')->nullable()->constrained('departments');
+            // $table->foreignId('level_id')->constrained('levels');
+            // $table->foreignId('department_id')->nullable()->constrained('departments');
             $table->softDeletes();
             $table->timestamps();
         });

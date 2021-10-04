@@ -21,13 +21,14 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             LevelSeeder::class,
             UserSeeder::class,
-            MailSeeder::class,
-            FileSeeder::class,
+            UserRoleSeeder::class,
+            // MailSeeder::class,
+            // FileSeeder::class,
             MailAttributeSeeder::class,
-            MailAttributeTransactionSeeder::class,
-            MailVersionSeeder::class,
-            MailTransactionSeeder::class,
-            MailLogSeeder::class,
+            // MailAttributeTransactionSeeder::class,
+            // MailVersionSeeder::class,
+            // MailTransactionSeeder::class,
+            // MailLogSeeder::class,
         ]);
     }
 }

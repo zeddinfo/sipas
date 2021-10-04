@@ -29,8 +29,6 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|min:3|max:100',
             'phone_number' => 'required|min:8|max:50',
             'email' => 'required|email|unique:users,id,' . Auth::id() . '|min:5|max:100',
-            'level_id' => 'required|exists:App\Models\Level,id',
-            'department_id' => 'nullable|exists:App\Models\Department,id',
             'password' => 'nullable|confirmed|min:6|max:50',
         ];
     }
