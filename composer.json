@@ -6,7 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "asantibanez/laravel-eloquent-state-machines": "^5.1",
         "barryvdh/laravel-snappy": "^0.4.8",
+        "dompdf/dompdf": "~0.6.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -15,11 +17,10 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
-        "realrashid/sweet-alert": "^4.0",
-        "yajra/laravel-datatables": "^1.5",
-        "dompdf/dompdf": "~0.6.1", 
         "mpdf/mpdf": "~5.7.3",
-        "tecnick.com/tcpdf": "~6.0.0"
+        "realrashid/sweet-alert": "^4.0",
+        "tecnick.com/tcpdf": "~6.0.0",
+        "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

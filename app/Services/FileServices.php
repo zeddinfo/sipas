@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\File;
+use Illuminate\Support\Facades\Storage;
 
 class FileServices
 {
@@ -16,18 +17,18 @@ class FileServices
 
     public static function extensionAdapter(File $file)
     {
-        $file_url = url('storage/' . $file->directory_name);
+        $file_url = Storage::url( $file->directory_name);
         switch (FileServices::getFileType($file->original_name)) {
             case FileServices::TYPE_IMAGE:
                 return $file_url;
                 break;
 
             case FileServices::TYPE_PDF:
-                return "https://docs.google.com/viewer?url=" . $file_url;
+                return  $file_url;
                 break;
 
             case FileServices::TYPE_DOC:
-                return "https://docs.google.com/gview?url=" . $file_url;
+                return $file_url;
                 break;
 
             default:

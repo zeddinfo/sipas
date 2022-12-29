@@ -60,7 +60,7 @@
 
                                         @if ($mail->code != '' || $mail->code != null)
                                             <a class="dropdown-item"
-                                                href="{{ route(RouteHelper::get('mail.out.action.archive'), ['mail' => $mail]) }}">Arsipkan</a>
+                                                {{-- href="{{ route(RouteHelper::get('mail.out.action.archive'), ['mail' => $mail->id]) }}">Arsipkan</a> --}}
                                         @endif
                                     @else
                                         <a href="{{ route('user.mail.out.revision.create', $mail) }}"

@@ -24,17 +24,17 @@ class UserSeeder extends Seeder
         User::create([
             'nip' => $faker->creditCardNumber,
             'name' => 'Admin',
-            'phone_number' => '082358969611',
-            'email' => 'admin@dinkesmelawi.com',
+            'phone_number' => $faker->phoneNumber,
+            'email' => 'admin@uici.ac.id',
             'password' => Hash::make('123123'),
         ]);
 
         //!! TU
         User::create([
             'nip' => $faker->creditCardNumber,
-            'name' => $faker->name,
+            'name' => 'Admin Surat',
             'phone_number' => $faker->phoneNumber,
-            'email' => $faker->email,
+            'email' => 'adminsurat@uici.ac.id',
             'password' => Hash::make('123123'),
         ]);
 
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
 
         //!! SEKRETARIS
         User::create([
-            'nip' => 'Sekretaris',
+            'nip' => $faker->creditCardNumber,
             'name' => $faker->name,
             'phone_number' => $faker->phoneNumber,
             'email' => $faker->email,

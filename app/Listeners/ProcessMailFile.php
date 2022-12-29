@@ -31,7 +31,7 @@ class ProcessMailFile
             $original_name = $file->getClientOriginalName();
 
             // !! Staging
-            $directory_name = $file->store('files');
+            $directory_name = $file->store('public/files');
 
             // //!! Testing
             // $directory_name = $file->store($original_name, 'files');
