@@ -57,16 +57,18 @@ class MailOutFinalController extends Controller
         ])->first();
 
         $creator_level_department = $mail->logs[0]->user_level_department;
-        $creator_department = explode('-', $creator_level_department)[1];
+        $creator_department = explode('-', $creator_level_department);
+
+
         $creator_department = Department::where('name', $creator_department)->first();
 
-        while ($creator_department->upperDepartment()->first() != null) {
+        while ($creator_department != null) {
             $creator_department = $creator_department->upperDepartment()->first();
         }
 
         // Asign Mail Code if null based on mail indexes
         if ($mail->code == null) {
-            $mail->code = $mail->attributes[0]->code . '/.../DINKES-' . $creator_department->name . '/' . Carbon::now()->year;
+            $mail->code = $mail->attributes[0]->code . '/.../DINKES-' .  '/' . Carbon::now()->year;
         }
 
         return view('mails.finalitation')->with(compact('mail_attributes', 'mail', 'correction'));

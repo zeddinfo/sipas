@@ -41,18 +41,18 @@ class UserSeeder extends Seeder
         //!! KADIS
         User::create([
             'nip' => $faker->creditCardNumber,
-            'name' => $faker->name,
+            'name' => 'Kadis',
             'phone_number' => $faker->phoneNumber,
-            'email' => $faker->email,
+            'email' => 'kadis@uici.ac.id',
             'password' => Hash::make('123123'),
         ]);
 
         //!! SEKRETARIS
         User::create([
             'nip' => $faker->creditCardNumber,
-            'name' => $faker->name,
+            'name' => 'Sekretaris UICI',
             'phone_number' => $faker->phoneNumber,
-            'email' => $faker->email,
+            'email' => 'sekretaris@uici.ac.id',
             'password' => Hash::make('123123'),
         ]);
 

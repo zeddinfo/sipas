@@ -125,6 +125,14 @@
 
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link has-arrow {{ Request::routeIs('tu.mail.out.index') ? 'active' : '' }}"
+                        href="{{ route('tu.mail.out.index') }}">
+                        <i data-feather="repeat" class="nav-icon icon-xs me-2"></i> Surat Keluar
+                    </a>
+
+                </li>
+
                 <!-- Nav item -->
                 <li class="nav-item">
                     <div class="navbar-heading">Master Surat</div>
@@ -145,6 +153,7 @@
 
                 </li>
             @endif
+
             @if (Auth::user()->hasRole('User'))
                 <li class="nav-item">
                     <a class="nav-link has-arrow {{ Request::routeIs('user.dashboard.index') ? 'active' : '' }}"
@@ -182,6 +191,14 @@
                     <a class="nav-link has-arrow {{ Request::routeIs('user.mail.out.index') ? 'active' : '' }}"
                         href="{{ route('user.mail.out.index') }}">
                         <i data-feather="log-out" class="nav-icon icon-xs me-2"></i> Surat Keluar
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link has-arrow {{ Request::routeIs('tu.mail.out.index') ? 'active' : '' }}"
+                        href="{{ route('tu.mail.out.index') }}">
+                        <i data-feather="repeat" class="nav-icon icon-xs me-2"></i> Surat Keluar
                     </a>
 
                 </li>
